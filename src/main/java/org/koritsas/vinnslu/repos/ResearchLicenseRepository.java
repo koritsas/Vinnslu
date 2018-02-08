@@ -36,8 +36,6 @@ public interface ResearchLicenseRepository extends JpaRepository<ResearchLicense
    // List<ResearchLicense> findByAreaGreaterThanEquals(Double area);
 
 
-
-
     ResearchLicense findByContractContractDate(Date date);
 
     List<ResearchLicense> findByContractContractDateAfter(Date date);
