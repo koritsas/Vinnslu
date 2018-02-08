@@ -222,6 +222,34 @@ public class ResearchLicenseRepositoryTest {
     }
 
     @Test
-    public void findByAreaGreaterOrEqualThan() {
+    public void findByAreaGreaterOrThan() {
+	List<ResearchLicense> licenses = researchLicenseRepository.findByAreaGreaterThan(6000.00);
+	Assert.assertTrue(licenses.size()==1);
+
+    }
+
+    @Test
+    public void findByAreaLessThan() {
+        List<ResearchLicense> licenses = researchLicenseRepository.findByAreaLessThan(12000.00);
+	Assert.assertTrue(licenses.size()==2);
+
+	List<ResearchLicense> licenses2 = researchLicenseRepository.findByAreaLessThan(6000.00);
+	Assert.assertTrue(licenses2.size()==1);
+
+    }
+
+    @Test
+    public void findByAreaGreaterThanEqual() {
+	List<ResearchLicense> licenses = researchLicenseRepository.findByAreaGreaterThanEqual(10000.00);
+	Assert.assertTrue(licenses.size()==1);
+
+
+    }
+
+    @Test
+    public void findByAreaLessThanEqual() {
+
+	List<ResearchLicense> licenses = researchLicenseRepository.findByAreaLessThanEqual(5000.00);
+	Assert.assertTrue(licenses.size()==1);
     }
 }
