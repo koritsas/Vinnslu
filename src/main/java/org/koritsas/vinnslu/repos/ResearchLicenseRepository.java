@@ -37,6 +37,7 @@ public interface ResearchLicenseRepository extends JpaRepository<ResearchLicense
 
 
 
+
     ResearchLicense findByContractContractDate(Date date);
 
     List<ResearchLicense> findByContractContractDateAfter(Date date);
