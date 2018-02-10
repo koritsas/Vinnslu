@@ -2,8 +2,8 @@ package org.koritsas.vinnslu.models;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
+import org.koritsas.vinnslu.models.common.LicenceBuilder;
 import org.koritsas.vinnslu.models.types.Contract;
-import org.koritsas.vinnslu.utils.LicenceBuilder;
 
 import javax.persistence.*;
 

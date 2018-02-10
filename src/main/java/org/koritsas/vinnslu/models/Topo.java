@@ -32,7 +32,7 @@ public class Topo implements Serializable{
     @Column(name="abl")
     private int abl;
 
-    @Column(name="the_geom",nullable = false)
+    @Column(nullable = false)
     private Polygon polygon;
 
     @Column(name="community",nullable = false)

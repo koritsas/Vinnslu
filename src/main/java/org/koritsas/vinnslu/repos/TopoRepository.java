@@ -1,10 +1,11 @@
 package org.koritsas.vinnslu.repos;
 
-import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Point;
 import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Topo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -22,21 +23,10 @@ public interface TopoRepository extends JpaRepository<Topo,Long>{
 
     //Spatial Queries
 
-    @Query(value = "SELECT p FROM Topo p WHERE p.the_geom.contains(:point)=true")
-    Topo findByPolygonContaining(final Geometry point);
+    @Query(value = "SELECT p FROM #{#entityName} p WHERE intersection(p.polygon,(:point)) = true")
+    Topo findByPolygonContains(@Param("point") Point point);
 
-    @Query("SELECT p FROM #{#entityName} p WHERE p.the_geom.getArea()>:area")
-    List<Topo> findByPolygonGreaterThan(final double area);
 
-    @Query("SELECT p FROM #{#entityName} p WHERE p.the_geom.getArea()<:area")
-    List<Topo> findByAreaSmallerThan(final double area);
 
-    @Query("SELECT p FROM #{#entityName} p WHERE p.the_geom.getArea()>=:area")
-    List<Topo> findByAreaLargerOrEqualThan(final double area);
 
-    @Query("SELECT p FROM #{#entityName} p WHERE p.the_geom.getArea()<=:area")
-    List<Topo> findByAreaSmallerOrEqualThan(final double area);
-
-    @Query("SELECT p FROM #{#entityName} p WHERE p.the_geom.intersects(:geometry) = true")
-    List<Topo> findByIntersection(Geometry geometry);
 }

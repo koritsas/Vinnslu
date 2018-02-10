@@ -18,7 +18,6 @@ import java.util.Date;
 @SpringBootApplication
 public class VinnsluApplication {
 
-
     public static void main(String[] args) {
 
 	ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
@@ -77,6 +76,10 @@ public class VinnsluApplication {
 	//System.out.println(polygon1);
 	System.out.println(
 	    "llllllllllllllllllllleleleleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeelllllllllllllllllllllllllllllllllllllllllllleeeeeeeeeeee");
+
+
+
+
 
     }
 

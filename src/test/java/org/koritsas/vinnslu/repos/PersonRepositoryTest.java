@@ -77,7 +77,7 @@ public class PersonRepositoryTest {
 
     @Test
     public void findByAfm(){
-        Person p = (Person) personRepository.findByAfm(666L);
+        Person p = personRepository.findByAfm(666L);
         Assert.assertEquals(p,person);
     }
 }

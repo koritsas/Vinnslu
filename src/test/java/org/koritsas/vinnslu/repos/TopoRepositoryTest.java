@@ -1,8 +1,8 @@
 package org.koritsas.vinnslu.repos;
 
 import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Point;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.io.ParseException;
 import com.vividsolutions.jts.io.WKTReader;
@@ -61,9 +61,9 @@ public class TopoRepositoryTest{
 
 	company = new Company(666L,"hermes","drama");
 	person = new Person.PersonBuilder("ilias","koritsas").setBirthDate(new Date()).build();
-	Topo topo = new Topo.TopoBuilder(polygon).setAbl(1234).setOwner(company).setCommunity("Braxia").setLocation("Prosotsani").setForest(true).setPrefecture("Drama").build();
-	Topo topo2 = new Topo.TopoBuilder(polygon).setAbl(2134).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setPrefecture("Drama").build();
-	Topo topo3 = new Topo.TopoBuilder(polygon).setAbl(3214).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setPrefecture("Drama").build();
+	Topo topo = new Topo.TopoBuilder(polygon).setAbl(1234).setOwner(company).setCommunity("Braxia").setLocation("Prosotsani").setTopoOwner(person).setForest(true).setPrefecture("Drama").build();
+	Topo topo2 = new Topo.TopoBuilder(polygon).setAbl(2134).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
+	Topo topo3 = new Topo.TopoBuilder(polygon).setAbl(3214).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
 
 	this.manager.persist(company);
 	this.manager.persist(person);
@@ -128,40 +128,23 @@ public class TopoRepositoryTest{
     @Test
     public void findByTopoOwner() {
 	List<Topo> topos = this.topoRepository.findByTopoOwner(person);
-	Assert.assertFalse(topos.isEmpty());
+	Assert.assertTrue(topos.get(0).getTopoOwner().getName() == "ilias");
 
     }
+
+
 
     @Test
     public void findByPoint() {
-	Geometry geometry = geometryFactory.createPoint(new Coordinate(500426.634,4568643.937));
-        Topo topo = topoRepository.findByPolygonContaining( geometry );
+	Point point = geometryFactory.createPoint(new Coordinate(20,20));
+
+	System.out.println(point.intersects(geometryFactory.createGeometry(point)));
+	point.getBoundary();
+
+        Topo topo = topoRepository.findByPolygonContains(point);
         Assert.assertNotNull(topo);
     }
 
-    @Test
-    public void findByAreaLargerThan() {
-        List<Topo> topos=this.topoRepository.findByPolygonGreaterThan(10000.00);
-        Assert.assertFalse(topos.isEmpty());
-    }
-
-    @Test
-    public void findByAreaSmallerThan() {
-	List<Topo> topos=this.topoRepository.findByPolygonGreaterThan(1000000);
-	Assert.assertFalse(topos.isEmpty());
-    }
-
-    @Test
-    public void findByAreaLargerOrEqualThan() {
-	List<Topo> topos=this.topoRepository.findByPolygonGreaterThan(10000);
-	Assert.assertFalse(topos.isEmpty());
-    }
-
-    @Test
-    public void findByAreaSmallerOrEqualThan() {
-	List<Topo> topos=this.topoRepository.findByPolygonGreaterThan(1000000);
-	Assert.assertFalse(topos.isEmpty());
-    }
 
     @Test
     public void findByIntersection() {
