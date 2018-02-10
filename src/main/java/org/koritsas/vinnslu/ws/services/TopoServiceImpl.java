@@ -1,10 +1,10 @@
 package org.koritsas.vinnslu.ws.services;
 
 import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.exceptions.EntityNotFoundException;
 import org.koritsas.vinnslu.repos.TopoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -20,23 +20,36 @@ public class TopoServiceImpl implements TopoService{
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = EntityNotFoundException.class)
     public Topo deleteTopo(long id) {
-	return null;
+        Topo existing = topoRepository.findOne(id);
+        if (existing == null){
+            throw new EntityNotFoundException("Topo with id: " + id +" not found. Cannot delete");
+	}
+        topoRepository.delete(id);
+	return existing;
     }
 
     @Override
+    @Transactional
     public List<Topo> getAllTopos() {
-	return null;
+	return topoRepository.findAll();
     }
 
     @Override
+    @Transactional
     public Topo findTopoById(long id) {
-	return null;
+	return topoRepository.findOne(id);
     }
 
     @Override
+    @Transactional
     public Topo updateTopo(Topo topo) {
-	return null;
+        Topo existing = topoRepository.findOne(topo.getId());
+        if( existing == null){
+            throw new EntityNotFoundException("Topo with id: " + topo.getId() + " not found. Cannot be updated");
+	}
+        topo.set
+	return;
     }
 }
