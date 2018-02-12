@@ -48,6 +48,8 @@ public class Company implements Serializable{
         this.name=companyBuilder.getName();
     }
 
+    public Long getId() { return id; }
+
     public Long getAfm() { return afm; }
 
     public void setAfm(Long afm) { this.afm = afm; }
@@ -60,6 +62,16 @@ public class Company implements Serializable{
 
     public void setAddress(String address) { this.address = address; }
 
+    @Override
+    public String toString() {
+	return "Company{" +
+	    "id=" + id +
+	    ", afm=" + afm +
+	    ", name='" + name + '\'' +
+	    ", address='" + address + '\'' +
+	    '}';
+    }
+
     public static class CompanyBuilder extends OwnerBuilder<CompanyBuilder,Company>{
 
 	public CompanyBuilder(String name) {
@@ -70,5 +82,7 @@ public class Company implements Serializable{
 	public Company build() {
 	    return new Company(this);
 	}
+
+
     }
 }

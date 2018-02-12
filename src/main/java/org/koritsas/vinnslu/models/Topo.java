@@ -48,11 +48,11 @@ public class Topo implements Serializable{
     private boolean forest=true;
 
     @ManyToOne
-    @JoinColumn(name="owner_id",foreignKey = @ForeignKey(name="OWNER_FK"))
+    @JoinColumn(name="topo_owner_id",foreignKey = @ForeignKey(name="OWNER_FK"))
     private Company topoOwner;
 
     @ManyToOne
-    @JoinColumn(name="topo_owner_id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
+    @JoinColumn(name="owner_id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
     private Company owner;
 
     public Topo(){}

@@ -5,6 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 public class CompanyTest {
 
     Company company;
@@ -17,6 +20,19 @@ public class CompanyTest {
     @After
     public void tearDown() {
         company=null;
+    }
+
+
+    @Test
+    public void test1(){
+
+
+        Company company = mock(Company.class);
+        when(company.getName()).thenReturn("Hermes");
+
+	System.out.println(company.getAfm());
+        Assert.assertEquals(company.getName(),"Hermes");
+
     }
 
     @Test

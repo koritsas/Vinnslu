@@ -43,7 +43,7 @@ public class CompanyRepositoryTest {
 
     @Test
     public void findById() {
-        Company company = companyRepository.findById(5298);
+        Company company = companyRepository.findById(5298L);
         Assert.assertNotNull(company);
     }
 

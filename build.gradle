@@ -35,8 +35,8 @@ dependencies {
 	compile("org.springframework:spring-jdbc")
 	compile("org.hibernate:hibernate-spatial:5.2.3.Final")
 	compile("org.springframework.boot:spring-boot-starter-data-jpa")
- 	compile("org.springframework.boot:spring-boot-start-web")
-	compule("org.springframework.boot:spring-boot-starter-actuator")
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-actuator")
 
     compile("com.h2database:h2:1.4.194")
 
@@ -53,6 +53,8 @@ dependencies {
     //testCompile ("org.springframework.data:spring-data-jpa")
 	//testCompile("org.springframework.boot:spring-boot-devtools")
 	//testCompile("org.springframework:spring-jdbc")
+
+	testCompile 'org.mockito:mockito-core:2.7.22'
 	testCompile("org.hibernate:hibernate-spatial:5.2.3.Final")
 	testCompile("org.springframework.boot:spring-boot-starter-data-jpa")
     testCompile("com.h2database:h2:1.4.194")

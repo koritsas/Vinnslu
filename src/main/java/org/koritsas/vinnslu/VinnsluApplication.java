@@ -44,13 +44,14 @@ public class VinnsluApplication {
 	    e.printStackTrace();
 	}
 
+
 	Topo topo = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(666).build();
 
 	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
-	Company company = new Company(666L, "safdsa", "sadfasd");
+	Company company = new Company(666L, "Hermes", "Drama");
 
 	Person p = new Person.PersonBuilder("sadf", "sadfasd").setAfm(777L).build();
 
@@ -58,6 +59,7 @@ public class VinnsluApplication {
 
 	Company company1 = new Company(4532L,"sdfasdf","54543");
 	session.saveOrUpdate(company1);
+	session.saveOrUpdate(company);
 	topo.setTopoOwner(company1);
 
 
@@ -79,6 +81,8 @@ public class VinnsluApplication {
 
 
 
+
+	String coord="50 12,15 36,  54 89,12 45,45 89";
 
 
     }
