@@ -67,6 +67,8 @@ public class VinnsluApplication {
 	session.save(p);
 	session.saveOrUpdate(topo);
 
+
+
 	session.getTransaction().commit();
 	session.close();
 

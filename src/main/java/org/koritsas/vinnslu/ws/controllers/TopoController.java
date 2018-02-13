@@ -1,13 +1,14 @@
 package org.koritsas.vinnslu.ws.controllers;
 
-import org.koritsas.vinnslu.ws.dto.TopoDto;
+import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/topos")
@@ -18,10 +19,13 @@ public class TopoController {
     @Autowired
     public TopoController(TopoService topoService) { this.topoService = topoService; }
 
-    @PostMapping("/create")
-    public ResponseEntity<Void> createTopo(@RequestBody TopoDto dto) {
-	return topoService.createTopo(dto);
+    @GetMapping("/getAllTopos")
+    public ResponseEntity<List<Topo>> getAllTopos(){
+        return ResponseEntity.ok(topoService.getAllTopos());
     }
+
+
+
 
 
 }

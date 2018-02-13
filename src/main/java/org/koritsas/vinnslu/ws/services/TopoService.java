@@ -1,15 +1,16 @@
 package org.koritsas.vinnslu.ws.services;
 
-import com.vividsolutions.jts.geom.Polygon;
 import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.exceptions.EntityAlreadyExistsException;
+import org.koritsas.vinnslu.models.exceptions.EntityNotFoundException;
 import org.koritsas.vinnslu.repos.TopoRepository;
-import org.koritsas.vinnslu.utils.PolygonParser;
-import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 public class TopoService {
@@ -22,36 +23,56 @@ public class TopoService {
     @Autowired
     public TopoService(TopoRepository repository){this.repository=repository;}
 
-    public ResponseEntity<Void> createTopo(TopoDto dto) {
-	LOGGER.debug("Got this request body: " + dto.toString());
-	Topo topo = new Topo();
 
-	//Reading polygon string
-	/*WKTReader reader = new WKTReader();
-
-	Polygon polygon = null;
-
-	try {
-	    polygon = (Polygon) reader.read(dto.getPolygon());
-	} catch (ParseException e) {
-	    e.printStackTrace();
-	}
-*/
-	Polygon polygon = PolygonParser.parse(dto.getPolygon());
-
-
-	topo.setPolygon(polygon);
-	topo.setAbl(dto.getAbl());
-	topo.setCommunity(dto.getCommunity());
-	topo.setLocation(dto.getLocation());
-	topo.setPrefecture(dto.getPrefecture());
-	topo.setOwner(dto.getOwner());
-	topo.setTopoOwner(dto.getTopoOwner());
-
-
-
-	repository.save(topo);
-        return ResponseEntity.noContent().build();
+    @Transactional(rollbackFor = EntityAlreadyExistsException.class)
+    public Topo createTopo(Topo topo) {
+        return repository.save(topo);
     }
 
+
+    @Transactional(rollbackFor = EntityNotFoundException.class)
+    public Topo deleteTopo(long topoId){
+
+        Topo existing = repository.findOne(topoId);
+
+        if (existing == null){
+            throw new EntityNotFoundException("Topo with id: "+ topoId + " not found. Nothing has changed...But has ever?");
+	}
+
+	repository.delete(topoId);
+
+        return existing;
+    }
+
+    @Transactional(readOnly = true)
+    public List<Topo> getAllTopos() {
+	return repository.findAll();
+    }
+
+    @Transactional
+    public Topo findByAbl(int abl){return repository.findByAbl(abl);}
+
+    @Transactional
+    public Topo findById(long id) {
+	return repository.findOne(id);
+    }
+
+    @Transactional(rollbackFor = EntityNotFoundException.class)
+    public Topo updateUser(Topo topo) {
+	Topo existing = repository.findOne(topo.getId());
+	if (existing == null) {
+	    throw new EntityNotFoundException("Topo with id: " + topo.getId() + " not found. Cannot update.");
+	}
+	topo.setPolygon(existing.getPolygon());
+	topo.setAbl(existing.getAbl());
+	topo.setOwner(existing.getOwner());
+	topo.setTopoOwner(existing.getTopoOwner());
+	topo.setCommunity(existing.getCommunity());
+	topo.setLocation(existing.getLocation());
+	topo.setPrefecture(existing.getPrefecture());
+	topo.setForest(existing.getForest());
+
+	repository.save(topo);
+	return existing;
+    }
 }
