@@ -43,8 +43,8 @@ dependencies {
 	//compile group: 'com.vividsolutions', name: 'jts', version: '1.13'
 
 	compile group: 'net.postgis', name: 'postgis-jdbc', version: '2.2.1'
-	
-	//compile group: 'org.jfairy', name: 'jfairy', version: '0.2.4'
+
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '1.1.2'
 
 	runtime('org.postgresql:postgresql:42.2.1')
 

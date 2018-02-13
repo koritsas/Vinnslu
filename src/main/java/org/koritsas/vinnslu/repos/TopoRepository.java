@@ -13,7 +13,6 @@ import java.util.List;
 @Repository
 public interface TopoRepository extends JpaRepository<Topo,Long>{
 
-
     Topo findByAbl(final int abl);
     List<Topo> findByForest(final boolean forest);
     List<Topo> findByCommunity(final String community);
@@ -26,8 +25,6 @@ public interface TopoRepository extends JpaRepository<Topo,Long>{
 
     @Query(value = "SELECT p FROM #{#entityName} p WHERE intersection(p.polygon,(:point)) = true")
     Topo findByPolygonContains(@Param("point") Point point);
-
-
 
 
 
