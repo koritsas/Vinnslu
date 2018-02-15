@@ -1,14 +1,13 @@
 package org.koritsas.vinnslu;
 
 import com.vividsolutions.jts.geom.*;
-import com.vividsolutions.jts.io.ParseException;
-import com.vividsolutions.jts.io.WKTReader;
-import org.geolatte.geom.codec.Wkt;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Person;
 import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -30,10 +29,13 @@ public class VinnsluApplication {
 
 	polygon.setSRID(2100);
 
-	org.geolatte.geom.Polygon polygon1 = (org.geolatte.geom.Polygon) Wkt.fromWkt("POLYGON (" +
-	    "(30 10, 40 40, 20 40, 10 20, 30 10), " +
-	    "(20 30, 35 35, 30 20, 20 30))");
+	Polygon polygon2 = factory.createPolygon(
+	    new Coordinate[] { new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(1, 1),
+		new Coordinate(0, 0) });
 
+	polygon2.setSRID(2100);
+
+	/*
 	WKTReader reader = new WKTReader();
 
 	try {
@@ -43,10 +45,14 @@ public class VinnsluApplication {
 	} catch (ParseException e) {
 	    e.printStackTrace();
 	}
-
+*/
 
 	Topo topo = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(666).build();
+
+
+	Topo topo2 = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
+	    .setLocation("dfad").setAbl(667).build();
 
 	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	Session session = sessionFactory.openSession();
@@ -66,7 +72,7 @@ public class VinnsluApplication {
 	polygon.setSRID(2100);
 	session.save(p);
 	session.saveOrUpdate(topo);
-
+	session.saveOrUpdate(topo2);
 
 
 	session.getTransaction().commit();
@@ -86,6 +92,12 @@ public class VinnsluApplication {
 
 	String coord="50 12,15 36,  54 89,12 45,45 89";
 
+	GeometryModelMapper mm = new GeometryModelMapper();
+
+
+	TopoDto dto =mm.map(topo,TopoDto.class);
+
+	System.out.println(dto.getPolygon().toString());
 
     }
 

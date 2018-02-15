@@ -17,7 +17,6 @@ import java.util.Properties;
 @Configuration
 
 @EnableTransactionManagement
-//@PropertySource("application.properties")
 //@ComponentScan("org.koritsas.vinnslu.models")
 //@EntityScan("org.koritsas.vinnslu.models")
 @EnableJpaRepositories("org.koritsas.vinnslu.repos")

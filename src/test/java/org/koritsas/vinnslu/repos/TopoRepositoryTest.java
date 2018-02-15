@@ -33,6 +33,7 @@ public class TopoRepositoryTest{
 
     GeometryFactory geometryFactory;
 
+    Topo topo;
 
 
     @Autowired
@@ -61,9 +62,10 @@ public class TopoRepositoryTest{
 
 	company = new Company(666L,"hermes","drama");
 	person = new Person.PersonBuilder("ilias","koritsas").setBirthDate(new Date()).build();
-	Topo topo = new Topo.TopoBuilder(polygon).setAbl(1234).setOwner(company).setCommunity("Braxia").setLocation("Prosotsani").setTopoOwner(person).setForest(true).setPrefecture("Drama").build();
+	topo = new Topo.TopoBuilder(polygon).setAbl(1234).setOwner(company).setCommunity("Braxia").setLocation("Prosotsani").setTopoOwner(person).setForest(true).setPrefecture("Drama").build();
 	Topo topo2 = new Topo.TopoBuilder(polygon).setAbl(2134).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
 	Topo topo3 = new Topo.TopoBuilder(polygon).setAbl(3214).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
+
 
 	this.manager.persist(company);
 	this.manager.persist(person);
@@ -81,6 +83,15 @@ public class TopoRepositoryTest{
 
     @After
     public void tearDown(){
+
+    }
+
+    @Test
+    public void findById(){
+        Topo t = topoRepository.findOne(topo.getId());
+
+	System.out.println(topo.toString());
+        Assert.assertNotNull(t);
 
     }
 

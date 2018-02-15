@@ -1,9 +1,6 @@
 package org.koritsas.vinnslu.ws.dto;
 
-import com.vividsolutions.jts.geom.Polygon;
 import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.models.Topo;
-import org.koritsas.vinnslu.utils.PolygonParser;
 
 public class TopoDto {
 
@@ -55,35 +52,17 @@ public class TopoDto {
 
     public void setOwner(Company owner) { this.owner = owner; }
 
-    public static Topo toTopo(TopoDto dto){
-	//Reading polygon string
-	Topo topo = new Topo();
-
-	Polygon polygon = PolygonParser.parse(dto.getPolygon());
-
-	topo.setPolygon(polygon);
-	topo.setAbl(dto.getAbl());
-	topo.setCommunity(dto.getCommunity());
-	topo.setLocation(dto.getLocation());
-	topo.setPrefecture(dto.getPrefecture());
-	topo.setOwner(dto.getOwner());
-	topo.setTopoOwner(dto.getTopoOwner());
-
-	return topo;
-
-    }
-
     @Override
     public String toString() {
-	return "TopoDto{" +
-	    "abl=" + abl +
-	    ", polygon='" + polygon + '\'' +
-	    ", community='" + community + '\'' +
-	    ", location='" + location + '\'' +
-	    ", prefecture='" + prefecture + '\'' +
-	    ", forest=" + forest +
-	    ", topoOwner=" + topoOwner +
-	    ", owner=" + owner +
-	    '}';
+        return "TopoDto{" +
+            "abl=" + abl +
+            ", polygon=" + polygon +
+            ", community='" + community + '\'' +
+            ", location='" + location + '\'' +
+            ", prefecture='" + prefecture + '\'' +
+            ", forest=" + forest +
+            ", topoOwner=" + topoOwner +
+            ", owner=" + owner +
+            '}';
     }
 }

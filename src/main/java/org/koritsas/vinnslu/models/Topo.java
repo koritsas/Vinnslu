@@ -1,5 +1,9 @@
 package org.koritsas.vinnslu.models;
 
+import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
+import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
 import javafx.util.Builder;
 import org.hibernate.annotations.GenericGenerator;
@@ -32,6 +36,8 @@ public class Topo implements Serializable{
     @Column(name="abl")
     private int abl;
 
+    @JsonSerialize(using = GeometrySerializer.class)
+    @JsonDeserialize(using = GeometryDeserializer.class)
     @Column(nullable = false)
     private Polygon polygon;
 

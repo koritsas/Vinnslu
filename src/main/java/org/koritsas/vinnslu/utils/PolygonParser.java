@@ -13,9 +13,9 @@ public class PolygonParser {
     private static String MESSAGE = " Wrong polygon string format! The correct format is: x1 y1,x2 y2, ... ,xn yn";
 
 
-    public static Polygon parse(String polygon) throws BadPolygonFormatException {
+    public static Polygon parse(String polygonString) throws BadPolygonFormatException {
 
-	String[] pointTokens = polygon.trim().split(SPLIT_POINT_DELIMETER);
+	String[] pointTokens = polygonString.trim().split(SPLIT_POINT_DELIMETER);
 
 	Coordinate[] coordinates = new Coordinate[pointTokens.length+1];
 
@@ -37,8 +37,10 @@ public class PolygonParser {
 	throw new BadPolygonFormatException(MESSAGE);
     }
 
+	Polygon polygon =geometryFactory.createPolygon(coordinates);
 
-	return geometryFactory.createPolygon(coordinates);
+    	polygon.setSRID(2100);
+	return polygon;
 
 
 	//Stream.of(polygon).map(s -> s.split(SPLIT_POINT_DELIMETER)).forEach(strings -> Stream.of(strings).map(s -> s.split(SPLIT_COORDS_DELIMETER)).toArray(String[]::new));

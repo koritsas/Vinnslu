@@ -1,12 +1,12 @@
 package org.koritsas.vinnslu.ws.controllers;
 
 import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -14,18 +14,31 @@ import java.util.List;
 @RequestMapping("/topos")
 public class TopoController {
 
+    @Autowired
+    private GeometryModelMapper mapper;
+
+
     private TopoService topoService;
 
     @Autowired
-    public TopoController(TopoService topoService) { this.topoService = topoService; }
+    private TopoController(TopoService topoService) { this.topoService = topoService; }
 
     @GetMapping("/getAllTopos")
     public ResponseEntity<List<Topo>> getAllTopos(){
+
         return ResponseEntity.ok(topoService.getAllTopos());
     }
 
+    @PostMapping("/create")
+    public ResponseEntity<Topo> createTopo(@RequestBody TopoDto dto){
+        return ResponseEntity.ok(topoService.createTopo(mapper.map(dto,Topo.class)));
+    }
 
 
+    @DeleteMapping(value = "/delete/{topoId}")
+    public ResponseEntity<String> delete(@PathVariable long topoId) {
+        return ResponseEntity.ok("Deleted: " + topoService.deleteTopo(topoId).getId());
+    }
 
 
 }
