@@ -5,7 +5,6 @@ import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,13 +17,12 @@ public class TopoController {
     @Autowired
     private GeometryModelMapper mapper;
 
-
     private TopoService topoService;
 
     @Autowired
     private TopoController(TopoService topoService) { this.topoService = topoService; }
 
-    @GetMapping(value = "/getAllTopos",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @GetMapping(value = "/getAllTopos")
     public ResponseEntity<List<Topo>> getAllTopos(){
         return ResponseEntity.ok(topoService.getAllTopos());
     }

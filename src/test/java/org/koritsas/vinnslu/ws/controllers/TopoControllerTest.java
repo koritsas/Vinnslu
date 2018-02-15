@@ -13,6 +13,7 @@ import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.repos.TopoRepository;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.services.TopoService;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,16 +30,12 @@ import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(TopoController.class)
 public class TopoControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
 
     @MockBean
     GeometryModelMapper geometryModelMapper;
@@ -52,20 +49,22 @@ public class TopoControllerTest {
     @Autowired
     TopoController topoController;
 
-
+    @Mock
     Topo topo1;
 
+    @Mock
     Topo topo2;
 
-    String JSON= "{ \"abl\": 1000, \"community\": \"SomeCommunity\", \"location\": \"SomeLocation\", \"polygon\": \"0 0,0 1,1 1\", \"prefecture\": \"SomePrefecture\" }";
+    String JSON = "{ \"abl\": 1000, \"community\": \"SomeCommunity\", \"location\": \"SomeLocation\", \"polygon\": \"0 0,0 1,1 1\", \"prefecture\": \"SomePrefecture\" }";
 
-
+    @Autowired
+    private MockMvc mockMvc;
 
     @Before
     public void setup() {
 
-        //Init Mocks
-        MockitoAnnotations.initMocks(this);
+	//Init Mocks
+	MockitoAnnotations.initMocks(this);
 	mockMvc = MockMvcBuilders
 	    .standaloneSetup(topoController)
 	    .build();
@@ -77,13 +76,14 @@ public class TopoControllerTest {
 	GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 2100);
 
 	Polygon polygon1 = factory.createPolygon(
-	    new Coordinate[] { new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(1, 0),new Coordinate(1, 0),
+	    new Coordinate[] { new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(1, 0), new Coordinate(1, 0),
 		new Coordinate(0, 0) });
 
 	polygon1.setSRID(2100);
 
 	Polygon polygon2 = factory.createPolygon(
-	    new Coordinate[] { new Coordinate(0, 1), new Coordinate(0.5, 5), new Coordinate(5, 5), new Coordinate(7, 0.5),new Coordinate(1, 0),new Coordinate(1, 1),
+	    new Coordinate[] { new Coordinate(0, 1), new Coordinate(0.5, 5), new Coordinate(5, 5),
+		new Coordinate(7, 0.5), new Coordinate(1, 0), new Coordinate(1, 1),
 		new Coordinate(0, 1) });
 
 	polygon2.setSRID(2100);
@@ -91,9 +91,9 @@ public class TopoControllerTest {
 	topo1 = new Topo.TopoBuilder(polygon1).setPrefecture("Δράμα").setLocation("Βράχια").setCommunity("Προσοτσάνη")
 	    .setAbl(666).build();
 
-
 	topo2 = new Topo.TopoBuilder(polygon2).setPrefecture("Δράμα").setLocation("Βράχια").setCommunity("Προσοτσάνη")
 	    .setAbl(667).build();
+
 
 
 	Mockito.when(topoRepository.findByAbl(666)).thenReturn(topo1);
@@ -104,27 +104,40 @@ public class TopoControllerTest {
     @Test
     public void testGetAllTopos() throws Exception {
 
-	List<Topo> topos = Arrays.asList(topo1,topo2);
-
-
+	List<Topo> topos = Arrays.asList(topo1, topo2);
 
 	when(topoService.getAllTopos()).thenReturn(topos);
 
 	List<Topo> ts = topoService.getAllTopos();
 
-        mockMvc.perform(get("/topos/getAllTopos")).andExpect(status().isOk())
+	mockMvc.perform(get("/topos/getAllTopos")).andExpect(status().isOk())
 	    .andExpect(status().is2xxSuccessful());
 
 	mockMvc.perform(get("/topos/getAllTopos")
 	    .contentType(MediaType.APPLICATION_JSON))
 	    .andExpect(status().isOk())
+	    .andExpect(jsonPath("$[0].abl",is(666)))
 	    .andExpect(jsonPath("$[0].prefecture", is("Δράμα")))
-	    .andExpect(jsonPath("$[0].location",is("Βράχια")))
-	    .andExpect(jsonPath("$[0].community",is("Προσοτσάνη")))
-	    .andExpect(jsonPath("$[0].polygon", Matchers.notNullValue()));
-
+	    .andExpect(jsonPath("$[0].location", is("Βράχια")))
+	    .andExpect(jsonPath("$[0].community", is("Προσοτσάνη")))
+	    .andExpect(jsonPath("$[0].polygon", Matchers.notNullValue()))
+	    .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
 
     }
 
+    @Test
+    public void testCreateTopo() throws Exception {
 
+	mockMvc.perform(post("/topos/create").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(JSON))
+	    .andExpect(status().isOk());
+
+    }
+
+    @Test
+    public void testDeleteTopo() throws Exception {
+
+        when(topoService.deleteTopo(1));
+
+        mockMvc.perform(put("/topos/delete/1")).andExpect(status().isOk()).andExpect(content().string("Deleted: "+topo1.getId()));
+    }
 }
