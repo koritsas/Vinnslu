@@ -5,6 +5,7 @@ import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,9 +24,8 @@ public class TopoController {
     @Autowired
     private TopoController(TopoService topoService) { this.topoService = topoService; }
 
-    @GetMapping("/getAllTopos")
+    @GetMapping(value = "/getAllTopos",produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<List<Topo>> getAllTopos(){
-
         return ResponseEntity.ok(topoService.getAllTopos());
     }
 
@@ -38,6 +38,11 @@ public class TopoController {
     @DeleteMapping(value = "/delete/{topoId}")
     public ResponseEntity<String> delete(@PathVariable long topoId) {
         return ResponseEntity.ok("Deleted: " + topoService.deleteTopo(topoId).getId());
+    }
+
+    @GetMapping("/findTopo/{topoId}")
+    public ResponseEntity<Topo> findTopo(@PathVariable long topoId){
+        return ResponseEntity.ok(topoService.findById(topoId));
     }
 
 

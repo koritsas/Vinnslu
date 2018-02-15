@@ -57,8 +57,9 @@ dependencies {
 	//testCompile("org.springframework:spring-jdbc")
 
 
-	testCompile 'org.mockito:mockito-core:2.8.9'
+	//testCompile 'org.mockito:mockito-core:2.8.9'
 
+	testCompile "com.jayway.jsonpath:json-path-assert"
 	testCompile('org.springframework.boot:spring-boot-starter-web')
 	testCompile("org.hibernate:hibernate-spatial:5.2.3.Final")
 	testCompile("org.springframework.boot:spring-boot-starter-data-jpa")

@@ -4,14 +4,20 @@ import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.geom.PrecisionModel;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koritsas.vinnslu.models.Person;
 import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.repos.TopoRepository;
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.services.TopoService;
-import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
@@ -21,28 +27,38 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import static org.hamcrest.Matchers.is;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-
+@WebMvcTest(TopoController.class)
 public class TopoControllerTest {
 
+    @Autowired
     private MockMvc mockMvc;
 
-    @Mock
+    @MockBean
+    GeometryModelMapper geometryModelMapper;
+
+    @MockBean
     TopoService topoService;
 
-    @Mock
-    //@InjectMocks
+    @MockBean
+    TopoRepository topoRepository;
+
+    @Autowired
     TopoController topoController;
 
 
     Topo topo1;
 
     Topo topo2;
+
+    String JSON= "{ \"abl\": 1000, \"community\": \"SomeCommunity\", \"location\": \"SomeLocation\", \"polygon\": \"0 0,0 1,1 1\", \"prefecture\": \"SomePrefecture\" }";
+
 
 
     @Before
@@ -80,7 +96,9 @@ public class TopoControllerTest {
 	    .setAbl(667).build();
 
 
+	Mockito.when(topoRepository.findByAbl(666)).thenReturn(topo1);
 
+	Mockito.when(topoRepository.findByAbl(667)).thenReturn(topo2);
     }
 
     @Test
@@ -88,22 +106,24 @@ public class TopoControllerTest {
 
 	List<Topo> topos = Arrays.asList(topo1,topo2);
 
+
+
 	when(topoService.getAllTopos()).thenReturn(topos);
 
+	List<Topo> ts = topoService.getAllTopos();
+
+        mockMvc.perform(get("/topos/getAllTopos")).andExpect(status().isOk())
+	    .andExpect(status().is2xxSuccessful());
+
+	mockMvc.perform(get("/topos/getAllTopos")
+	    .contentType(MediaType.APPLICATION_JSON))
+	    .andExpect(status().isOk())
+	    .andExpect(jsonPath("$[0].prefecture", is("Δράμα")))
+	    .andExpect(jsonPath("$[0].location",is("Βράχια")))
+	    .andExpect(jsonPath("$[0].community",is("Προσοτσάνη")))
+	    .andExpect(jsonPath("$[0].polygon", Matchers.notNullValue()));
 
 
-        mockMvc.perform(get("/topos/getAllTopos")).andExpect(status().isOk()) .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE));
-
-
-
-        verify(topoController,times(1)).getAllTopos();
-
-        verifyNoMoreInteractions(topoService);
-    }
-
-    @Test
-    public void TestTopoController(){
-	System.out.println(mockMvc.toString());
     }
 
 
