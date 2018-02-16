@@ -7,6 +7,7 @@ import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Person;
 import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -59,6 +60,7 @@ public class VinnsluApplication {
 	session.beginTransaction();
 	Company company = new Company(666L, "Hermes", "Drama");
 
+
 	Person p = new Person.PersonBuilder("sadf", "sadfasd").setAfm(777L).build();
 
 	topo.setOwner(p);
@@ -95,8 +97,12 @@ public class VinnsluApplication {
 	GeometryModelMapper mm = new GeometryModelMapper();
 
 
+
 	TopoDto dto =mm.map(topo,TopoDto.class);
 
+	//Topo t = mm.map(dto,Topo.class);
+
+	CompanyDto cdto = mm.map(company, CompanyDto.class);
 	System.out.println(dto.getPolygon().toString());
 
     }

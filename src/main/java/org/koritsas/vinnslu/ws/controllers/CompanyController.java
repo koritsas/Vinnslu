@@ -1,24 +1,53 @@
 package org.koritsas.vinnslu.ws.controllers;
 
+import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.services.CompanyService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
 public class CompanyController {
+
     private CompanyService service;
 
     @Autowired
     public CompanyController(CompanyService service){this.service=service;}
 
-    @PostMapping("/create")
-    public void createCompany(@RequestBody CompanyDto dto){
-        service.createCompany(dto);
+    @Autowired
+    GeometryModelMapper mapper;
+
+    @GetMapping("/find/all")
+    public ResponseEntity<List<Company>> findAll(){
+        return ResponseEntity.ok(service.getCompanies());
     }
+
+    @GetMapping("/find/{companyId}")
+    public ResponseEntity<Company> findCompanyById(@PathVariable long companyId){
+        return ResponseEntity.ok(service.findCompanyById(companyId));
+    }
+
+    @PostMapping("/create")
+    public ResponseEntity<Company> createCompany(@RequestBody CompanyDto dto){
+        return ResponseEntity.ok(service.createCompany(mapper.map(dto,Company.class)));
+    }
+
+    @DeleteMapping("/delete/{companyId}")
+    public ResponseEntity<String> delete(@PathVariable long companyId) {
+        return ResponseEntity.ok("Deleted: " + service.deleteCompany(companyId).getId());
+    }
+
+    @PutMapping("/update")
+    public ResponseEntity<Company> update(@RequestBody CompanyDto dto){
+        return ResponseEntity.ok(service.updateCompany(mapper.map(dto,Company.class)));
+    }
+
 
 }

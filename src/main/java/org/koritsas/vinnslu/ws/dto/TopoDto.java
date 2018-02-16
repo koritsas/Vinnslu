@@ -4,6 +4,8 @@ import org.koritsas.vinnslu.models.Company;
 
 public class TopoDto {
 
+    private Long id;
+
     private int abl;
 
     private String polygon;
@@ -19,6 +21,18 @@ public class TopoDto {
     private Company topoOwner;
 
     private Company owner;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public boolean isForest() {
+        return forest;
+    }
 
     public int getAbl() { return abl; }
 

@@ -48,6 +48,10 @@ public class Company implements Serializable{
         this.name=companyBuilder.getName();
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public Long getId() { return id; }
 
     public Long getAfm() { return afm; }

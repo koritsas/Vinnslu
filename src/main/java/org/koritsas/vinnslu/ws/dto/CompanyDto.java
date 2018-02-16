@@ -2,11 +2,21 @@ package org.koritsas.vinnslu.ws.dto;
 
 public class CompanyDto {
 
+    private Long id;
+
     private Long afm;
 
     private String name;
 
     private String address;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public Long getAfm() { return afm; }
 
@@ -23,9 +33,10 @@ public class CompanyDto {
     @Override
     public String toString() {
         return "CompanyDto{" +
-            "afm=" + afm +
-            ", name='" + name + '\'' +
-            ", address='" + address + '\'' +
-            '}';
+                "id=" + id +
+                ", afm=" + afm +
+                ", name='" + name + '\'' +
+                ", address='" + address + '\'' +
+                '}';
     }
 }

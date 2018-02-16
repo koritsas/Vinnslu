@@ -1,5 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
+import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.models.exceptions.EntityAlreadyExistsException;
 import org.koritsas.vinnslu.models.exceptions.EntityNotFoundException;
@@ -58,21 +59,22 @@ public class TopoService {
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
-    public Topo updateUser(Topo topo) {
+    public Topo updateTopo(Topo topo) {
 	Topo existing = repository.findOne(topo.getId());
 	if (existing == null) {
 	    throw new EntityNotFoundException("Topo with id: " + topo.getId() + " not found. Cannot update.");
 	}
-	topo.setPolygon(existing.getPolygon());
-	topo.setAbl(existing.getAbl());
-	topo.setOwner(existing.getOwner());
-	topo.setTopoOwner(existing.getTopoOwner());
-	topo.setCommunity(existing.getCommunity());
-	topo.setLocation(existing.getLocation());
-	topo.setPrefecture(existing.getPrefecture());
-	topo.setForest(existing.getForest());
+	existing.setPolygon(topo.getPolygon());
+	existing.setAbl(topo.getAbl());
+	existing.setOwner(topo.getOwner());
+	existing.setTopoOwner(topo.getTopoOwner());
+	existing.setCommunity(topo.getCommunity());
+	existing.setLocation(topo.getLocation());
+	existing.setPrefecture(topo.getPrefecture());
+	existing.setForest(topo.getForest());
 
-	repository.save(topo);
+	repository.save(existing);
 	return existing;
     }
+
 }

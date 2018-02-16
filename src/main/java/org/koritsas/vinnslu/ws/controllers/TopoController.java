@@ -22,7 +22,7 @@ public class TopoController {
     @Autowired
     private TopoController(TopoService topoService) { this.topoService = topoService; }
 
-    @GetMapping(value = "/getAllTopos")
+    @GetMapping(value = "/all")
     public ResponseEntity<List<Topo>> getAllTopos(){
         return ResponseEntity.ok(topoService.getAllTopos());
     }
@@ -38,10 +38,14 @@ public class TopoController {
         return ResponseEntity.ok("Deleted: " + topoService.deleteTopo(topoId).getId());
     }
 
-    @GetMapping("/findTopo/{topoId}")
+    @GetMapping("/find/{topoId}")
     public ResponseEntity<Topo> findTopo(@PathVariable long topoId){
         return ResponseEntity.ok(topoService.findById(topoId));
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<Topo> updateTopo(@RequestBody TopoDto dto){
+        return ResponseEntity.ok(topoService.updateTopo(mapper.map(dto,Topo.class)));
+    }
 
 }
