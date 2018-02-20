@@ -49,11 +49,11 @@ public class VinnsluApplication {
 */
 
 	Topo topo = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
-	    .setLocation("dfad").setAbl(666).build();
+	    .setLocation("dfad").setAbl(666L).build();
 
 
 	Topo topo2 = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
-	    .setLocation("dfad").setAbl(667).build();
+	    .setLocation("dfad").setAbl(667L).build();
 
 	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	Session session = sessionFactory.openSession();
@@ -76,9 +76,10 @@ public class VinnsluApplication {
 	session.saveOrUpdate(topo);
 	session.saveOrUpdate(topo2);
 
-
 	session.getTransaction().commit();
 	session.close();
+
+
 
 	System.out.println(polygon);
 

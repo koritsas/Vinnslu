@@ -1,6 +1,5 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.models.exceptions.EntityAlreadyExistsException;
 import org.koritsas.vinnslu.models.exceptions.EntityNotFoundException;

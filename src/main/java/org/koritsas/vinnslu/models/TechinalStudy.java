@@ -22,16 +22,16 @@ public class TechinalStudy implements Serializable {
         }
     )
     @GeneratedValue(generator = "technical_generator")
-    private Long environmentlId;
+    private Long technicalStudyId;
 
     @OneToOne
-    @JoinColumn(name="licence_id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
+    @JoinColumn(name="licence_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
     private MiningLicense miningLicense;
 
 
     @NaturalId
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="abl",foreignKey = @ForeignKey(name="MINING_LICENCE_FK"))
+    @JoinColumn(name="abl",referencedColumnName = "abl",foreignKey = @ForeignKey(name="MINING_LICENCE_FK"))
     private Topo topo;
 
     private String protocolNumber;
@@ -51,15 +51,15 @@ public class TechinalStudy implements Serializable {
     private Authority organization;
 
     @ManyToOne
-    @JoinColumn(name="id",foreignKey = @ForeignKey(name="PERSONS_ID_FK"))
+    @JoinColumn(name="reductor_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="PERSONS_ID_FK"))
     private Person reductor;
 
     @ManyToOne
-    @JoinColumn(name="id",foreignKey = @ForeignKey(name="PERSONS_ID_FK"))
+    @JoinColumn(name="supervisor_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="PERSONS_ID_FK"))
     private Person supervisor;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
+    @JoinColumn(name = "document_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
     private Document document;
 
     public TechinalStudy(){
@@ -79,7 +79,7 @@ public class TechinalStudy implements Serializable {
         this.miningLicense=builder.nestedMiningLicense;
     }
 
-    public Long getEnvironmentlId() { return environmentlId; }
+    public Long getTechnicalStudyId() { return technicalStudyId; }
 
     public MiningLicense getMiningLicense() { return miningLicense; }
 

@@ -42,4 +42,36 @@ public class Document implements Serializable{
     private File file;
 
     public Document(){}
+
+    public Document(String reductor, String organization, String protocolNumber, Date documentDate, File file) {
+        this.reductor = reductor;
+        this.organization = organization;
+        this.protocolNumber = protocolNumber;
+        this.documentDate = documentDate;
+        this.file = file;
+    }
+
+    public Long getId() { return id; }
+
+    public void setId(Long id) { this.id = id; }
+
+    public String getReductor() { return reductor; }
+
+    public void setReductor(String reductor) { this.reductor = reductor; }
+
+    public String getOrganization() { return organization; }
+
+    public void setOrganization(String organization) { this.organization = organization; }
+
+    public String getProtocolNumber() { return protocolNumber; }
+
+    public void setProtocolNumber(String protocolNumber) { this.protocolNumber = protocolNumber; }
+
+    public Date getDocumentDate() { return documentDate; }
+
+    public void setDocumentDate(Date documentDate) { this.documentDate = documentDate; }
+
+    public File getFile() { return file; }
+
+    public void setFile(File file) { this.file = file; }
 }

@@ -26,15 +26,15 @@ public class EnvironmentalTerms implements Serializable {
 	}
     )
     @GeneratedValue(generator = "environmental_generator")
-    private Long environmentlId;
+    private Long environmentalId;
 
     @OneToOne
-    @JoinColumn(name="licence_id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
+    @JoinColumn(name="licence_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
     private MiningLicense miningLicense;
 
     @NaturalId
     @OneToOne
-    @JoinColumn(name = "abl", foreignKey = @ForeignKey(name = "TOPOS_ABL_FK"))
+    @JoinColumn(name = "abl",referencedColumnName = "abl", foreignKey = @ForeignKey(name = "TOPOS_ABL_FK"))
     private Topo topo;
 
     @Temporal(TemporalType.DATE)
@@ -49,7 +49,7 @@ public class EnvironmentalTerms implements Serializable {
     private Date renewalDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "reductor_id", foreignKey = @ForeignKey(name = "PERSONS_ID_FK"))
+    @JoinColumn(name = "reductor_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "PERSONS_ID_FK"))
     private Person reductor;
 
     private Authority organization;
@@ -57,7 +57,7 @@ public class EnvironmentalTerms implements Serializable {
     private String protocolNumber;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "document_id", foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
+    @JoinColumn(name = "document_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
     private Document document;
 
     public EnvironmentalTerms() {}
@@ -75,7 +75,7 @@ public class EnvironmentalTerms implements Serializable {
     }
 
 
-    public Long getEnvironmentlId() { return environmentlId; }
+    public Long getEnvironmentalId() { return environmentalId; }
 
     public MiningLicense getMiningLicense() { return miningLicense; }
 

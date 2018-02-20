@@ -25,13 +25,13 @@ public class ResearchLicense {
         }
     )
     @GeneratedValue(generator = "license_generator")
-    private Long licenseId;
+    private Long id;
 
     @Column(nullable = false)
     private boolean active;
 
     @OneToOne
-    @JoinColumn(name="abl",foreignKey = @ForeignKey(name="TOPOS_ABL_FK"))
+    @JoinColumn(name="abl",referencedColumnName = "abl",foreignKey = @ForeignKey(name="TOPOS_ABL_FK"))
     @NaturalId
     private Topo topo;
 

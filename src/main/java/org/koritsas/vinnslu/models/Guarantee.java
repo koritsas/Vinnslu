@@ -15,8 +15,8 @@ public class Guarantee implements Serializable {
     @EmbeddedId
     private GuaranteeLetter guaranteeLetter;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "id", foreignKey = @ForeignKey(name = "PERSONS_ID_FK"))
+    @ManyToOne
+    @JoinColumn(name = "company_id",referencedColumnName = "id", foreignKey = @ForeignKey(name = "COMPANY_ID_FK"))
     private Company company;
 
     private boolean complementary;
@@ -26,11 +26,11 @@ public class Guarantee implements Serializable {
     private GuaranteeLetterType guaranteeLetterType;
 
     @ManyToOne
-    @JoinColumn(name = "abl", foreignKey = @ForeignKey(name = "TOPOS_ABL_FK"))
+    @JoinColumn(name = "abl",referencedColumnName ="abl" ,foreignKey = @ForeignKey(name = "TOPOS_ABL_FK"))
     private Topo topo;
 
     @OneToOne
-    @JoinColumn(name = "document", foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
+    @JoinColumn(name = "document",referencedColumnName = "id", foreignKey = @ForeignKey(name = "DOCUMENTS_ID_FK"))
     private Document document;
 
     public Guarantee() {}

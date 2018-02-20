@@ -34,7 +34,7 @@ public class Topo implements Serializable{
 
     @NaturalId
     @Column(name="abl")
-    private int abl;
+    private Long abl;
 
     @JsonSerialize(using = GeometrySerializer.class)
     @JsonDeserialize(using = GeometryDeserializer.class)
@@ -85,9 +85,9 @@ public class Topo implements Serializable{
 
     public Long getId() { return id; }
 
-    public int getAbl() { return abl; }
+    public Long getAbl() { return abl; }
 
-    public void setAbl(int abl) { this.abl = abl; }
+    public void setAbl(Long abl) { this.abl = abl; }
 
     public Polygon getPolygon() { return polygon; }
 
@@ -127,7 +127,7 @@ public class Topo implements Serializable{
 
 
         //Optional parameters
-        private int nestedAbl;
+        private Long nestedAbl;
 
         private boolean nestedForest;
 
@@ -147,7 +147,7 @@ public class Topo implements Serializable{
             this.nestedPolygon=polygon;
         }
 
-        public TopoBuilder setAbl(int abl){
+        public TopoBuilder setAbl(Long abl){
             this.nestedAbl=abl;
             return this;
         }
