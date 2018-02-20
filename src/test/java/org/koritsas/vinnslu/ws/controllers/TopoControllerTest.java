@@ -12,14 +12,10 @@ import org.koritsas.vinnslu.models.Person;
 import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.repos.TopoRepository;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.invocation.InvocationOnMock;
-import org.mockito.stubbing.Answer;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -117,10 +113,10 @@ public class TopoControllerTest {
 
 	List<Topo> ts = topoService.getAllTopos();
 
-	mockMvc.perform(get("/topos/all")).andExpect(status().isOk())
+	mockMvc.perform(get("/topos/find/all")).andExpect(status().isOk())
 	    .andExpect(status().is2xxSuccessful());
 
-	mockMvc.perform(get("/topos/all")
+	mockMvc.perform(get("/topos/find/all")
 	    .contentType(MediaType.APPLICATION_JSON))
 	    .andExpect(status().isOk())
 	    .andExpect(jsonPath("$[0].abl",is(666)))

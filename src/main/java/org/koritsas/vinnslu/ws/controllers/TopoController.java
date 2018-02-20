@@ -22,7 +22,7 @@ public class TopoController {
     @Autowired
     private TopoController(TopoService topoService) { this.topoService = topoService; }
 
-    @GetMapping(value = "/all")
+    @GetMapping(value = "/find/all")
     public ResponseEntity<List<Topo>> getAllTopos(){
         return ResponseEntity.ok(topoService.getAllTopos());
     }
