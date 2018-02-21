@@ -89,12 +89,12 @@ public class TopoControllerTest {
 	polygon2.setSRID(2100);
 
 	topo1 = new Topo.TopoBuilder(polygon1).setPrefecture("Δράμα").setLocation("Βράχια").setCommunity("Προσοτσάνη")
-	    .setAbl(666).build();
+	    .setAbl(666L).build();
 
 	topo1.setId(1L);
 
 	topo2 = new Topo.TopoBuilder(polygon2).setPrefecture("Λάρισα").setLocation("Σαρλίκι").setCommunity("Νέες Καρυές")
-	    .setAbl(667).build();
+	    .setAbl(667L).build();
 
 	topo2.setId(2L);
 

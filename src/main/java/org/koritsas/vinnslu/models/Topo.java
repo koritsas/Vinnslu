@@ -219,4 +219,19 @@ public class Topo implements Serializable{
 
     @Override
     public int hashCode(){return Objects.hash(super.hashCode(),polygon,abl,owner,topoOwner,community,prefecture,location,forest);}
+
+    @Override
+    public String toString() {
+	return "Topo{" +
+	    "id=" + id +
+	    ", abl=" + abl +
+	    ", polygon=" + polygon +
+	    ", community='" + community + '\'' +
+	    ", location='" + location + '\'' +
+	    ", prefecture='" + prefecture + '\'' +
+	    ", forest=" + forest +
+	    ", topoOwner=" + topoOwner +
+	    ", owner=" + owner +
+	    '}';
+    }
 }

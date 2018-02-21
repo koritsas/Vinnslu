@@ -18,19 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import java.util.Arrays;
-import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.isNotNull;
 import static org.mockito.Mockito.*;
-import static org.mockito.internal.configuration.GlobalConfiguration.validate;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @WebMvcTest(CompanyController.class)
@@ -56,7 +49,7 @@ public class CompanyControllerTest {
     Company company2;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
 
         MockitoAnnotations.initMocks(this);
         mockMvc = MockMvcBuilders
@@ -90,7 +83,6 @@ public class CompanyControllerTest {
 
         when(companyService.getCompanies()).thenReturn(Arrays.asList(company1,company2));
 
-
         when(companyRepository.findByAddress("Δράμα")).thenReturn(Arrays.asList(company1,company2));
 
 
@@ -98,7 +90,7 @@ public class CompanyControllerTest {
     }
 
     @After
-    public void tearDown() throws Exception {
+    public void tearDown() {
     }
 
     @Test

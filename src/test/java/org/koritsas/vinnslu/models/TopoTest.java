@@ -20,8 +20,8 @@ public class TopoTest {
         Company company = new Company.CompanyBuilder("drama").build();
         Person person = new Person.PersonBuilder("Ilias","koritsas").build();
 
-
-        topo = new Topo.TopoBuilder(polygon).setLocation("Bouri").setPrefecture("Drama").setForest(false).setCommunity("Pyrgoi").setAbl(666).setOwner(company).setTopoOwner(
+	topo = new Topo.TopoBuilder(polygon).setLocation("Bouri").setPrefecture("Drama").setForest(false)
+	    .setCommunity("Pyrgoi").setAbl(666L).setOwner(company).setTopoOwner(
             person).build();
 
 

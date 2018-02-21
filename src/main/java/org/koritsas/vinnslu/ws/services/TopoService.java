@@ -17,31 +17,34 @@ public class TopoService {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TopoService.class.getName());
 
-
     private TopoRepository repository;
 
     @Autowired
-    public TopoService(TopoRepository repository){this.repository=repository;}
-
+    public TopoService(TopoRepository repository) {this.repository = repository;}
 
     @Transactional(rollbackFor = EntityAlreadyExistsException.class)
     public Topo createTopo(Topo topo) {
-        return repository.save(topo);
+
+	LOGGER.info("Creating topo: {}", topo);
+
+	return repository.save(topo);
     }
 
-
     @Transactional(rollbackFor = EntityNotFoundException.class)
-    public Topo deleteTopo(long topoId){
+    public Topo deleteTopo(long topoId) {
 
-        Topo existing = repository.findOne(topoId);
+	Topo existing = repository.findOne(topoId);
 
-        if (existing == null){
-            throw new EntityNotFoundException("Topo with id: "+ topoId + " not found. Nothing has changed...But has ever?");
+	if (existing == null) {
+	    throw new EntityNotFoundException(
+		"Topo with id: " + topoId + " not found. Nothing has changed...But has ever?");
 	}
+
+	LOGGER.info("Deleting topo: {}", existing.toString());
 
 	repository.delete(topoId);
 
-        return existing;
+	return existing;
     }
 
     @Transactional(readOnly = true)
@@ -50,7 +53,7 @@ public class TopoService {
     }
 
     @Transactional
-    public Topo findByAbl(int abl){return repository.findByAbl(abl);}
+    public Topo findByAbl(int abl) {return repository.findByAbl(abl);}
 
     @Transactional
     public Topo findById(long id) {
@@ -60,9 +63,11 @@ public class TopoService {
     @Transactional(rollbackFor = EntityNotFoundException.class)
     public Topo updateTopo(Topo topo) {
 	Topo existing = repository.findOne(topo.getId());
+
 	if (existing == null) {
 	    throw new EntityNotFoundException("Topo with id: " + topo.getId() + " not found. Cannot update.");
 	}
+
 	existing.setPolygon(topo.getPolygon());
 	existing.setAbl(topo.getAbl());
 	existing.setOwner(topo.getOwner());
@@ -71,6 +76,8 @@ public class TopoService {
 	existing.setLocation(topo.getLocation());
 	existing.setPrefecture(topo.getPrefecture());
 	existing.setForest(topo.getForest());
+
+	LOGGER.info("Topo with id: " + topo.getId() + " updated to: {}", existing.toString());
 
 	repository.save(existing);
 	return existing;

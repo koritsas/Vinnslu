@@ -74,7 +74,21 @@ public class Person extends Company{
 
     public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
 
-
+    @Override
+    public String toString() {
+	return "Person{" +
+	    "name'" + getName() + '\'' +
+	    "afm'" + getAfm() + '\'' +
+	    "address'" + getAddress() + '\'' +
+	    "fathername='" + fathername + '\'' +
+	    ", mothername='" + mothername + '\'' +
+	    ", idCardNumber='" + idCardNumber + '\'' +
+	    ", job='" + job + '\'' +
+	    ", surname='" + surname + '\'' +
+	    ", phone=" + phone +
+	    ", birthDate=" + birthDate +
+	    '}';
+    }
 
     public static class PersonBuilder extends OwnerBuilder<PersonBuilder,Person>{
 

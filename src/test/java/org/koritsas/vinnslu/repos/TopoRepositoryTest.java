@@ -62,9 +62,12 @@ public class TopoRepositoryTest{
 
 	company = new Company(666L,"hermes","drama");
 	person = new Person.PersonBuilder("ilias","koritsas").setBirthDate(new Date()).build();
-	topo = new Topo.TopoBuilder(polygon).setAbl(1234).setOwner(company).setCommunity("Braxia").setLocation("Prosotsani").setTopoOwner(person).setForest(true).setPrefecture("Drama").build();
-	Topo topo2 = new Topo.TopoBuilder(polygon).setAbl(2134).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
-	Topo topo3 = new Topo.TopoBuilder(polygon).setAbl(3214).setOwner(company).setCommunity("Braxia").setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
+	topo = new Topo.TopoBuilder(polygon).setAbl(1234L).setOwner(company).setCommunity("Braxia")
+	    .setLocation("Prosotsani").setTopoOwner(person).setForest(true).setPrefecture("Drama").build();
+	Topo topo2 = new Topo.TopoBuilder(polygon).setAbl(2134L).setOwner(company).setCommunity("Braxia")
+	    .setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
+	Topo topo3 = new Topo.TopoBuilder(polygon).setAbl(3214L).setOwner(company).setCommunity("Braxia")
+	    .setForest(false).setLocation("Prosotsani").setTopoOwner(person).setPrefecture("Drama").build();
 
 
 	this.manager.persist(company);
@@ -100,7 +103,7 @@ public class TopoRepositoryTest{
 
         Topo topo = this.topoRepository.findByAbl(1234);
 	Assert.assertNotNull(topo);
-	Assert.assertEquals(topo.getAbl(),1234);
+	Assert.assertEquals(java.util.Optional.ofNullable(topo.getAbl()), 1234L);
     }
 
     @Test
