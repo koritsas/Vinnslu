@@ -21,7 +21,7 @@ public class PersonService {
     @Autowired
     PersonRepository repository;
 
-    private PersonService(PersonRepository repository) {this.repository = repository;}
+    public PersonService(PersonRepository repository) {this.repository = repository;}
 
     @Transactional(readOnly = true)
     public List<Person> getPersons() {
