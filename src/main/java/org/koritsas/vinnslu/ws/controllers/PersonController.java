@@ -24,26 +24,26 @@ public class PersonController {
     @GetMapping("/find/all")
     public ResponseEntity<List<Person>> findAll() {
 
-	return ResponseEntity.ok(service.getPersons());
+	return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/find/{personId}")
     public ResponseEntity<Person> findPerson(@PathVariable long personId) {
-	return ResponseEntity.ok(service.findPerson(personId));
+	return ResponseEntity.ok(service.find(personId));
     }
 
     @PostMapping("/create")
     public ResponseEntity<Person> createPerson(@RequestBody PersonDto dto) {
-	return ResponseEntity.ok(service.createPerson(mapper.map(dto, Person.class)));
+	return ResponseEntity.status(201).body(service.create(mapper.map(dto, Person.class)));
     }
 
     @DeleteMapping("/delete/{personId}")
     public ResponseEntity<String> deletePerson(@PathVariable long personId) {
-	return ResponseEntity.ok("Deleted person with id: " + service.deletePerson(personId).getId());
+	return ResponseEntity.ok("Deleted person with id: " + service.delete(personId).getId());
     }
 
     @PutMapping("/update")
     public ResponseEntity<Person> update(@RequestBody Person dto) {
-	return ResponseEntity.ok(service.updatePerson(mapper.map(dto, Person.class)));
+	return ResponseEntity.status(204).body(service.update(mapper.map(dto, Person.class)));
     }
 }

@@ -71,17 +71,17 @@ public class CompanyControllerTest {
         when(companyRepository.findByAfm(667L)).thenReturn(company2);
         when(companyRepository.findByName("Μπύρος")).thenReturn(company2);
 
-        when(companyService.findCompanyById(1L)).thenReturn(company1);
-        when(companyService.createCompany(company1)).thenReturn(company1);
-        when(companyService.deleteCompany(1L)).thenReturn(company1);
-        when(companyService.updateCompany(company1)).thenReturn(company1);
+        when(companyService.find(1L)).thenReturn(company1);
+        when(companyService.create(company1)).thenReturn(company1);
+        when(companyService.delete(1L)).thenReturn(company1);
+        when(companyService.update(company1)).thenReturn(company1);
 
-        when(companyService.findCompanyById(2L)).thenReturn(company2);
-        when(companyService.createCompany(company2)).thenReturn(company2);
-        when(companyService.deleteCompany(2L)).thenReturn(company2);
-        when(companyService.updateCompany(company2)).thenReturn(company2);
+        when(companyService.find(2L)).thenReturn(company2);
+        when(companyService.create(company2)).thenReturn(company2);
+        when(companyService.delete(2L)).thenReturn(company2);
+        when(companyService.update(company2)).thenReturn(company2);
 
-        when(companyService.getCompanies()).thenReturn(Arrays.asList(company1,company2));
+        when(companyService.findAll()).thenReturn(Arrays.asList(company1, company2));
 
         when(companyRepository.findByAddress("Δράμα")).thenReturn(Arrays.asList(company1,company2));
 
@@ -103,7 +103,7 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$.name",is("Ερμής")))
                 .andExpect(jsonPath("$.address",is("Δράμα")));
 
-      verify(companyService,atLeastOnce()).findCompanyById(1L);
+        verify(companyService, atLeastOnce()).find(1L);
 
      mockMvc.perform(get("/companies/find/11")).andExpect(status().isOk());
 
@@ -120,7 +120,7 @@ public class CompanyControllerTest {
     @Test
     public void deleteCompany() throws Exception {
 
-        when(companyService.deleteCompany(1L)).thenReturn(company1);
+        when(companyService.delete(1L)).thenReturn(company1);
 
         when(companyRepository.findOne(1L)).thenReturn(company1);
 

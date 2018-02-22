@@ -109,9 +109,9 @@ public class TopoControllerTest {
 
 	List<Topo> topos = Arrays.asList(topo1, topo2);
 
-	when(topoService.getAllTopos()).thenReturn(topos);
+	when(topoService.findAll()).thenReturn(topos);
 
-	List<Topo> ts = topoService.getAllTopos();
+	List<Topo> ts = topoService.findAll();
 
 	mockMvc.perform(get("/topos/find/all")).andExpect(status().isOk())
 	    .andExpect(status().is2xxSuccessful());
@@ -132,7 +132,7 @@ public class TopoControllerTest {
     public void testCreateTopo() throws Exception {
 
 	mockMvc.perform(post("/topos/create").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(JSON))
-	    .andExpect(status().isOk());
+	    .andExpect(status().is(201));
     }
 
     @Test
@@ -141,7 +141,7 @@ public class TopoControllerTest {
 
 		when(topoRepository.findOne(1L)).thenReturn(topo1);
 
-		when(topoService.deleteTopo(1L)).thenReturn(topo1);
+	when(topoService.delete(1L)).thenReturn(topo1);
 
         mockMvc.perform(delete("/topos/delete/1")).andExpect(status().isOk()).andExpect(content().string("Deleted: " + topo1.getId()));
 
@@ -160,7 +160,7 @@ public class TopoControllerTest {
 
         when(topoRepository.findOne(1L)).thenReturn(topo1);
 
-        when(topoService.findById(1L)).thenReturn(topo1);
+	when(topoService.find(1L)).thenReturn(topo1);
 
         mockMvc.perform(get("/topos/find/1")).andExpect(status().isOk());
 
@@ -171,18 +171,19 @@ public class TopoControllerTest {
         mockMvc.perform(delete("/topos/find/1")).andExpect(status().is(405));
 
     }
-/*
+
     @Test
     public void testUpdateTopo() throws Exception {
 
-        when(topoService.updateTopo(topo2)).thenReturn(topo2);
+	when(topoService.update(topo2)).thenReturn(topo2);
 
         topo2.setCommunity("Λάρισα");
 
         GeometryModelMapper gmm = new GeometryModelMapper();
 
-        mockMvc.perform(put("/topos/update/1").contentType("application/json").content(gmm.map(topo2, TopoDto.class).toString())).andExpect(status().isOk()).andExpect(jsonPath("$.community",is("Λάρισα")));
+	mockMvc.perform(put("/topos/update/1").contentType("application/json")).andExpect(status().is(204))
+	    .andExpect(jsonPath("$.community", is("Λάρισα")));
 
     }
-    */
+
 }

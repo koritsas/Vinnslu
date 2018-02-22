@@ -38,13 +38,13 @@ public class AbstractService<E, R extends JpaRepository> {
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
-    public void delete(long id) {
+    public E delete(long id) {
 
 	if (!repo.exists(id)) {
 	    throw new EntityNotFoundException("Entity with id: " + id + " not found");
 	}
 
-	repo.delete(id);
+	return (E) repo.findOne(id);
 
     }
 

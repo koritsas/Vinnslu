@@ -1,11 +1,9 @@
 package org.koritsas.vinnslu.ws.controllers;
 
 import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.models.Topo;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.services.CompanyService;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,27 +24,27 @@ public class CompanyController {
 
     @GetMapping("/find/all")
     public ResponseEntity<List<Company>> findAll(){
-        return ResponseEntity.ok(service.getCompanies());
+	return ResponseEntity.ok(service.findAll());
     }
 
     @GetMapping("/find/{companyId}")
     public ResponseEntity<Company> findCompanyById(@PathVariable long companyId){
-        return ResponseEntity.ok(service.findCompanyById(companyId));
+	return ResponseEntity.ok(service.find(companyId));
     }
 
     @PostMapping("/create")
     public ResponseEntity<Company> createCompany(@RequestBody CompanyDto dto){
-        return ResponseEntity.ok(service.createCompany(mapper.map(dto,Company.class)));
+	return ResponseEntity.status(201).body(service.create(mapper.map(dto, Company.class)));
     }
 
     @DeleteMapping("/delete/{companyId}")
     public ResponseEntity<String> delete(@PathVariable long companyId) {
-        return ResponseEntity.ok("Deleted: " + service.deleteCompany(companyId).getId());
+	return ResponseEntity.ok("Deleted: " + service.delete(companyId));
     }
 
     @PutMapping("/update")
     public ResponseEntity<Company> update(@RequestBody CompanyDto dto){
-        return ResponseEntity.ok(service.updateCompany(mapper.map(dto,Company.class)));
+	return ResponseEntity.status(204).body(service.update(mapper.map(dto, Company.class)));
     }
 
 

@@ -63,7 +63,7 @@ public class PersonControllerTest {
 
 	when(personRepository.findOne(1L)).thenReturn(person);
 
-	when(personService.findPerson(1L)).thenReturn(person);
+	when(personService.find(1L)).thenReturn(person);
     }
 
     @After
@@ -92,9 +92,9 @@ public class PersonControllerTest {
     @Test
     public void testDeletePerson() throws Exception {
 
-	when(personService.deletePerson(1L)).thenReturn(person);
+	when(personService.delete(1L)).thenReturn(person);
 
-	when(personService.findPerson(1L)).thenReturn(person);
+	when(personService.find(1L)).thenReturn(person);
 
 	mockMvc.perform(delete("/delete/1")).andExpect(status().isOk())
 	    .andExpect(content().string("Deleted person with id: " + person.getId()));
