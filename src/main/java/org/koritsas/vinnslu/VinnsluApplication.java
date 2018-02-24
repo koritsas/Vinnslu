@@ -3,6 +3,7 @@ package org.koritsas.vinnslu;
 import com.vividsolutions.jts.geom.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.koritsas.vinnslu.models.Authority;
 import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Person;
 import org.koritsas.vinnslu.models.Topo;
@@ -48,6 +49,10 @@ public class VinnsluApplication {
 	}
 */
 
+	Authority auth1 = new Authority(666L, "sadf", "sdf");
+
+	Authority auth2 = new Authority(667L, "sadfsdf", "sdf");
+
 	Topo topo = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(666L).build();
 
@@ -75,6 +80,9 @@ public class VinnsluApplication {
 	session.save(p);
 	session.saveOrUpdate(topo);
 	session.saveOrUpdate(topo2);
+
+	session.save(auth1);
+	session.save(auth2);
 
 	session.getTransaction().commit();
 	session.close();
