@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-public class AbstractService<E, R extends JpaRepository> {
+public class AbstractService<E extends Serializable, R extends JpaRepository> {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
@@ -49,16 +49,16 @@ public class AbstractService<E, R extends JpaRepository> {
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
-    public E update(E entity) {
+    public E update(long id) {
 
-	if (!repo.exists((Serializable) entity)) {
+	E existing = (E) repo.findOne(id);
+
+	if (existing == null) {
 
 	    throw new EntityNotFoundException("Entity does not exist, therefore, cannot be updated");
 	}
 
-	E newe = entity;
-
-	return (E) repo.save(entity);
+	return (E) repo.save(existing);
     }
 
 }
