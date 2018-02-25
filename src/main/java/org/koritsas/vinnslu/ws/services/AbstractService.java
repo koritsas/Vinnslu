@@ -49,16 +49,14 @@ public class AbstractService<E extends Serializable, R extends JpaRepository> {
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
-    public E update(long id) {
+    public E update(long id, E entity) {
 
-	E existing = (E) repo.findOne(id);
-
-	if (existing == null) {
+	if (!repo.exists(id)) {
 
 	    throw new EntityNotFoundException("Entity does not exist, therefore, cannot be updated");
 	}
 
-	return (E) repo.save(existing);
+	return (E) repo.save(entity);
     }
 
 }

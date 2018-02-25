@@ -44,6 +44,6 @@ public class PersonController {
 
     @PutMapping("/update")
     public ResponseEntity<Person> update(@RequestBody Person dto) {
-	return ResponseEntity.status(204).body(service.update(mapper.map(dto, Person.class)));
+	return ResponseEntity.status(204).body(service.update(dto.getId(), mapper.map(dto, Person.class)));
     }
 }

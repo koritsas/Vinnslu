@@ -45,7 +45,7 @@ public class TopoController {
 
     @PutMapping("/update")
     public ResponseEntity<Topo> updateTopo(@RequestBody TopoDto dto){
-        return ResponseEntity.status(204).body(topoService.update(mapper.map(dto, Topo.class)));
+        return ResponseEntity.status(204).body(topoService.update(dto.getId(), mapper.map(dto, Topo.class)));
     }
 
 }
