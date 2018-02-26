@@ -147,7 +147,7 @@ public class ResearchLicenseRepositoryTest {
 	System.out.println(researchLicense1.getEndDate());
 
 	Assert.assertTrue(licenses.size()==1);
-	//Assert.assertEquals(licenses.get(0),researchLicense1);
+	//Assert.assertEquals(licenses.find(0),researchLicense1);
 
     }
 

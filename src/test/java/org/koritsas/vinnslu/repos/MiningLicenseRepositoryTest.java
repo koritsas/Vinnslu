@@ -147,7 +147,7 @@ public class MiningLicenseRepositoryTest {
         System.out.println(MiningLicense1.getEndDate());
 
         Assert.assertTrue(licenses.size()==1);
-        //Assert.assertEquals(licenses.get(0),MiningLicense1);
+	//Assert.assertEquals(licenses.find(0),MiningLicense1);
 
     }
 

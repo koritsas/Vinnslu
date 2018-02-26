@@ -17,11 +17,11 @@ public abstract class AbstractCrudService<R extends JpaRepository, E, PK extends
 	this.repository = repository;
     }
 
-    public E get(PK id) {
+    public E find(PK id) {
         return (E) repository.findOne(id);
     }
 
-    public List<E> getAll() {
+    public List<E> findAll() {
         return repository.findAll();
     }
 

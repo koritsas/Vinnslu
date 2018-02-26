@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.io.Serializable;
 import java.util.List;
 
-public class AbstractService<E extends Serializable, R extends JpaRepository> {
+public abstract class AbstractService<E extends Serializable, R extends JpaRepository> {
 
     private final Logger LOGGER = LoggerFactory.getLogger(this.getClass());
 
