@@ -3,10 +3,7 @@ package org.koritsas.vinnslu;
 import com.vividsolutions.jts.geom.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.koritsas.vinnslu.models.Authority;
-import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.models.Person;
-import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.*;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
@@ -60,6 +57,11 @@ public class VinnsluApplication {
 	Topo topo2 = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(667L).build();
 
+	//Vehicle vehicle1 = new Vehicle.Builder("XXX-666","sadfasdf", VehicleType.JEEP).build();
+	//Vehicle vehicle2 = new Vehicle.Builder("XXX-667","rrrrrrrr", VehicleType.CAR).setBrand("Toyota").build();
+
+	Document doc = new Document("asdfa", "Sfdgsd", "dfgsdfg", new Date(), null);
+
 	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
@@ -83,6 +85,11 @@ public class VinnsluApplication {
 
 	session.save(auth1);
 	session.save(auth2);
+
+	//session.save(vehicle1);
+	//session.save(vehicle2);
+
+	session.save(doc);
 
 	session.getTransaction().commit();
 	session.close();
