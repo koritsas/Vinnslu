@@ -7,10 +7,11 @@ import org.koritsas.vinnslu.models.types.VehicleType;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-public class Vehicle {
+public class Vehicle implements Serializable {
 
     @Id
     @GenericGenerator(

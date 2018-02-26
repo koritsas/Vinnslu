@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController("/persons")
+@RestController()
+@RequestMapping("/person")
 public class PersonController {
 
     @Autowired
