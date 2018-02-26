@@ -175,14 +175,43 @@ public class TopoControllerTest {
     @Test
     public void testUpdateTopo() throws Exception {
 
-	when(topoService.update(topo2)).thenReturn(topo2);
+	when(topoService.update(2L, topo2)).thenReturn(topo2);
 
+	when(topoRepository.findOne(2L)).thenReturn(topo2);
         topo2.setCommunity("Λάρισα");
 
         GeometryModelMapper gmm = new GeometryModelMapper();
 
-	mockMvc.perform(put("/topos/update/1").contentType("application/json")).andExpect(status().is(204))
-	    .andExpect(jsonPath("$.community", is("Λάρισα")));
+	String json = "{\n"
+	    + "    \"id\": 1,\n"
+	    + "    \"abl\": 666,\n"
+	    + "    \"community\": \"Fdsad\",\n"
+	    + "    \"location\": \"dfad\",\n"
+	    + "    \"prefecture\": \"fdasdf\",\n"
+	    + "    \"forest\": false,\n"
+	    + "    \"topoOwner\": {\n"
+	    + "        \"id\": 1,\n"
+	    + "        \"afm\": 4532,\n"
+	    + "        \"name\": \"sdfasdf\",\n"
+	    + "        \"address\": \"54543\"\n"
+	    + "    },\n"
+	    + "    \"owner\": {\n"
+	    + "        \"id\": 3,\n"
+	    + "        \"afm\": 777,\n"
+	    + "        \"name\": \"sadf\",\n"
+	    + "        \"address\": null,\n"
+	    + "        \"fathername\": null,\n"
+	    + "        \"mothername\": null,\n"
+	    + "        \"idCardNumber\": null,\n"
+	    + "        \"job\": null,\n"
+	    + "        \"surname\": \"sadfasd\",\n"
+	    + "        \"phone\": null,\n"
+	    + "        \"birthDate\": null\n"
+	    + "    }\n"
+	    + "}";
+
+	mockMvc.perform(put("/topos/update").contentType("application/json").content(json)).andExpect(status().is(204));
+
 
     }
 

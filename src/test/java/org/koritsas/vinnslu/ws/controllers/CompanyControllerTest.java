@@ -74,12 +74,12 @@ public class CompanyControllerTest {
         when(companyService.find(1L)).thenReturn(company1);
         when(companyService.create(company1)).thenReturn(company1);
         when(companyService.delete(1L)).thenReturn(company1);
-        when(companyService.update(company1)).thenReturn(company1);
+        when(companyService.update(1L, company1)).thenReturn(company1);
 
         when(companyService.find(2L)).thenReturn(company2);
         when(companyService.create(company2)).thenReturn(company2);
         when(companyService.delete(2L)).thenReturn(company2);
-        when(companyService.update(company2)).thenReturn(company2);
+        when(companyService.update(2L, company2)).thenReturn(company2);
 
         when(companyService.findAll()).thenReturn(Arrays.asList(company1, company2));
 
@@ -124,8 +124,8 @@ public class CompanyControllerTest {
 
         when(companyRepository.findOne(1L)).thenReturn(company1);
 
-        mockMvc.perform(delete("/companies/delete/1")).andExpect(status().isOk())
-                .andExpect(content().string("Deleted: " + company1.getId()));
+        mockMvc.perform(delete("/companies/delete/1")).andExpect(status().isOk());
+
 
     }
 

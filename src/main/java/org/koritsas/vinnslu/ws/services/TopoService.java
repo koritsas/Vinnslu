@@ -5,7 +5,7 @@ import org.koritsas.vinnslu.repos.TopoRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class TopoService extends AbstractService<Topo, TopoRepository> {
+public class TopoService extends AbstractCRUDService<TopoRepository, Topo, Long> {
     public TopoService(TopoRepository repo) {
 	super(repo);
     }

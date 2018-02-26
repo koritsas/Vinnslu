@@ -5,7 +5,8 @@ import org.koritsas.vinnslu.repos.CompanyRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CompanyService extends AbstractService<Company, CompanyRepository> {
+public class CompanyService extends AbstractCRUDService<CompanyRepository, Company, Long> {
+
     public CompanyService(CompanyRepository repo) {
         super(repo);
     }

@@ -44,7 +44,7 @@ public class CompanyController {
 
     @PutMapping("/update")
     public ResponseEntity<Company> update(@RequestBody CompanyDto dto){
-	return ResponseEntity.status(204).body(service.update(dto.getId(), mapper.map(dto, Company.class)));
+        return ResponseEntity.status(204).body(service.update(dto.getId(), mapper.map(dto, Company.class)));
     }
 
 
