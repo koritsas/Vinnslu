@@ -1,6 +1,7 @@
 package org.koritsas.vinnslu.ws.dto;
 
 import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.MachineryType;
 
 import java.util.Date;
@@ -35,6 +36,14 @@ public class MachineDto {
     private double weight;
 
     private Company company;
+
+    private Fuel fuel;
+
+    private double length;
+
+    private double width;
+
+    private double height;
 
     public Long getId() { return id; }
 
@@ -95,4 +104,20 @@ public class MachineDto {
     public Company getCompany() { return company; }
 
     public void setCompany(Company company) { this.company = company; }
+
+    public Fuel getFuel() { return fuel; }
+
+    public void setFuel(Fuel fuel) { this.fuel = fuel; }
+
+    public double getLength() { return length; }
+
+    public void setLength(double length) { this.length = length; }
+
+    public double getWidth() { return width; }
+
+    public void setWidth(double width) { this.width = width; }
+
+    public double getHeight() { return height; }
+
+    public void setHeight(double height) { this.height = height; }
 }

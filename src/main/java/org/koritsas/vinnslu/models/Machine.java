@@ -1,6 +1,7 @@
 package org.koritsas.vinnslu.models;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.MachineryType;
 
 import javax.persistence.*;
@@ -57,11 +58,30 @@ public class Machine implements Serializable {
     @Column(precision = 2)
     private double weight;
 
+    @Column(precision = 2)
+    private double length;
+
+    @Column(precision = 2)
+    private double width;
+
+    @Column(precision = 2)
+    private double height;
+
     @ManyToOne
     @JoinColumn(name = "company", referencedColumnName = "id", foreignKey = @ForeignKey(name = "COMPANY_FK"))
     private Company company;
 
+    @Enumerated(EnumType.STRING)
+    private Fuel fuel;
+
+
+
     private Machine(Builder builder) {
+
+	setFuel(builder.nestedFuel);
+	setHeight(builder.nestedHeight);
+	setWidth(builder.nestedWidth);
+	setLength(builder.nestedLength);
 	setCompany(builder.nestedCompany);
 	setCategory(builder.nestedCategory);
 	setStamp(builder.nestedStamp);
@@ -134,6 +154,22 @@ public class Machine implements Serializable {
 
     public void setWeight(double weight) { this.weight = weight; }
 
+    public double getLength() { return length; }
+
+    public void setLength(double length) { this.length = length; }
+
+    public double getWidth() { return width; }
+
+    public void setWidth(double width) { this.width = width; }
+
+    public double getHeight() { return height; }
+
+    public void setHeight(double height) { this.height = height; }
+
+    public Fuel getFuel() { return fuel; }
+
+    public void setFuel(Fuel fuel) { this.fuel = fuel; }
+
     public Company getCompany() { return company; }
 
     public void setCompany(Company company) { this.company = company; }
@@ -169,7 +205,16 @@ public class Machine implements Serializable {
 
 	private double nestedWeight;
 
+	private double nestedHeight;
+
+	private double nestedWidth;
+
+	private double nestedLength;
+
 	private Company nestedCompany;
+
+	private Fuel nestedFuel;
+
 
 	public Builder(MachineryType category, String stamp) {
 	    this.nestedCategory = category;
@@ -180,6 +225,27 @@ public class Machine implements Serializable {
 	    nestedCompany = company;
 	    return this;
 	}
+
+	public Builder setFuel(Fuel fuel) {
+	    nestedFuel = fuel;
+	    return this;
+	}
+
+	public Builder setHeight(double height) {
+	    nestedHeight = height;
+	    return this;
+	}
+
+	public Builder setWidth(double width) {
+	    nestedWidth = width;
+	    return this;
+	}
+
+	public Builder setLength(double length) {
+	    nestedLength = length;
+	    return this;
+	}
+
 
 	public Builder setBrand(String val) {
 	    nestedBrand = val;
