@@ -1,19 +1,18 @@
 package org.koritsas.vinnslu.ws.controllers;
 
 import org.koritsas.vinnslu.models.Topo;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/topos")
-public class TopoController {
-
+public class TopoController extends AbstractController<TopoService, Topo, Long, Class<Topo>, TopoDto> {
+    public TopoController(TopoService service) {
+	super(service);
+    }
+/*
     @Autowired
     private GeometryModelMapper mapper;
 
@@ -47,5 +46,5 @@ public class TopoController {
     public ResponseEntity<Topo> updateTopo(@RequestBody TopoDto dto){
         return ResponseEntity.status(204).body(topoService.update(dto.getId(), mapper.map(dto, Topo.class)));
     }
-
+*/
 }

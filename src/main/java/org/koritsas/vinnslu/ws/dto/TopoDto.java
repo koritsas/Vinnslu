@@ -1,8 +1,10 @@
 package org.koritsas.vinnslu.ws.dto;
 
 import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.utils.AbtractDto;
 
-public class TopoDto {
+public class TopoDto implements AbtractDto<Long> {
 
     private Long id;
 
@@ -24,6 +26,11 @@ public class TopoDto {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public Class getClaZZ() {
+        return Topo.class;
     }
 
     public void setId(Long id) {
