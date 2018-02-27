@@ -23,6 +23,7 @@ public class Vehicle implements Serializable {
 	    @Parameter(name = "increment_size", value = "1")
 	}
     )
+    @GeneratedValue(generator = "vehicle_generator")
     private Long id;
 
     @Column(precision = 17)
