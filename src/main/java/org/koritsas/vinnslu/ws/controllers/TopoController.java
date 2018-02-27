@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/topos")
-public class TopoController extends AbstractController<TopoService, Topo, Long, Class<Topo>, TopoDto> {
+public class TopoController extends AbstractCRUDController<TopoService, Topo, Long, TopoDto> {
     public TopoController(TopoService service) {
 	super(service);
     }

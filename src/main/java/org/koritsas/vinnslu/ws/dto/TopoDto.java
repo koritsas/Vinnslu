@@ -2,9 +2,9 @@ package org.koritsas.vinnslu.ws.dto;
 
 import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Topo;
-import org.koritsas.vinnslu.utils.AbtractDto;
+import org.koritsas.vinnslu.utils.AbstractDto;
 
-public class TopoDto implements AbtractDto<Long> {
+public class TopoDto implements AbstractDto<Long> {
 
     private Long id;
 

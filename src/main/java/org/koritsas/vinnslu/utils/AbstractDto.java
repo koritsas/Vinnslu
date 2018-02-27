@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.utils;
 
-public interface AbtractDto<PK> {
+public interface AbstractDto<PK> {
 
     PK getId();
 
