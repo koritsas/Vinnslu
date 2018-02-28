@@ -113,10 +113,10 @@ public class TopoControllerTest {
 
 	List<Topo> ts = topoService.findAll();
 
-	mockMvc.perform(get("/topos/find/all")).andExpect(status().isOk())
+	mockMvc.perform(get("/topos")).andExpect(status().isOk())
 	    .andExpect(status().is2xxSuccessful());
 
-	mockMvc.perform(get("/topos/find/all")
+	mockMvc.perform(get("/topos")
 	    .contentType(MediaType.APPLICATION_JSON))
 	    .andExpect(status().isOk())
 	    .andExpect(jsonPath("$[0].abl",is(666)))
@@ -131,7 +131,7 @@ public class TopoControllerTest {
     @Test
     public void testCreateTopo() throws Exception {
 
-	mockMvc.perform(post("/topos/create").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(JSON))
+	mockMvc.perform(post("/topos").contentType(MediaType.APPLICATION_JSON_UTF8_VALUE).content(JSON))
 	    .andExpect(status().is(201));
     }
 
@@ -143,15 +143,15 @@ public class TopoControllerTest {
 
 	when(topoService.delete(1L)).thenReturn(topo1);
 
-        mockMvc.perform(delete("/topos/delete/1")).andExpect(status().isOk()).andExpect(content().string("Deleted: " + topo1.getId()));
+	mockMvc.perform(delete("/topos/1")).andExpect(status().isOk());
 
-        mockMvc.perform(delete("/topos/delete/fds")).andExpect(status().is4xxClientError());
+	mockMvc.perform(delete("/topos/fds")).andExpect(status().is4xxClientError());
 
-        mockMvc.perform(get("/topos/delete/fds")).andExpect(status().is(405));
+	mockMvc.perform(get("/topos/fds")).andExpect(status().is4xxClientError());
 
-        mockMvc.perform(put("/topos/delete/fds")).andExpect(status().is(405));
+	mockMvc.perform(put("/topos/fds")).andExpect(status().is4xxClientError());
 
-        mockMvc.perform(post("/topos/delete/fds")).andExpect(status().is(405));
+	mockMvc.perform(post("/topos/fds")).andExpect(status().is4xxClientError());
 
     }
 
@@ -162,13 +162,13 @@ public class TopoControllerTest {
 
 	when(topoService.find(1L)).thenReturn(topo1);
 
-        mockMvc.perform(get("/topos/find/1")).andExpect(status().isOk());
+	mockMvc.perform(get("/topos/1")).andExpect(status().isOk());
 
-        mockMvc.perform(put("/topos/find/1")).andExpect(status().is(405));
+	// mockMvc.perform(put("/topos/1")).andExpect(status().is(405));
 
-        mockMvc.perform(post("/topos/find/1")).andExpect(status().is(405));
+	// mockMvc.perform(post("/topos/1")).andExpect(status().is(405));
 
-        mockMvc.perform(delete("/topos/find/1")).andExpect(status().is(405));
+	// mockMvc.perform(delete("/topos/1")).andExpect(status().is(405));
 
     }
 
@@ -210,7 +210,7 @@ public class TopoControllerTest {
 	    + "    }\n"
 	    + "}";
 
-	mockMvc.perform(put("/topos/update").contentType("application/json").content(json)).andExpect(status().is(204));
+	mockMvc.perform(put("/topos").contentType("application/json").content(json)).andExpect(status().is(204));
 
 
     }
