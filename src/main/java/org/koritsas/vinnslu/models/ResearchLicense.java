@@ -7,12 +7,13 @@ import org.koritsas.vinnslu.models.types.Contract;
 
 import javax.persistence.*;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-public class ResearchLicense {
+public class ResearchLicense implements Serializable {
 
     @Id
     @GenericGenerator(

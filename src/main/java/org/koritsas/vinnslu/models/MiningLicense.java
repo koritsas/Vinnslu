@@ -5,11 +5,12 @@ import org.koritsas.vinnslu.models.types.Contract;
 
 import javax.persistence.Entity;
 
+import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 
 @Entity
-public class MiningLicense extends ResearchLicense {
+public class MiningLicense extends ResearchLicense implements Serializable {
     public MiningLicense(){
     }
 

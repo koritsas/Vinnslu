@@ -22,7 +22,7 @@ public class TechinalStudy implements Serializable {
         }
     )
     @GeneratedValue(generator = "technical_generator")
-    private Long technicalStudyId;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name="licence_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
@@ -79,7 +79,7 @@ public class TechinalStudy implements Serializable {
         this.miningLicense=builder.nestedMiningLicense;
     }
 
-    public Long getTechnicalStudyId() { return technicalStudyId; }
+    public Long getId() { return id; }
 
     public MiningLicense getMiningLicense() { return miningLicense; }
 

@@ -26,7 +26,7 @@ public class EnvironmentalTerms implements Serializable {
 	}
     )
     @GeneratedValue(generator = "environmental_generator")
-    private Long environmentalId;
+    private Long id;
 
     @OneToOne
     @JoinColumn(name="licence_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="MINING_LICENSE_FK"))
@@ -74,8 +74,7 @@ public class EnvironmentalTerms implements Serializable {
 	this.miningLicense = builder.nestedMiningLicence;
     }
 
-
-    public Long getEnvironmentalId() { return environmentalId; }
+    public Long getId() { return id; }
 
     public MiningLicense getMiningLicense() { return miningLicense; }
 
