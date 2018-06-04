@@ -4,6 +4,8 @@ import com.vividsolutions.jts.geom.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.koritsas.vinnslu.models.*;
+import org.koritsas.vinnslu.models.types.Fuel;
+import org.koritsas.vinnslu.models.types.VehicleType;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
@@ -57,8 +59,8 @@ public class VinnsluApplication {
 	Topo topo2 = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(667L).build();
 
-	//Vehicle vehicle1 = new Vehicle.Builder("XXX-666","sadfasdf", VehicleType.JEEP).build();
-	//Vehicle vehicle2 = new Vehicle.Builder("XXX-667","rrrrrrrr", VehicleType.CAR).setBrand("Toyota").build();
+	Vehicle vehicle1 = new Vehicle.Builder("XXX-666","sadfasdf", VehicleType.JEEP).build();
+	Vehicle vehicle2 = new Vehicle.Builder("XXX-667","rrrrrrrr", VehicleType.CAR).setBrand("Toyota").build();
 
 	Document doc = new Document("asdfa", "Sfdgsd", "dfgsdfg", new Date(), null);
 
@@ -77,6 +79,15 @@ public class VinnsluApplication {
 	session.saveOrUpdate(company);
 	topo.setTopoOwner(company1);
 
+	Vehicle v1 = new Vehicle.Builder("XXX-666","fda8343asxcsa",VehicleType.CAR).setBrand("Toyota").setColor("#f44336").setModel("RAV").setOwnerCompany(company).setExhaustCardEnd(new Date()).setSecurityEnd(new Date()).setTollsEnd(new Date()).setDriver(p).setFuel(Fuel.GASOLINE).build();
+
+        Vehicle v2 = new Vehicle.Builder("XXX-667","fdadsafxcsa",VehicleType.CAR).setBrand("Chevrolette").setColor("#e91e63").setModel("Aveo").setOwnerCompany(company1).setExhaustCardEnd(new Date()).setSecurityEnd(new Date()).setTollsEnd(new Date()).setDriver(p).setFuel(Fuel.GAS).build();
+
+        Vehicle v3 = new Vehicle.Builder("XXX-668","fda83kjhfsxcsa",VehicleType.CAR).setBrand("Suzuki").setColor("#4caf50").setModel("Jimny").setOwnerCompany(company).setExhaustCardEnd(new Date()).setSecurityEnd(new Date()).setTollsEnd(new Date()).setDriver(p).setFuel(Fuel.PETROL).build();
+
+        session.save(v1);
+        session.save(v2);
+        session.save(v3);
 
 	polygon.setSRID(2100);
 	session.save(p);

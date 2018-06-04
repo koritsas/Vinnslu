@@ -1,8 +1,11 @@
 package org.koritsas.vinnslu.ws.dto;
 
+import org.koritsas.vinnslu.models.Person;
+import org.koritsas.vinnslu.utils.AbstractDto;
+
 import java.util.Date;
 
-public class PersonDto {
+public class PersonDto implements AbstractDto<Long> {
 
     private Long id;
 
@@ -27,6 +30,11 @@ public class PersonDto {
     private Date birthDate;
 
     public Long getId() { return id; }
+
+    @Override
+    public Class getClaZZ() {
+        return Person.class;
+    }
 
     public void setId(Long id) { this.id = id; }
 

@@ -3,6 +3,7 @@ package org.koritsas.vinnslu.models;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
+import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
 
 import javax.persistence.*;
@@ -26,7 +27,7 @@ public class Vehicle implements Serializable {
     @GeneratedValue(generator = "vehicle_generator")
     private Long id;
 
-    @Column(precision = 17)
+    @Column(precision = 17,name="frame_number")
     @NaturalId
     private String frameNumber;
 
@@ -39,7 +40,11 @@ public class Vehicle implements Serializable {
     @Enumerated(EnumType.STRING)
     private VehicleType vehicleType;
 
+    @Enumerated(EnumType.STRING)
+    private Fuel fuel;
+
     @Temporal(TemporalType.DATE)
+    @Column(name = "exhaust_card_end")
     private Date exhaustCardEnd;
 
     @Temporal(TemporalType.DATE)
@@ -60,6 +65,9 @@ public class Vehicle implements Serializable {
 
     private String model;
 
+    public Vehicle() {
+    }
+
     private Vehicle(Builder builder) {
 	setFrameNumber(builder.nestedFrameNumber);
 	setLicensePlate(builder.nestedLicensePlate);
@@ -72,6 +80,7 @@ public class Vehicle implements Serializable {
 	setDriver(builder.nestedDriver);
 	setBrand(builder.nestedBrand);
 	setModel(builder.nestedModel);
+	setFuel(builder.nestedFuel);
     }
 
     public Long getId() { return id; }
@@ -123,6 +132,14 @@ public class Vehicle implements Serializable {
 
     public void setModel(String model) { this.model = model; }
 
+    public Fuel getFuel() {
+        return fuel;
+    }
+
+    public void setFuel(Fuel fuel) {
+        this.fuel = fuel;
+    }
+
     /**
      * {@code Vehicle} builder static inner class.
      */
@@ -152,6 +169,8 @@ public class Vehicle implements Serializable {
 
 	private Person nestedDriver;
 
+	private Fuel nestedFuel;
+
 	public Builder(String licensePlate, String frameNumber, VehicleType type) {
 	    this.nestedLicensePlate = licensePlate;
 	    this.nestedFrameNumber = frameNumber;
@@ -167,6 +186,11 @@ public class Vehicle implements Serializable {
 	public Builder setColor(String color) {
 	    nestedColor = color;
 	    return this;
+	}
+
+	public Builder setFuel(Fuel fuel){
+		nestedFuel = fuel;
+		return this;
 	}
 
 	/**
@@ -219,7 +243,7 @@ public class Vehicle implements Serializable {
 	 * @param driver the {@code driver} to set
 	 * @return a reference to this Builder
 	 */
-	public Builder driver(Person driver) {
+	public Builder setDriver(Person driver) {
 	    nestedDriver = driver;
 	    return this;
 	}

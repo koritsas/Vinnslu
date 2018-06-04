@@ -1,6 +1,9 @@
 package org.koritsas.vinnslu.ws.dto;
 
-public class CompanyDto {
+import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.utils.AbstractDto;
+
+public class CompanyDto implements AbstractDto<Long> {
 
     private Long id;
 
@@ -12,6 +15,11 @@ public class CompanyDto {
 
     public Long getId() {
         return id;
+    }
+
+    @Override
+    public Class getClaZZ() {
+        return Company.class;
     }
 
     public void setId(Long id) {

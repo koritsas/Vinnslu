@@ -2,11 +2,13 @@ package org.koritsas.vinnslu.ws.dto;
 
 import org.koritsas.vinnslu.models.Company;
 import org.koritsas.vinnslu.models.Person;
+import org.koritsas.vinnslu.models.Vehicle;
 import org.koritsas.vinnslu.models.types.VehicleType;
+import org.koritsas.vinnslu.utils.AbstractDto;
 
 import java.util.Date;
 
-public class VehicleDto {
+public class VehicleDto implements AbstractDto<Long> {
 
     private Long id;
 
@@ -33,6 +35,11 @@ public class VehicleDto {
     private String model;
 
     public Long getId() { return id; }
+
+    @Override
+    public Class getClaZZ() {
+        return Vehicle.class;
+    }
 
     public void setId(Long id) { this.id = id; }
 
@@ -80,4 +87,5 @@ public class VehicleDto {
     public String getModel() { return model; }
 
     public void setModel(String model) { this.model = model; }
+
 }

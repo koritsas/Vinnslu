@@ -12,40 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/companies")
-public class CompanyController {
+@CrossOrigin(origins = "http://localhost:4200")
+public class CompanyController  extends AbstractCRUDController<CompanyService,Company,Long,CompanyDto>{
 
-    private CompanyService service;
 
-    @Autowired
-    public CompanyController(CompanyService service){this.service=service;}
-
-    @Autowired
-    GeometryModelMapper mapper;
-
-    @GetMapping("/find/all")
-    public ResponseEntity<List<Company>> findAll(){
-        return ResponseEntity.ok(service.findAll());
+    public CompanyController(CompanyService service) {
+        super(service);
     }
-
-    @GetMapping("/find/{companyId}")
-    public ResponseEntity<Company> findCompanyById(@PathVariable long companyId){
-        return ResponseEntity.ok(service.find(companyId));
-    }
-
-    @PostMapping("/create")
-    public ResponseEntity<Company> createCompany(@RequestBody CompanyDto dto){
-        return ResponseEntity.status(201).body(service.create(mapper.map(dto, Company.class)));
-    }
-
-    @DeleteMapping("/delete/{companyId}")
-    public ResponseEntity<String> delete(@PathVariable long companyId) {
-        return ResponseEntity.ok("Deleted: " + service.delete(companyId));
-    }
-
-    @PutMapping("/update")
-    public ResponseEntity<Company> update(@RequestBody CompanyDto dto){
-        return ResponseEntity.status(204).body(service.update(dto.getId(), mapper.map(dto, Company.class)));
-    }
-
-
 }

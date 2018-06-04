@@ -37,7 +37,7 @@ public class AbstractCRUDController<S extends AbstractCRUDService, E extends Ser
 	return ResponseEntity.status(201).body((E) service.create(mapper.map(dto, (Class<E>) dto.getClaZZ())));
     }
 
-    @DeleteMapping("/{companyId}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> delete(@PathVariable long companyId) {
 	return ResponseEntity.ok("Deleted: " + service.delete(companyId));
     }
