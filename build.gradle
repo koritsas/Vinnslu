@@ -45,7 +45,7 @@ dependencies {
 
 	compile group: 'net.postgis', name: 'postgis-jdbc', version: '2.2.1'
 
-	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '1.1.2'
+	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '2.3.0'
 
 	compile group: 'com.bedatadriven', name: 'jackson-datatype-jts', version: '2.4'
 
