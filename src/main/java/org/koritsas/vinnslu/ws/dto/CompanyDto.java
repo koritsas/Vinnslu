@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.dto;
 
-import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.utils.AbstractDto;
 
 public class CompanyDto implements AbstractDto<Long> {

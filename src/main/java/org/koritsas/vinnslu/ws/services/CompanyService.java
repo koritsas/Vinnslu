@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.repos.CompanyRepository;
 import org.springframework.stereotype.Service;
 

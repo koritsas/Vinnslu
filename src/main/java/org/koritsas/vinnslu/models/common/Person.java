@@ -1,6 +1,4 @@
-package org.koritsas.vinnslu.models;
-
-import org.koritsas.vinnslu.models.common.OwnerBuilder;
+package org.koritsas.vinnslu.models.common;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

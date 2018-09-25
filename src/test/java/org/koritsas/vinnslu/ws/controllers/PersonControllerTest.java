@@ -4,7 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.koritsas.vinnslu.models.Person;
+import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.repos.PersonRepository;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.services.PersonService;

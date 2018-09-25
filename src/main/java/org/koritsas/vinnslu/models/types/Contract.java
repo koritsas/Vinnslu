@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.models.types;
 
-import org.koritsas.vinnslu.models.Person;
+import org.koritsas.vinnslu.models.common.Person;
 
 import javax.persistence.*;
 

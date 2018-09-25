@@ -1,9 +1,12 @@
 package org.koritsas.vinnslu.ws.dto;
 
+import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.utils.AbstractDto;
+
 import java.io.File;
 import java.util.Date;
 
-public class DocumentDto {
+public class DocumentDto implements AbstractDto<Long> {
 
     private Long id;
 
@@ -18,6 +21,11 @@ public class DocumentDto {
     private File file;
 
     public Long getId() { return id; }
+
+    @Override
+    public Class getClaZZ() {
+        return Document.class;
+    }
 
     public void setId(Long id) { this.id = id; }
 

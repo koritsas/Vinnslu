@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.dto;
 
-import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Contract;
 
 import java.util.Date;

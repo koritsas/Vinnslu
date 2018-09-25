@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Document;
+import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.repos.DocumentRepository;
 import org.springframework.stereotype.Service;
 

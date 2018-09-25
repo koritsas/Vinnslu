@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Person;
+import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.repos.PersonRepository;
 import org.springframework.stereotype.Service;
 

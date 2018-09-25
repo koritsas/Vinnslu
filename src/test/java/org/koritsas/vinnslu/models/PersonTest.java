@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.koritsas.vinnslu.models.common.Person;
 
 import java.util.Date;
 

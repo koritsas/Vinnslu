@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.repos;
 
-import org.koritsas.vinnslu.models.Company;
+import org.koritsas.vinnslu.models.common.Company;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

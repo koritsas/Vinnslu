@@ -1,7 +1,7 @@
 package org.koritsas.vinnslu.models.common;
 
 import javafx.util.Builder;
-import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Contract;
 
 import java.util.Date;

@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Vehicle;
+import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.repos.VehicleRepository;
 import org.springframework.stereotype.Service;
 

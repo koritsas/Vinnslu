@@ -36,6 +36,7 @@ public class DatabaseConfiguration {
 	dataSource.setUrl(environment.getRequiredProperty("spring.datasource.url"));
 	dataSource.setUsername(environment.getRequiredProperty("spring.datasource.username"));
 	dataSource.setPassword(environment.getRequiredProperty("spring.datasource.password"));
+
 	return dataSource;
     }
 
@@ -68,7 +69,10 @@ public class DatabaseConfiguration {
 		setProperty("hibernate.format_sql",environment.getProperty("hibernate.format_sql"));
 		setProperty("hibernate.use_sql_comments",environment.getProperty("hibernate.use_sql_comments"));
 		setProperty("hibernate.integration.spatial.enabled",environment.getProperty("hibernate.integration.spatial.enabled"));
-
+		setProperty("hibernate.dll-auto",environment.getProperty("hibernate.ddl-auto"));
+		setProperty("hibernate.physical_naming_strategy",environment.getProperty("hibernate.physical_naming_strategy"));
+		setProperty("spring.jpa.hibernate.ddl-auto=create",environment.getProperty("spring.jpa.hibernate.ddl-auto"));
+		setProperty("spring.jpa.hibernate.naming.physical-strategy",environment.getProperty("spring.jpa.hibernate.naming.physical-strategy"));
 
 	    }
 	};

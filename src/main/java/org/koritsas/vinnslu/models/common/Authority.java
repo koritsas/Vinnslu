@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.models;
+package org.koritsas.vinnslu.models.common;
 
 import javax.persistence.Entity;
 

@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.models;
+package org.koritsas.vinnslu.models.topo;
 
 import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
 import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
@@ -9,6 +9,7 @@ import javafx.util.Builder;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
+import org.koritsas.vinnslu.models.common.Company;
 
 import javax.persistence.*;
 

@@ -7,6 +7,9 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.models.common.Person;
+import org.koritsas.vinnslu.models.topo.Topo;
 
 public class TopoTest {
 

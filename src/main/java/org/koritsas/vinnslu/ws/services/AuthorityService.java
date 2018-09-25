@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
-import org.koritsas.vinnslu.models.Authority;
+import org.koritsas.vinnslu.models.common.Authority;
 import org.koritsas.vinnslu.repos.AuthorityRepository;
 import org.springframework.stereotype.Service;
 

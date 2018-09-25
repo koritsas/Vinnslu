@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.models.exceptions;
+package org.koritsas.vinnslu.exceptions;
 
 public class BadPolygonFormatException extends RuntimeException{
 

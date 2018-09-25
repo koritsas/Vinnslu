@@ -1,18 +1,16 @@
-package org.koritsas.vinnslu.models;
+package org.koritsas.vinnslu.models.common;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
-import org.springframework.hateoas.ResourceSupport;
 
 import javax.persistence.*;
-
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name="documents",uniqueConstraints = {@UniqueConstraint(name = "DOCUMENT_SINGULARITY",columnNames = {"organization","protocol_number","document_date"})})
-public class Document extends ResourceSupport implements Serializable {
+public class Document implements Serializable {
 
     @Id
     @GenericGenerator(

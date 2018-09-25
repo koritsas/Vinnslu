@@ -1,7 +1,7 @@
 package org.koritsas.vinnslu.repos;
 
-import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.models.Machine;
+import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.models.vehicles.Machine;
 import org.koritsas.vinnslu.models.types.MachineryType;
 import org.springframework.data.jpa.repository.JpaRepository;
 

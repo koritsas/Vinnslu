@@ -1,8 +1,10 @@
-package org.koritsas.vinnslu.models;
+package org.koritsas.vinnslu.models.vehicles;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
+import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
 

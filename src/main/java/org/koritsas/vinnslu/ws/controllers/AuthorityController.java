@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.controllers;
 
-import org.koritsas.vinnslu.models.Authority;
+import org.koritsas.vinnslu.models.common.Authority;
 import org.koritsas.vinnslu.ws.dto.AuthorityDto;
 import org.koritsas.vinnslu.ws.services.AuthorityService;
 import org.springframework.web.bind.annotation.RequestMapping;

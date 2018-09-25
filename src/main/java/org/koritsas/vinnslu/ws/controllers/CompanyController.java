@@ -1,14 +1,9 @@
 package org.koritsas.vinnslu.ws.controllers;
 
-import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.services.CompanyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/companies")

@@ -3,7 +3,7 @@ package org.koritsas.vinnslu.utils;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
-import org.koritsas.vinnslu.models.exceptions.BadPolygonFormatException;
+import org.koritsas.vinnslu.exceptions.BadPolygonFormatException;
 
 public class PolygonParser {
     private static String SPLIT_POINT_DELIMETER = ",";

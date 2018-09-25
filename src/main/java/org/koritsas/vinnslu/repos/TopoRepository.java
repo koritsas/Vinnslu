@@ -1,8 +1,8 @@
 package org.koritsas.vinnslu.repos;
 
 import com.vividsolutions.jts.geom.Point;
-import org.koritsas.vinnslu.models.Company;
-import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.models.topo.Topo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -25,6 +25,7 @@ public interface TopoRepository extends JpaRepository<Topo,Long>{
 
     @Query(value = "SELECT p FROM #{#entityName} p WHERE intersection(p.polygon,(:point)) = true")
     Topo findByPolygonContains(@Param("point") Point point);
+
 
 
 

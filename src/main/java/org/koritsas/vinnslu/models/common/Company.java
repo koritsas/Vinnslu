@@ -1,7 +1,6 @@
-package org.koritsas.vinnslu.models;
+package org.koritsas.vinnslu.models.common;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.koritsas.vinnslu.models.common.OwnerBuilder;
 
 import javax.persistence.*;
 

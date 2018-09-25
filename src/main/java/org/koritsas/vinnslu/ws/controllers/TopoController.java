@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.ws.controllers;
 
-import org.koritsas.vinnslu.models.Topo;
+import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.koritsas.vinnslu.ws.services.TopoService;
 import org.springframework.web.bind.annotation.RequestMapping;
