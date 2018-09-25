@@ -6,6 +6,7 @@ import org.koritsas.vinnslu.models.common.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name = "standard_environmental_commitments")
@@ -52,5 +53,37 @@ public class StandardEnvironmentalCommitments implements Serializable{
         this.forestryOpinion = forestryOpinion;
         this.miningInspectionOpinion = miningInspectionOpinion;
         this.document = document;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StandardEnvironmentalCommitments that = (StandardEnvironmentalCommitments) o;
+        return active == that.active &&
+                archeologyOpinion == that.archeologyOpinion &&
+                ministryOpinion == that.ministryOpinion &&
+                forestryOpinion == that.forestryOpinion &&
+                miningInspectionOpinion == that.miningInspectionOpinion &&
+                Objects.equals(document, that.document);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(active, archeologyOpinion, ministryOpinion, forestryOpinion, miningInspectionOpinion, document);
+    }
+
+    @Override
+    public String toString() {
+        return "StandardEnvironmentalCommitments{" +
+                "id=" + id +
+                ", active=" + active +
+                ", archeologyOpinion=" + archeologyOpinion +
+                ", ministryOpinion=" + ministryOpinion +
+                ", forestryOpinion=" + forestryOpinion +
+                ", miningInspectionOpinion=" + miningInspectionOpinion +
+                ", document=" + document +
+                '}';
     }
 }

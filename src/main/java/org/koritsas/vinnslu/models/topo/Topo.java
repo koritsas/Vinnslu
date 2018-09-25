@@ -62,6 +62,10 @@ public class Topo implements Serializable{
     @JoinColumn(name="owner_id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
     private Company owner;
 
+    @OneToOne
+    @JoinColumn(name = "research_license_id",referencedColumnName = "id",foreignKey =@ForeignKey(name="RESEARCH_LICENSE_FK"))
+    private ResearchLicense researchLicense;
+
     public Topo(){}
 
     private Topo(Polygon polygon) {
@@ -79,6 +83,8 @@ public class Topo implements Serializable{
         this.owner=topoBuilder.nestedOwner;
 
     }
+
+
 
     public void setId(Long id) {
         this.id = id;
@@ -195,44 +201,5 @@ public class Topo implements Serializable{
 
 
     }
-    @Override
-    public boolean equals(Object o){
-        if (this == o){
-            return true;
-        }
-        if (super.equals(o)){
-            return true;
-        }
-        if (o == null || this.getClass() != o.getClass()){
-            return false;
-        }
-        Topo topo = (Topo) o;
 
-        return polygon == topo.polygon &&
-            abl == topo.abl &&
-            owner == topo.owner &&
-            topoOwner == topo.topoOwner &&
-            community == topo.community &&
-            prefecture == topo.prefecture &&
-            location == topo.location &&
-            forest == topo.forest;
-    }
-
-    @Override
-    public int hashCode(){return Objects.hash(super.hashCode(),polygon,abl,owner,topoOwner,community,prefecture,location,forest);}
-
-    @Override
-    public String toString() {
-	return "Topo{" +
-	    "id=" + id +
-	    ", abl=" + abl +
-	    ", polygon=" + polygon +
-	    ", community='" + community + '\'' +
-	    ", location='" + location + '\'' +
-	    ", prefecture='" + prefecture + '\'' +
-	    ", forest=" + forest +
-	    ", topoOwner=" + topoOwner +
-	    ", owner=" + owner +
-	    '}';
-    }
 }
