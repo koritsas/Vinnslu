@@ -10,6 +10,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.utils.GeoJsonSerializer;
 
 import javax.persistence.*;
 
@@ -17,6 +18,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name="topos")
+@JsonSerialize(using = GeoJsonSerializer.class)
 public class Topo implements Serializable{
 
     @Id
@@ -36,8 +38,7 @@ public class Topo implements Serializable{
     @Column(name="abl")
     private Long abl;
 
-    @JsonSerialize(using = GeometrySerializer.class)
-    @JsonDeserialize(using = GeometryDeserializer.class)
+
     @Column(nullable = false)
     private Polygon polygon;
 
