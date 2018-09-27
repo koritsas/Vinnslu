@@ -22,7 +22,7 @@ public class TopoDto implements AbstractDto<Long> {
 
     private Company topoOwner;
 
-    private Company owner;
+    private Company areaOwner;
 
     public Long getId() {
         return id;
@@ -69,9 +69,9 @@ public class TopoDto implements AbstractDto<Long> {
 
     public void setTopoOwner(Company topoOwner) { this.topoOwner = topoOwner; }
 
-    public Company getOwner() { return owner; }
+    public Company getAreaOwner() { return areaOwner; }
 
-    public void setOwner(Company owner) { this.owner = owner; }
+    public void setAreaOwner(Company areaOwner) { this.areaOwner = areaOwner; }
 
     @Override
     public String toString() {
@@ -83,7 +83,7 @@ public class TopoDto implements AbstractDto<Long> {
             ", prefecture='" + prefecture + '\'' +
             ", forest=" + forest +
             ", topoOwner=" + topoOwner +
-            ", owner=" + owner +
+            ", areaOwner=" + areaOwner +
             '}';
     }
 }

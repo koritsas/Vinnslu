@@ -53,9 +53,9 @@ public class VinnsluApplication {
 	}
 */
 
-	Authority auth1 = new Authority(666L, "sadf", "sdf");
+	Authority auth1 = new Authority(668L, "sadf", "sdf");
 
-	Authority auth2 = new Authority(667L, "sadfsdf", "sdf");
+	Authority auth2 = new Authority(669L, "sadfsdf", "sdf");
 
 	Topo topo = new Topo.TopoBuilder(polygon).setPrefecture("fdasdf").setLocation("adf").setCommunity("Fdsad")
 	    .setLocation("dfad").setAbl(666L).build();
@@ -77,7 +77,7 @@ public class VinnsluApplication {
 
 	Person p = new Person.PersonBuilder("sadf", "sadfasd").setAfm(777L).build();
 
-	topo.setOwner(p);
+	topo.setAreaOwner(p);
 
 	Company company1 = new Company(4532L,"sdfasdf","54543");
 	session.saveOrUpdate(company1);

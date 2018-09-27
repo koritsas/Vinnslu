@@ -74,6 +74,6 @@ public class TopoTest {
 
     @Test
     public void getOwner() {
-        Assert.assertNotNull(topo.getOwner());
+        Assert.assertNotNull(topo.getAreaOwner());
     }
 }

@@ -3,8 +3,10 @@ package org.koritsas.vinnslu.models.topo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.common.Status;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -26,7 +28,8 @@ public class ResearchLicense implements Serializable {
     @GeneratedValue(generator = "research_license_generator")
     private Long id;
 
-    private boolean active;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(name = "protocol_number")
     private String protocolNumber;
@@ -51,101 +54,11 @@ public class ResearchLicense implements Serializable {
     @JoinColumn(name = "document", referencedColumnName = "id", foreignKey = @ForeignKey(name = "RESEARCH_DOCUMENT_ID"))
     private Document document;
 
+    @Max(300000)
+    private double area;
+
     public ResearchLicense() {
     }
 
-    public ResearchLicense(boolean active, String protocolNumber, String ada, Date startDate, Date endDate, StandardEnvironmentalCommitments standardEnvironmentalCommitments, StandardTechnicalCommitments standardTechnicalCommitments, Document document) {
-        this.active = active;
-        this.protocolNumber = protocolNumber;
-        this.ada = ada;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.standardEnvironmentalCommitments = standardEnvironmentalCommitments;
-        this.standardTechnicalCommitments = standardTechnicalCommitments;
-        this.document = document;
-    }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
-
-    public String getProtocolNumber() {
-        return protocolNumber;
-    }
-
-    public void setProtocolNumber(String protocolNumber) {
-        this.protocolNumber = protocolNumber;
-    }
-
-    public String getAda() {
-        return ada;
-    }
-
-    public void setAda(String ada) {
-        this.ada = ada;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(Date startDate) {
-        this.startDate = startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public Document getDocument() {
-        return document;
-    }
-
-    public void setDocument(Document document) {
-        this.document = document;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ResearchLicense that = (ResearchLicense) o;
-        return active == that.active &&
-                Objects.equals(protocolNumber, that.protocolNumber) &&
-                Objects.equals(ada, that.ada) &&
-                Objects.equals(startDate, that.startDate) &&
-                Objects.equals(endDate, that.endDate) &&
-                Objects.equals(standardEnvironmentalCommitments, that.standardEnvironmentalCommitments) &&
-                Objects.equals(standardTechnicalCommitments, that.standardTechnicalCommitments) &&
-                Objects.equals(document, that.document);
-    }
-
-    @Override
-    public int hashCode() {
-
-        return Objects.hash(active, protocolNumber, ada, startDate, endDate, standardEnvironmentalCommitments, standardTechnicalCommitments, document);
-    }
-
-    @Override
-    public String toString() {
-        return "ResearchLicense{" +
-                "id=" + id +
-                ", active=" + active +
-                ", protocolNumber='" + protocolNumber + '\'' +
-                ", ada='" + ada + '\'' +
-                ", startDate=" + startDate +
-                ", endDate=" + endDate +
-                ", standardEnvironmentalCommitments=" + standardEnvironmentalCommitments +
-                ", standardTechnicalCommitments=" + standardTechnicalCommitments +
-                ", document=" + document +
-                '}';
-    }
 }

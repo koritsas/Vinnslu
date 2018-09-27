@@ -4,6 +4,7 @@ import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.common.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,7 +26,8 @@ public class EnvironmentalImpactStudy implements Serializable {
     @GeneratedValue(generator = "env_impact_generator")
     private Long id;
 
-    private boolean active;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column(name = "protocol_number")
     private String protocolNumber;

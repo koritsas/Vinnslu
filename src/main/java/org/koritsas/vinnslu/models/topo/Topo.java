@@ -14,7 +14,6 @@ import org.koritsas.vinnslu.models.common.Company;
 import javax.persistence.*;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 @Entity
 @Table(name="topos")
@@ -60,7 +59,7 @@ public class Topo implements Serializable{
 
     @ManyToOne
     @JoinColumn(name="owner_id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
-    private Company owner;
+    private Company areaOwner;
 
     @OneToOne
     @JoinColumn(name = "research_license_id",referencedColumnName = "id",foreignKey =@ForeignKey(name="RESEARCH_LICENSE_FK"))
@@ -80,8 +79,8 @@ public class Topo implements Serializable{
         this.forest=topoBuilder.nestedForest;
         this.location=topoBuilder.nestedLocation;
         this.prefecture=topoBuilder.nestedPrefecture;
-        this.owner=topoBuilder.nestedOwner;
-
+        this.areaOwner =topoBuilder.nestedAreaOwner;
+        this.researchLicense = topoBuilder.nestedResearchLicense;
     }
 
 
@@ -120,9 +119,9 @@ public class Topo implements Serializable{
 
     public void setTopoOwner(Company topoOwner) { this.topoOwner = topoOwner; }
 
-    public Company getOwner() { return owner; }
+    public Company getAreaOwner() { return areaOwner; }
 
-    public void setOwner(Company owner) { this.owner = owner; }
+    public void setAreaOwner(Company areaOwner) { this.areaOwner = areaOwner; }
 
 
 
@@ -134,6 +133,8 @@ public class Topo implements Serializable{
 
 
         //Optional parameters
+        private ResearchLicense nestedResearchLicense;
+
         private Long nestedAbl;
 
         private boolean nestedForest;
@@ -146,7 +147,7 @@ public class Topo implements Serializable{
 
         private Company nestedTopoOwner;
 
-        private Company nestedOwner;
+        private Company nestedAreaOwner;
 
 
 
@@ -156,6 +157,11 @@ public class Topo implements Serializable{
 
         public TopoBuilder setAbl(Long abl){
             this.nestedAbl=abl;
+            return this;
+        }
+
+        public TopoBuilder setResearchLicense(ResearchLicense researchLicense){
+            this.nestedResearchLicense =researchLicense;
             return this;
         }
 
@@ -180,7 +186,7 @@ public class Topo implements Serializable{
         }
 
         public TopoBuilder setOwner(Company owner){
-            this.nestedOwner = owner;
+            this.nestedAreaOwner = owner;
             return this;
         }
 
@@ -189,8 +195,8 @@ public class Topo implements Serializable{
             return this;
         }
 
-        public TopoBuilder setNestedOwner(Company owner){
-            this.nestedOwner=owner;
+        public TopoBuilder setNestedAreaOwner(Company owner){
+            this.nestedAreaOwner =owner;
             return this;
         }
 

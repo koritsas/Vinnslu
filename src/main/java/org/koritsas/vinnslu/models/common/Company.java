@@ -1,13 +1,14 @@
 package org.koritsas.vinnslu.models.common;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
 
 import java.io.Serializable;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @Embeddable
 public class Company implements Serializable{
 
@@ -24,7 +25,7 @@ public class Company implements Serializable{
     @GeneratedValue(generator = "company_generator")
     private Long id;
 
-
+    @NaturalId
     @Column(unique = true)
     private Long afm;
 

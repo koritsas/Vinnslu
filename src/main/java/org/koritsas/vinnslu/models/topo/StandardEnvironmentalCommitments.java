@@ -3,6 +3,7 @@ package org.koritsas.vinnslu.models.topo;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.common.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -25,7 +26,8 @@ public class StandardEnvironmentalCommitments implements Serializable{
     @GeneratedValue(generator = "sec_generator")
     private Long id;
 
-    private boolean active;
+    @Enumerated
+    private Status status;
 
     @Column(name = "archeology_opinion")
     private boolean archeologyOpinion;
@@ -46,8 +48,8 @@ public class StandardEnvironmentalCommitments implements Serializable{
     public StandardEnvironmentalCommitments() {
     }
 
-    public StandardEnvironmentalCommitments(boolean active, boolean archeologyOpinion, boolean ministryOpinion, boolean forestryOpinion, boolean miningInspectionOpinion, Document document) {
-        this.active = active;
+    public StandardEnvironmentalCommitments(Status status, boolean archeologyOpinion, boolean ministryOpinion, boolean forestryOpinion, boolean miningInspectionOpinion, Document document) {
+        this.status = status;
         this.archeologyOpinion = archeologyOpinion;
         this.ministryOpinion = ministryOpinion;
         this.forestryOpinion = forestryOpinion;
@@ -60,7 +62,7 @@ public class StandardEnvironmentalCommitments implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StandardEnvironmentalCommitments that = (StandardEnvironmentalCommitments) o;
-        return active == that.active &&
+        return status == that.status &&
                 archeologyOpinion == that.archeologyOpinion &&
                 ministryOpinion == that.ministryOpinion &&
                 forestryOpinion == that.forestryOpinion &&
@@ -71,14 +73,14 @@ public class StandardEnvironmentalCommitments implements Serializable{
     @Override
     public int hashCode() {
 
-        return Objects.hash(active, archeologyOpinion, ministryOpinion, forestryOpinion, miningInspectionOpinion, document);
+        return Objects.hash(status, archeologyOpinion, ministryOpinion, forestryOpinion, miningInspectionOpinion, document);
     }
 
     @Override
     public String toString() {
         return "StandardEnvironmentalCommitments{" +
                 "id=" + id +
-                ", active=" + active +
+                ", status=" + status +
                 ", archeologyOpinion=" + archeologyOpinion +
                 ", ministryOpinion=" + ministryOpinion +
                 ", forestryOpinion=" + forestryOpinion +
@@ -86,4 +88,6 @@ public class StandardEnvironmentalCommitments implements Serializable{
                 ", document=" + document +
                 '}';
     }
+
+
 }
