@@ -2,6 +2,7 @@ package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import org.koritsas.vinnslu.models.common.Document;
 
 import javax.persistence.*;
@@ -9,6 +10,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "standard_technical_commitments")
+
 public class StandardTechnicalCommitments implements Serializable {
 
     @Id

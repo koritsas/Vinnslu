@@ -3,6 +3,7 @@ package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import org.koritsas.vinnslu.models.common.Person;
 
 import javax.persistence.Entity;
@@ -11,7 +12,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "technical_study")
+@Table(name = "technical_study",schema = "new_schema")
+
 public class TechnicalStudy {
 
     @Id

@@ -19,7 +19,7 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
 
     @Transactional
     public E find(PK id) {
-	return (E) repo.findOne(id);
+	return (E) repo.getOne(id);
     }
 
     @Transactional(readOnly = true)
@@ -38,11 +38,11 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
     @Transactional(rollbackFor = EntityNotFoundException.class)
     public E delete(PK id) {
 
-	if (!repo.exists(id)) {
+	if (!repo.existsById(id)) {
 	    throw new EntityNotFoundException("Entity with id: " + id + " not found");
 	}
 
-	E entity = (E) repo.findOne(id);
+	E entity = (E) repo.getOne(id);
 
 	repo.delete(id);
 
@@ -53,7 +53,7 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
     @Transactional(rollbackFor = EntityNotFoundException.class)
     public E update(PK id, E entity) {
 
-	if (!repo.exists(id)) {
+	if (!repo.existsById(id)) {
 	    throw new EntityNotFoundException("Entity does not exist, therefore, cannot be updated");
 	}
 

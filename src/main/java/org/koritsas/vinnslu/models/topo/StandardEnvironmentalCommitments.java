@@ -2,6 +2,7 @@ package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.common.Status;
 
@@ -11,6 +12,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "standard_environmental_commitments")
+
 public class StandardEnvironmentalCommitments implements Serializable{
 
     @Id

@@ -1,5 +1,7 @@
 package org.koritsas.vinnslu.models.common;
 
+
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Temporal;

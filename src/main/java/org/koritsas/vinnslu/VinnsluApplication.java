@@ -14,14 +14,19 @@ import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.ConfigurableApplicationContext;
 
+import javax.persistence.EntityManager;
 import java.util.Date;
 
 @SpringBootApplication
 public class VinnsluApplication {
+
+
 
     public static void main(String[] args) {
 
@@ -70,6 +75,8 @@ public class VinnsluApplication {
 	Document doc = new Document("asdfa", "Sfdgsd", "dfgsdfg", new Date(), null);
 
 	SessionFactory sessionFactory = (SessionFactory) context.getBean("sessionFactory");
+
+	context.getBean("session");
 	Session session = sessionFactory.openSession();
 	session.beginTransaction();
 	Company company = new Company(666L, "Hermes", "Drama");

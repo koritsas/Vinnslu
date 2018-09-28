@@ -2,6 +2,7 @@ package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
+
 import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.common.Status;
 

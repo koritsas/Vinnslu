@@ -3,6 +3,7 @@ package org.koritsas.vinnslu.models.common;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 
+
 import javax.persistence.*;
 
 import java.io.Serializable;
