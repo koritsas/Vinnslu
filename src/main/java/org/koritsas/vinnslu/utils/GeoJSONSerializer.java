@@ -56,7 +56,7 @@ public class GeoJSONSerializer extends StdSerializer<Topo> {
         gen.writeStringField("prefecture",value.getPrefecture());
         gen.writeBooleanField("forest",value.getForest());
         gen.writeObjectField("topoOwner",value.getTopoOwner());
-        gen.writeObjectField("owner",value.getOwner());
+        gen.writeObjectField("owner",value.getAreaOwner());
         gen.writeEndObject();
 
 

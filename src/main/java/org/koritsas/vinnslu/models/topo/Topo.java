@@ -1,7 +1,6 @@
 package org.koritsas.vinnslu.models.topo;
 
-import com.bedatadriven.jackson.datatype.jts.serialization.GeometryDeserializer;
-import com.bedatadriven.jackson.datatype.jts.serialization.GeometrySerializer;
+
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
@@ -123,6 +122,7 @@ public class Topo implements Serializable{
     public Company getAreaOwner() { return areaOwner; }
 
     public void setAreaOwner(Company areaOwner) { this.areaOwner = areaOwner; }
+
 
 
 

@@ -3,6 +3,7 @@ package org.koritsas.vinnslu.ws.controllers;
 import org.koritsas.vinnslu.utils.AbstractDto;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.services.AbstractCRUDService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ public class AbstractCRUDController<S extends AbstractCRUDService, E extends Ser
     private S service;
 
     @Autowired
-    private GeometryModelMapper mapper;
+    private ModelMapper mapper;
 
     public AbstractCRUDController(S service) {
 	this.service = service;

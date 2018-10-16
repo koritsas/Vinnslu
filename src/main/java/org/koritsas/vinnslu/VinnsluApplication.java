@@ -1,8 +1,15 @@
 package org.koritsas.vinnslu;
 
+import com.github.kuros.random.jpa.Database;
+import com.github.kuros.random.jpa.JPAContext;
+import com.github.kuros.random.jpa.JPAContextFactory;
+import com.github.kuros.random.jpa.types.CreationPlan;
+import com.github.kuros.random.jpa.types.Entity;
 import com.vividsolutions.jts.geom.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.ejb.HibernateEntityManagerFactory;
+import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
 import org.koritsas.vinnslu.models.common.Authority;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.common.Document;
@@ -11,6 +18,7 @@ import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
 import org.koritsas.vinnslu.models.vehicles.Vehicle;
+import org.koritsas.vinnslu.utils.FakeData;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.CompanyDto;
 import org.koritsas.vinnslu.ws.dto.TopoDto;
@@ -19,19 +27,42 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.data.jpa.provider.HibernateUtils;
+import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import java.util.Date;
 
 @SpringBootApplication
 public class VinnsluApplication {
 
 
+    private EntityManager entityManager;
 
     public static void main(String[] args) {
 
 	ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
 
+    EntityManager entityManager = (EntityManager) context.getBean("entityManager");
+
+        System.out.println(entityManager);
+
+
+        System.out.println("----------------------Starting kuros-----------------------------------");
+/*
+        JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, entityManager)
+                .generate();
+
+        FakeData fakeData = new FakeData();
+
+        fakeData.printEm();
+*/
+
+
+
+/*
 	Person emp = new Person.PersonBuilder("sdfa", "Sdafsa").setAddress("sdf").setBirthDate(new Date()).build();
 	GeometryFactory factory = new GeometryFactory(new PrecisionModel(), 2100);
 	Polygon polygon = factory.createPolygon(
@@ -46,17 +77,7 @@ public class VinnsluApplication {
 
 	polygon2.setSRID(2100);
 
-	/*
-	WKTReader reader = new WKTReader();
 
-	try {
-	    polygon = (Polygon) reader.read("POLYGON (" +
-		"(30 10, 40 40, 20 40, 10 20, 30 10), " +
-		"(20 30, 35 35, 30 20, 20 30))");
-	} catch (ParseException e) {
-	    e.printStackTrace();
-	}
-*/
 
 	Authority auth1 = new Authority(668L, "sadf", "sdf");
 
@@ -143,7 +164,11 @@ public class VinnsluApplication {
 
 	CompanyDto cdto = mm.map(company, CompanyDto.class);
 	System.out.println(dto.getPolygon().toString());
-
+*/
     }
 
+    @PersistenceContext
+    public void setEntityManager(EntityManager entityManager) {
+        this.entityManager = entityManager;
+    }
 }

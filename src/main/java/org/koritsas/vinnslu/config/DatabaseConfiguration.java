@@ -6,6 +6,7 @@ import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
@@ -18,30 +19,36 @@ import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 
 import java.util.Properties;
 
 @Configuration
-
 @EnableTransactionManagement
-@EnableAutoConfiguration
-@EnableJpaRepositories("org.koritsas.vinnslu.repos")
-
+@EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 public class DatabaseConfiguration {
 
     private static final String[] ENTITIES_PACKAGE = { "org.koritsas.vinnslu.models" };
 
     private Environment environment;
 
+    @Autowired
+    EntityManager entityManager;
+
+    @Bean(name = "entityManager")
+    public EntityManager getEntityManager(){
+
+        return entityManager;
+    }
 
 
     @Bean
 	public GeometryModelMapper geometryModelMapper(){
     	return new GeometryModelMapper();
 	}
-
+/*
     @Autowired
     public void setEnvironment(Environment environment) { this.environment = environment; }
 
@@ -103,5 +110,8 @@ public class DatabaseConfiguration {
 	    }
 	};
 
+
     }
+
+    */
 }
