@@ -17,6 +17,7 @@ import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
+import org.koritsas.vinnslu.models.vehicles.Machine;
 import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.utils.FakeData;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
@@ -32,8 +33,10 @@ import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.util.Date;
+import java.util.Vector;
 
 @SpringBootApplication
 public class VinnsluApplication {
@@ -45,21 +48,29 @@ public class VinnsluApplication {
 
 	ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
 
+
+/*
     EntityManager entityManager = (EntityManager) context.getBean("entityManager");
 
         System.out.println(entityManager);
 
 
         System.out.println("----------------------Starting kuros-----------------------------------");
-/*
+
+
         JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, entityManager)
                 .generate();
+
+        CreationPlan creationPlan = jpaContext.create(
+                Entity.of(Vehicle.class, 2),
+                Entity.of(Machine.class,3));
+
 
         FakeData fakeData = new FakeData();
 
         fakeData.printEm();
-*/
 
+*/
 
 
 /*

@@ -4,7 +4,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Person;
-import org.koritsas.vinnslu.models.common.Status;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Mining_License",uniqueConstraints = @UniqueConstraint(columnNames = {"notary","contractDate","contractNumber"}))
+@Table(name = "Mining_License")
 public class MiningLicense {
 
     @Id
@@ -29,46 +28,127 @@ public class MiningLicense {
     private Long id;
 
     @NaturalId
-    @NotNull
-    @JoinColumn(name = "abl", referencedColumnName = "abl", foreignKey = @ForeignKey(name = "ABL_ID"))
-    private Long abl;
+    @JoinColumn(name = "topo_abl", referencedColumnName = "abl", foreignKey = @ForeignKey(name = "MINING_LICENSE_TOPO_ABL_ID"))
+    private Topo topo_abl;
 
-    private Person notary;
+    private boolean active;
 
-    @Temporal(TemporalType.DATE)
-    private Date contractDate;
+    private String ada;
 
-    private int contractNumber;
 
-    @Temporal(TemporalType.DATE)
-    private Date startDate;
+    @Embedded
+    @Column(unique = true)
+    private Contract contract;
 
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @OneToOne
-    @JoinColumn(name="environmental_impact_study", referencedColumnName = "id", foreignKey = @ForeignKey(name = "EIS_FK"))
-    private EnvironmentalImpactStudy environmentalImpactStudy;
 
-    @OneToOne
-    @JoinColumn(name="technical_study", referencedColumnName = "id", foreignKey = @ForeignKey(name = "TS_FK"))
+    @ManyToOne
+    @JoinColumn(name = "technical_study_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_TECHICAL_STUDY_ID"))
     private TechnicalStudy technicalStudy;
 
-    private Status status;
+    @ManyToOne
+    @JoinColumn(name = "topo_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_TOPO_ID"))
+    private Topo topo;
+
+    @ManyToOne
+    @JoinColumn(name = "environmental_guarantee_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_ENVIRONMENTAL_GUARANTEE_ID"))
+    private Guarantee environmentalGuarantee;
+
+    @ManyToOne
+    @JoinColumn(name = "lease_guarantee_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_LEASE_GUARANTEE_ID"))
+    private Guarantee leaseGuarantee;
 
     public MiningLicense() {
     }
 
-    public MiningLicense(Long abl, Person notary, Date contractDate, int contractNumber, Date startDate, Date endDate, EnvironmentalImpactStudy environmentalImpactStudy, TechnicalStudy technicalStudy, Status status) {
-        this.abl = abl;
-        this.notary = notary;
-        this.contractDate = contractDate;
-        this.contractNumber = contractNumber;
-        this.startDate = startDate;
+    public MiningLicense(Topo topo_abl, boolean active, String ada, Contract contract, Date endDate, TechnicalStudy technicalStudy, Topo topo, Guarantee environmentalGuarantee, Guarantee leaseGuarantee) {
+        this.topo_abl = topo_abl;
+        this.active = active;
+        this.ada = ada;
+        this.contract = contract;
         this.endDate = endDate;
-        this.environmentalImpactStudy = environmentalImpactStudy;
         this.technicalStudy = technicalStudy;
-        this.status = status;
+        this.topo = topo;
+        this.environmentalGuarantee = environmentalGuarantee;
+        this.leaseGuarantee = leaseGuarantee;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public Topo getTopo_abl() {
+        return topo_abl;
+    }
+
+    public void setTopo_abl(Topo topo_abl) {
+        this.topo_abl = topo_abl;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getAda() {
+        return ada;
+    }
+
+    public void setAda(String ada) {
+        this.ada = ada;
+    }
+
+    public Contract getContract() {
+        return contract;
+    }
+
+    public void setContract(Contract contract) {
+        this.contract = contract;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public TechnicalStudy getTechnicalStudy() {
+        return technicalStudy;
+    }
+
+    public void setTechnicalStudy(TechnicalStudy technicalStudy) {
+        this.technicalStudy = technicalStudy;
+    }
+
+    public Topo getTopo() {
+        return topo;
+    }
+
+    public void setTopo(Topo topo) {
+        this.topo = topo;
+    }
+
+    public Guarantee getEnvironmentalGuarantee() {
+        return environmentalGuarantee;
+    }
+
+    public void setEnvironmentalGuarantee(Guarantee environmentalGuarantee) {
+        this.environmentalGuarantee = environmentalGuarantee;
+    }
+
+    public Guarantee getLeaseGuarantee() {
+        return leaseGuarantee;
+    }
+
+    public void setLeaseGuarantee(Guarantee leaseGuarantee) {
+        this.leaseGuarantee = leaseGuarantee;
     }
 
     @Override
@@ -76,35 +156,58 @@ public class MiningLicense {
         if (this == o) return true;
         if (!(o instanceof MiningLicense)) return false;
         MiningLicense that = (MiningLicense) o;
-        return contractNumber == that.contractNumber &&
-                Objects.equals(abl, that.abl) &&
-                Objects.equals(notary, that.notary) &&
-                Objects.equals(contractDate, that.contractDate) &&
-                Objects.equals(startDate, that.startDate) &&
+        return active == that.active &&
+                Objects.equals(topo_abl, that.topo_abl) &&
+                Objects.equals(ada, that.ada) &&
+                Objects.equals(contract, that.contract) &&
                 Objects.equals(endDate, that.endDate) &&
-                Objects.equals(environmentalImpactStudy, that.environmentalImpactStudy) &&
                 Objects.equals(technicalStudy, that.technicalStudy) &&
-                status == that.status;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(abl, notary, contractDate, contractNumber, startDate, endDate, environmentalImpactStudy, technicalStudy, status);
+                Objects.equals(topo, that.topo) &&
+                Objects.equals(environmentalGuarantee, that.environmentalGuarantee) &&
+                Objects.equals(leaseGuarantee, that.leaseGuarantee);
     }
 
     @Override
     public String toString() {
         return "MiningLicense{" +
-                "id=" + id +
-                ", abl=" + abl +
-                ", notary=" + notary +
-                ", contractDate=" + contractDate +
-                ", contractNumber=" + contractNumber +
-                ", startDate=" + startDate +
+                "topo_abl=" + topo_abl +
+                ", active=" + active +
+                ", ada='" + ada + '\'' +
+                ", contract=" + contract +
                 ", endDate=" + endDate +
-                ", environmentalImpactStudy=" + environmentalImpactStudy +
                 ", technicalStudy=" + technicalStudy +
-                ", status=" + status +
+                ", topo=" + topo +
+                ", environmentalGuarantee=" + environmentalGuarantee +
+                ", leaseGuarantee=" + leaseGuarantee +
                 '}';
     }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(topo_abl, active, ada, contract, endDate, technicalStudy, topo, environmentalGuarantee, leaseGuarantee);
+    }
+
+    // Embeddable class for Contract
+    @Embeddable
+    private class Contract{
+
+        private Date date;
+
+        private Person notary;
+
+        private int contractNumber;
+
+        public Contract() {
+        }
+
+        public Contract(Date date, Person notary, int contractNumber) {
+            this.date = date;
+            this.notary = notary;
+            this.contractNumber = contractNumber;
+        }
+
+
+    }
+
+
 }

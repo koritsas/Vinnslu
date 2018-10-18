@@ -1,10 +1,8 @@
 package org.koritsas.vinnslu.models.topo;
 
-import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Status;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,7 +10,6 @@ import java.util.Date;
 
 @Entity
 @Table(name = "environmental_impact_study")
-
 public class EnvironmentalImpactStudy implements Serializable {
     @Id
     @GenericGenerator(
@@ -27,22 +24,23 @@ public class EnvironmentalImpactStudy implements Serializable {
     @GeneratedValue(generator = "env_impact_generator")
     private Long id;
 
-    @Enumerated(EnumType.STRING)
-    private Status status;
+    private String ada;
 
-    @Column(name = "protocol_number")
-    private String protocolNumber;
+    private String protocol;
 
-    @Column(name = "start_date")
+    private boolean active;
+
     @Temporal(TemporalType.DATE)
     private Date startDate;
 
-
-    @Column(name = "end_date")
     @Temporal(TemporalType.DATE)
     private Date endDate;
 
-    @OneToOne
+    @ManyToOne
+    @JoinColumn(name = "topo_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "ENV_IMPACT_TOPO_ID"))
+    private Topo topo;
+
+    @ManyToOne
     @JoinColumn(name = "env_impact_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ENV_IMPACT_FK"))
     private Document document;
 

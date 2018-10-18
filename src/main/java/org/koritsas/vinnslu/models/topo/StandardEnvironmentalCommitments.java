@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Status;
+import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,37 +12,33 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "standard_environmental_commitments")
-
 public class StandardEnvironmentalCommitments implements Serializable{
 
     @Id
     @GenericGenerator(
-            name = "sec_generator",
+            name = "ppd_generator",
             strategy = "org.hibernate.id.enhanced.SequenceStyleGenerator",
             parameters = {
-                    @Parameter(name = "sequence_name", value = "sec_seq"),
+                    @Parameter(name = "sequence_name", value = "ppd_seq"),
                     @Parameter(name = "initial_value", value = "1"),
                     @Parameter(name = "increment_size", value = "1")
             }
     )
-    @GeneratedValue(generator = "sec_generator")
+    @GeneratedValue(generator = "ppd_generator")
     private Long id;
 
-    @Enumerated
-    private Status status;
+    private boolean active;
 
-    @Column(name = "archeology_opinion")
-    private boolean archeologyOpinion;
+    private String protocol;
 
-    @Column(name = "ministry_opinion")
-    private boolean ministryOpinion;
+    private String ada;
 
-    @Column(name = "forestry_opinion")
-    private boolean forestryOpinion;
+    @ManyToOne
+    @JoinColumn(name = "topo_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "PPD_TOPO_ID_FK"))
+    private Topo topo;
 
-    @Column(name = "mining_inspection_opinion")
-    private boolean miningInspectionOpinion;
 
+    @Lazy
     @ManyToOne
     @JoinColumn(name = "document", referencedColumnName = "id", foreignKey = @ForeignKey(name = "SEC_DOCUMENT_ID"))
     private Document document;
@@ -50,12 +46,47 @@ public class StandardEnvironmentalCommitments implements Serializable{
     public StandardEnvironmentalCommitments() {
     }
 
-    public StandardEnvironmentalCommitments(Status status, boolean archeologyOpinion, boolean ministryOpinion, boolean forestryOpinion, boolean miningInspectionOpinion, Document document) {
-        this.status = status;
-        this.archeologyOpinion = archeologyOpinion;
-        this.ministryOpinion = ministryOpinion;
-        this.forestryOpinion = forestryOpinion;
-        this.miningInspectionOpinion = miningInspectionOpinion;
+    public Long getId() {
+        return id;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public String getProtocol() {
+        return protocol;
+    }
+
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
+    }
+
+    public String getAda() {
+        return ada;
+    }
+
+    public void setAda(String ada) {
+        this.ada = ada;
+    }
+
+    public Topo getTopo() {
+        return topo;
+    }
+
+    public void setTopo(Topo topo) {
+        this.topo = topo;
+    }
+
+    public Document getDocument() {
+        return document;
+    }
+
+    public void setDocument(Document document) {
         this.document = document;
     }
 
@@ -64,32 +95,26 @@ public class StandardEnvironmentalCommitments implements Serializable{
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StandardEnvironmentalCommitments that = (StandardEnvironmentalCommitments) o;
-        return status == that.status &&
-                archeologyOpinion == that.archeologyOpinion &&
-                ministryOpinion == that.ministryOpinion &&
-                forestryOpinion == that.forestryOpinion &&
-                miningInspectionOpinion == that.miningInspectionOpinion &&
+        return active == that.active &&
+                Objects.equals(protocol, that.protocol) &&
+                Objects.equals(ada, that.ada) &&
+                Objects.equals(topo, that.topo) &&
                 Objects.equals(document, that.document);
     }
 
     @Override
     public int hashCode() {
-
-        return Objects.hash(status, archeologyOpinion, ministryOpinion, forestryOpinion, miningInspectionOpinion, document);
+        return Objects.hash(active, protocol, ada, topo, document);
     }
 
     @Override
     public String toString() {
         return "StandardEnvironmentalCommitments{" +
-                "id=" + id +
-                ", status=" + status +
-                ", archeologyOpinion=" + archeologyOpinion +
-                ", ministryOpinion=" + ministryOpinion +
-                ", forestryOpinion=" + forestryOpinion +
-                ", miningInspectionOpinion=" + miningInspectionOpinion +
+                "active=" + active +
+                ", protocol='" + protocol + '\'' +
+                ", ada='" + ada + '\'' +
+                ", topo=" + topo +
                 ", document=" + document +
                 '}';
     }
-
-
 }

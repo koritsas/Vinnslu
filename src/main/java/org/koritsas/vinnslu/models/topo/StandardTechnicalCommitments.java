@@ -1,15 +1,18 @@
 package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Parameter;
 
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.common.Opinions;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
-@Table(name = "standard_technical_commitments")
+
 
 public class StandardTechnicalCommitments implements Serializable {
 
@@ -26,8 +29,20 @@ public class StandardTechnicalCommitments implements Serializable {
     @GeneratedValue(generator = "stc_generator")
     private Long id;
 
-    @Column(name = "mining_inspection_opinion")
-    private boolean miningInspectionOpinion;
+    private boolean active;
+
+    private String protocol;
+
+    private String ada;
+
+    @ManyToOne
+    @JoinColumn(name = "topo_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "PTD_TOPO_ID_FK"))
+    private Topo topo;
+
+    @ManyToOne
+    @JoinColumn(name = "opinions_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "PTD_OPINIONS_ID_FK"))
+    private Opinions opinions;
+
 
     @ManyToOne
     @JoinColumn(name = "document", referencedColumnName = "id", foreignKey = @ForeignKey(name = "STC_DOCUMENT_ID"))
@@ -36,23 +51,42 @@ public class StandardTechnicalCommitments implements Serializable {
     public StandardTechnicalCommitments() {
     }
 
-    public StandardTechnicalCommitments(boolean miningInspectionOpinion) {
-        this.miningInspectionOpinion = miningInspectionOpinion;
+    public StandardTechnicalCommitments(boolean active, String protocol, String ada, Topo topo, Opinions opinions, Document document) {
+        this.active = active;
+        this.protocol = protocol;
+        this.ada = ada;
+        this.topo = topo;
+        this.opinions = opinions;
+        this.document = document;
     }
 
-    public Long getId() {
-        return id;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof StandardTechnicalCommitments)) return false;
+        StandardTechnicalCommitments that = (StandardTechnicalCommitments) o;
+        return active == that.active &&
+                Objects.equals(protocol, that.protocol) &&
+                Objects.equals(ada, that.ada) &&
+                Objects.equals(topo, that.topo) &&
+                Objects.equals(opinions, that.opinions) &&
+                Objects.equals(document, that.document);
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(active, protocol, ada, topo, opinions, document);
     }
 
-    public boolean isMiningInspectionOpinion() {
-        return miningInspectionOpinion;
-    }
-
-    public void setMiningInspectionOpinion(boolean miningInspectionOpinion) {
-        this.miningInspectionOpinion = miningInspectionOpinion;
+    @Override
+    public String toString() {
+        return "StandardTechnicalCommitments{" +
+                "active=" + active +
+                ", protocol='" + protocol + '\'' +
+                ", ada='" + ada + '\'' +
+                ", topo=" + topo +
+                ", opinions=" + opinions +
+                ", document=" + document +
+                '}';
     }
 }

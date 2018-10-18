@@ -32,132 +32,14 @@ public class Person extends Company{
 
     public Person(){}
 
-
-    private Person(PersonBuilder personBuilder){
-	this.setName(personBuilder.getName());
-	this.setAfm(personBuilder.getAfm());
-	this.setAddress(personBuilder.getAddress());
-	this.surname= personBuilder.nestedSurname;
-	this.birthDate= personBuilder.nestedBirthDate;
-	this.phone= personBuilder.nestedPhone;
-        this.fathername= personBuilder.nestedFathername;
-        this.mothername= personBuilder.nestedMothername;
-        this.job = personBuilder.nestedJob;
-        this.idCardNumber= personBuilder.nestedIdCardNumber;
-    }
-
-    public String getFathername() { return fathername; }
-
-    public void setFathername(String fathername) { this.fathername = fathername; }
-
-    public String getMothername() { return mothername; }
-
-    public void setMothername(String mothername) { this.mothername = mothername; }
-
-    public String getIdCardNumber() { return idCardNumber; }
-
-    public void setIdCardNumber(String idCardNumber) { this.idCardNumber = idCardNumber; }
-
-    public String getJob() { return job; }
-
-    public void setJob(String job) { this.job = job; }
-
-    public String getSurname() { return surname; }
-
-    public void setSurname(String surname) { this.surname = surname; }
-
-    public Long getPhone() { return phone; }
-
-    public void setPhone(Long phone) { this.phone = phone; }
-
-    public Date getBirthDate() { return birthDate; }
-
-    public void setBirthDate(Date birthDate) { this.birthDate = birthDate; }
-
-    @Override
-    public String toString() {
-	return "Person{" +
-	    "name'" + getName() + '\'' +
-	    "afm'" + getAfm() + '\'' +
-	    "address'" + getAddress() + '\'' +
-	    "fathername='" + fathername + '\'' +
-	    ", mothername='" + mothername + '\'' +
-	    ", idCardNumber='" + idCardNumber + '\'' +
-	    ", job='" + job + '\'' +
-	    ", surname='" + surname + '\'' +
-	    ", phone=" + phone +
-	    ", birthDate=" + birthDate +
-	    '}';
-    }
-
-    public static class PersonBuilder extends OwnerBuilder<PersonBuilder,Person>{
-
-        private String nestedFathername;
-
-        private String nestedMothername;
-
-        private String nestedIdCardNumber;
-
-        private String nestedJob;
-
-	private String nestedSurname;
-
-	private Long nestedPhone;
-
-	private Date nestedBirthDate;
-
-
-	public PersonBuilder(String name,String surname) {
-	    super(name);
-	    this.nestedSurname=surname;
+	public Person(Long afm, String name, String address, String department, int phone, String fathername, String mothername, String idCardNumber, String job, String surname, Long phone1, Date birthDate) {
+		super(afm, name, address, department, phone);
+		this.fathername = fathername;
+		this.mothername = mothername;
+		this.idCardNumber = idCardNumber;
+		this.job = job;
+		this.surname = surname;
+		this.phone = phone1;
+		this.birthDate = birthDate;
 	}
-
-	public PersonBuilder setSurname(String surname){
-	    this.nestedSurname=surname;
-	    return this;
-	}
-
-	public PersonBuilder setPhone(Long phone){
-	    this.nestedPhone=phone;
-	    return this;
-	}
-
-	public PersonBuilder setBirthDate(Date birthDate){
-	    this.nestedBirthDate=birthDate;
-	    return this;
-	}
-
-	public PersonBuilder setFathername(String fathername){
-	    this.nestedFathername=fathername;
-	    return this;
-	}
-
-	public PersonBuilder setMothername(String mothername){
-	    this.nestedMothername = mothername;
-	    return this;
-	}
-
-	public PersonBuilder setIdCardNumber(String idCardNumber){
-	    this.nestedIdCardNumber=idCardNumber;
-	    return this;
-	}
-
-	public PersonBuilder setDepartment(String department){
-	    this.nestedJob = department;
-	    return this;
-	}
-
-
-	@Override
-	public Person build() {
-	    return new Person(this);
-	}
-    }
-
-
-
-
-
-
-
 }

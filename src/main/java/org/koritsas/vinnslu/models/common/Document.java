@@ -8,10 +8,10 @@ import javax.persistence.*;
 import java.io.File;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
-@Table(name="documents",uniqueConstraints = {@UniqueConstraint(name = "DOCUMENT_SINGULARITY",columnNames = {"organization","protocol_number","document_date"})})
-
+@Table(name="documents",uniqueConstraints = {@UniqueConstraint(name = "DOCUMENT_SINGULARITY",columnNames = {"sender_id","protocol","date","file"})})
 public class Document implements Serializable {
 
     @Id
@@ -27,52 +27,131 @@ public class Document implements Serializable {
     @GeneratedValue(generator = "document_generator")
     private Long id;
 
-    private String reductor;
+    private String name;
 
-    @Column(name = "organization")
-    private String organization;
+    @ManyToOne
+    @JoinColumn(name = "sender_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "SENDER_ID_FK"))
+    private Company sender;
 
-    @Column(name="protocol_number")
-    private String protocolNumber;
+    @ManyToOne
+    @JoinColumn(name = "receiver_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "RECEIVER_ID_FK"))
+    private Company receiver;
 
-    @Column(name = "document_date")
     @Temporal(TemporalType.DATE)
-    private Date documentDate;
+    private Date date;
+
+    private String protocol;
+
+    private String mimetype;
 
     @Lob
     private File file;
 
-    public Document(){}
+    public Document() {
+    }
 
-    public Document(String reductor, String organization, String protocolNumber, Date documentDate, File file) {
-        this.reductor = reductor;
-        this.organization = organization;
-        this.protocolNumber = protocolNumber;
-        this.documentDate = documentDate;
+    public Document(String name, Company sender, Company receiver, Date date, String protocolNumber, String mimetype, File file) {
+        this.name = name;
+        this.sender = sender;
+        this.receiver = receiver;
+        this.date = date;
+        this.mimetype = mimetype;
         this.file = file;
     }
 
-    public Long getEntityId() { return id; }
+    public Long getId() {
+        return id;
+    }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-    public String getReductor() { return reductor; }
+    public String getName() {
+        return name;
+    }
 
-    public void setReductor(String reductor) { this.reductor = reductor; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public String getOrganization() { return organization; }
+    public Company getSender() {
+        return sender;
+    }
 
-    public void setOrganization(String organization) { this.organization = organization; }
+    public void setSender(Company sender) {
+        this.sender = sender;
+    }
 
-    public String getProtocolNumber() { return protocolNumber; }
+    public Company getReceiver() {
+        return receiver;
+    }
 
-    public void setProtocolNumber(String protocolNumber) { this.protocolNumber = protocolNumber; }
+    public void setReceiver(Company receiver) {
+        this.receiver = receiver;
+    }
 
-    public Date getDocumentDate() { return documentDate; }
+    public Date getDate() {
+        return date;
+    }
 
-    public void setDocumentDate(Date documentDate) { this.documentDate = documentDate; }
+    public void setDate(Date date) {
+        this.date = date;
+    }
 
-    public File getFile() { return file; }
+    public String getProtocolNumber() {
+        return protocol;
+    }
 
-    public void setFile(File file) { this.file = file; }
+    public void setProtocolNumber(String protocolNumber) {
+        this.protocol = protocolNumber;
+    }
+
+    public String getMimetype() {
+        return mimetype;
+    }
+
+    public void setMimetype(String mimetype) {
+        this.mimetype = mimetype;
+    }
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Document)) return false;
+        Document document = (Document) o;
+        return Objects.equals(id, document.id) &&
+                Objects.equals(name, document.name) &&
+                Objects.equals(sender, document.sender) &&
+                Objects.equals(receiver, document.receiver) &&
+                Objects.equals(date, document.date) &&
+                Objects.equals(mimetype, document.mimetype) &&
+                Objects.equals(file, document.file);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, sender, receiver, date, mimetype, file);
+    }
+
+    @Override
+    public String toString() {
+        return "Document{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", sender=" + sender +
+                ", receiver=" + receiver +
+                ", date=" + date +
+                ", mimetype='" + mimetype + '\'' +
+                ", file=" + file +
+                '}';
+    }
 }
