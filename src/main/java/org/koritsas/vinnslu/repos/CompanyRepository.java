@@ -13,6 +13,7 @@ public interface CompanyRepository extends JpaRepository<Company,Long>{
 
     Company findByName(final String name);
     Company findByAfm(final Long afm);
+    Company findByPhone(final int phone);
     List<Company> findByAddress(final String address);
     List<Company> findByAddressLike(final String address);
     List<Company> findByAddressIsNull();
