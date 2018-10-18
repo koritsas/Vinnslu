@@ -13,8 +13,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "technical_study",schema = "new_schema")
-
+@Table(name = "technical_study")
 public class TechnicalStudy {
 
     @Id

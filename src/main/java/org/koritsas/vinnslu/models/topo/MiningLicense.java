@@ -45,7 +45,7 @@ public class MiningLicense {
 
 
     @ManyToOne
-    @JoinColumn(name = "technical_study_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_TECHICAL_STUDY_ID"))
+    @JoinColumn(name = "technical_study_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "MINING_LICENSE_TECHNICAL_STUDY_ID"))
     private TechnicalStudy technicalStudy;
 
     @ManyToOne

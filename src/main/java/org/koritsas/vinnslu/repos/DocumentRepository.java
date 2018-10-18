@@ -11,10 +11,8 @@ import java.util.List;
 public interface DocumentRepository extends JpaRepository<Document,Long>{
 
     Document findById(final int id);
-    Document findByDocumentDate(final Date date);
-    Document findByDocumentDateAfter(final Date date);
+    Document findByDate(final Date date);
+    Document findByDateAfter(final Date date);
+    Document findByProtocol(final String protocolNumber);
 
-    Document findByProtocolNumber(final String protocolNumber);
-    List<Document> findByReductor(final String reductor);
-    List<Document> findByOrganization(final String organization);
 }

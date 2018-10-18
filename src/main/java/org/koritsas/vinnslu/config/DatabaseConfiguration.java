@@ -28,7 +28,7 @@ import java.util.Properties;
 @Configuration
 @EnableTransactionManagement
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
-@EnableJpaRepositories
+
 public class DatabaseConfiguration {
 
     private static final String[] ENTITIES_PACKAGE = { "org.koritsas.vinnslu.models" };
