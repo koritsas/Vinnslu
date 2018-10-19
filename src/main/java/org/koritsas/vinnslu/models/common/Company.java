@@ -29,7 +29,7 @@ public class Company implements Serializable{
 
     @NaturalId
     @Column(unique = true)
-    private Long afm;
+    private int afm;
 
     @Column(nullable = false)
     private String name;
@@ -42,7 +42,7 @@ public class Company implements Serializable{
 
     public Company() {}
 
-    public Company(Long afm, String name, String address, String department, int phone) {
+    public Company(int afm, String name, String address, String department, int phone) {
         this.afm = afm;
         this.name = name;
         this.address = address;
@@ -58,11 +58,11 @@ public class Company implements Serializable{
         this.id = id;
     }
 
-    public Long getAfm() {
+    public int getAfm() {
         return afm;
     }
 
-    public void setAfm(Long afm) {
+    public void setAfm(int afm) {
         this.afm = afm;
     }
 

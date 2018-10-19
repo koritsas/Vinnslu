@@ -31,6 +31,7 @@ public class ResearchLicense implements Serializable {
 
     private String protocol;
 
+    @Column(unique = true)
     private String ada;
 
     private boolean active;

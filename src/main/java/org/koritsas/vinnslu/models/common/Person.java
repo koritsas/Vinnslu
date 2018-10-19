@@ -32,7 +32,7 @@ public class Person extends Company{
 
     public Person(){}
 
-	public Person(Long afm, String name, String address, String department, int phone, String fathername, String mothername, String idCardNumber, String job, String surname, Long phone1, Date birthDate) {
+	public Person(int afm, String name, String address, String department, int phone, String fathername, String mothername, String idCardNumber, String job, String surname, Long phone1, Date birthDate) {
 		super(afm, name, address, department, phone);
 		this.fathername = fathername;
 		this.mothername = mothername;
