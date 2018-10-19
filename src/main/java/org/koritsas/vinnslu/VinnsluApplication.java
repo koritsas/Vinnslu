@@ -26,6 +26,7 @@ import org.koritsas.vinnslu.ws.dto.TopoDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.data.jpa.provider.HibernateUtils;
@@ -47,6 +48,7 @@ public class VinnsluApplication {
     public static void main(String[] args) {
 
 	ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
+
 
 
 /*

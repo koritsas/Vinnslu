@@ -13,11 +13,11 @@ import java.util.List;
 @Repository
 public interface AuthorityRepository extends JpaRepository<Authority,Long> {
 
-    Company findByName(final String name);
-    Company findByAfm(final Long afm);
-    Company findByPhone(final int phone);
-    List<Company> findByAddress(final String address);
-    List<Company> findByAddressLike(final String address);
-    List<Company> findByAddressIsNull();
+    Authority findByName(final String name);
+    Authority findByAfm(final int afm);
+    Authority findByPhone(final int phone);
+    List<Authority> findByAddress(final String address);
+    List<Authority> findByAddressLike(final String address);
+    List<Authority> findByAddressIsNull();
 
 }

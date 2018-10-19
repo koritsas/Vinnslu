@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.common.Opinions;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -32,6 +33,10 @@ public class StandardEnvironmentalCommitments implements Serializable{
     private String protocol;
 
     private String ada;
+
+    @ManyToOne
+    @JoinColumn(name = "opinions_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "PTD_OPINIONS_ID_FK"))
+    private Opinions opinions;
 
     @ManyToOne
     @JoinColumn(name = "topo_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "PPD_TOPO_ID_FK"))
@@ -90,29 +95,40 @@ public class StandardEnvironmentalCommitments implements Serializable{
         this.document = document;
     }
 
+    public Opinions getOpinions() {
+        return opinions;
+    }
+
+    public void setOpinions(Opinions opinions) {
+        this.opinions = opinions;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof StandardEnvironmentalCommitments)) return false;
         StandardEnvironmentalCommitments that = (StandardEnvironmentalCommitments) o;
         return active == that.active &&
                 Objects.equals(protocol, that.protocol) &&
                 Objects.equals(ada, that.ada) &&
+                Objects.equals(opinions, that.opinions) &&
                 Objects.equals(topo, that.topo) &&
                 Objects.equals(document, that.document);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(active, protocol, ada, topo, document);
+        return Objects.hash(active, protocol, ada, opinions, topo, document);
     }
 
     @Override
     public String toString() {
         return "StandardEnvironmentalCommitments{" +
-                "active=" + active +
+                "id=" + id +
+                ", active=" + active +
                 ", protocol='" + protocol + '\'' +
                 ", ada='" + ada + '\'' +
+                ", opinions=" + opinions +
                 ", topo=" + topo +
                 ", document=" + document +
                 '}';
