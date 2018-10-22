@@ -25,17 +25,17 @@ public class GeoJsonSerializer extends StdSerializer<Topo> {
         gen.writeStartObject();
 
 
-            // "type":"Feature"
-            gen.writeStringField("type","Feature");
+        // "type":"Feature"
+        gen.writeStringField("type", "Feature");
 
         gen.writeFieldName("geometry");
         gen.writeStartObject();
-        gen.writeStringField("type",value.getPolygon().getGeometryType());
+        gen.writeStringField("type", value.getPolygon().getGeometryType());
         gen.writeFieldName("coordinates");
         gen.writeStartArray();
         gen.writeStartArray();
-        for (Coordinate coordinate:value.getPolygon().getCoordinates()){
-            gen.writeArray(new double[]{coordinate.x, coordinate.y},0,2);
+        for (Coordinate coordinate : value.getPolygon().getCoordinates()) {
+            gen.writeArray(new double[]{coordinate.x, coordinate.y}, 0, 2);
         }
         gen.writeEndArray();
         gen.writeEndArray();
@@ -43,19 +43,15 @@ public class GeoJsonSerializer extends StdSerializer<Topo> {
         //properties
         gen.writeFieldName("properties");
         gen.writeStartObject();
-        gen.writeNumberField("id",value.getId());
-        gen.writeNumberField("abl",value.getAbl());
-        gen.writeStringField("community",value.getCommunity());
-        gen.writeStringField("location",value.getLocation());
-        gen.writeStringField("prefecture",value.getPrefecture());
-        gen.writeBooleanField("forest",value.isForest());
-        gen.writeObjectField("topoOwner",value.getTopoOwner());
-        gen.writeObjectField("owner",value.getAreaOwner());
+        gen.writeNumberField("id", value.getId());
+        gen.writeNumberField("abl", value.getAbl());
+        gen.writeStringField("community", value.getCommunity());
+        gen.writeStringField("location", value.getLocation());
+        gen.writeStringField("prefecture", value.getPrefecture());
+        gen.writeBooleanField("forest", value.isForest());
+        gen.writeObjectField("topoOwner", value.getTopoOwner());
+        gen.writeObjectField("owner", value.getAreaOwner());
         gen.writeEndObject();
-
-
-
-
 
 
         //}
