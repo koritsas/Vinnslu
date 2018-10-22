@@ -1,43 +1,11 @@
 package org.koritsas.vinnslu;
 
-import com.github.kuros.random.jpa.Database;
-import com.github.kuros.random.jpa.JPAContext;
-import com.github.kuros.random.jpa.JPAContextFactory;
-import com.github.kuros.random.jpa.types.CreationPlan;
-import com.github.kuros.random.jpa.types.Entity;
-import com.vividsolutions.jts.geom.*;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.ejb.HibernateEntityManagerFactory;
-import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
-import org.koritsas.vinnslu.models.common.Authority;
-import org.koritsas.vinnslu.models.common.Company;
-import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Person;
-import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.models.types.Fuel;
-import org.koritsas.vinnslu.models.types.VehicleType;
-import org.koritsas.vinnslu.models.vehicles.Machine;
-import org.koritsas.vinnslu.models.vehicles.Vehicle;
-import org.koritsas.vinnslu.utils.FakeData;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.ws.dto.CompanyDto;
-import org.koritsas.vinnslu.ws.dto.TopoDto;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ConfigurableApplicationContext;
-import org.springframework.data.jpa.provider.HibernateUtils;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
-import java.util.Date;
-import java.util.Vector;
 
 @SpringBootApplication
 public class VinnsluApplication {
@@ -171,7 +139,7 @@ public class VinnsluApplication {
 
 
 
-	TopoDto dto =mm.map(topo,TopoDto.class);
+	TopoDTO dto =mm.map(topo,TopoDTO.class);
 
 	//Topo t = mm.map(dto,Topo.class);
 

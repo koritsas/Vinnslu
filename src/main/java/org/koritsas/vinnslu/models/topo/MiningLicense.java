@@ -7,12 +7,13 @@ import org.koritsas.vinnslu.models.common.Person;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "Mining_License")
-public class MiningLicense {
+public class MiningLicense implements Serializable {
 
     @Id
     @GenericGenerator(
@@ -189,7 +190,7 @@ public class MiningLicense {
 
     // Embeddable class for Contract
     @Embeddable
-    private class Contract{
+    public class Contract{
 
         private Date date;
 

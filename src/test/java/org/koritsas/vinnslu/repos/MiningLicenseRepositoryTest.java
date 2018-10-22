@@ -36,7 +36,7 @@ public class MiningLicenseRepositoryTest {
     TestEntityManager entityManager;
 
     @Autowired
-    MiningLicenseRepository MiningLicenseRepository;
+    org.koritsas.vinnslu.repos.topo.MiningLicenseRepository MiningLicenseRepository;
 
     @Before
     public void setUp() {

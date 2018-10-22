@@ -9,12 +9,13 @@ import org.koritsas.vinnslu.models.common.Person;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "technical_study")
-public class TechnicalStudy {
+public class TechnicalStudy implements Serializable {
 
     @Id
     @GenericGenerator(
