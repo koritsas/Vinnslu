@@ -36,10 +36,10 @@ public class ExplosivesLicense implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date renewalDate;
 
-    @Column(precision = 2,columnDefinition = "int default 0")
+    @Column(precision = 2,columnDefinition = "double default 0.00")
     private double anfo;
 
-    @Column(precision = 2,columnDefinition = "int default 0")
+    @Column(precision = 2,columnDefinition = "double default 0.00")
     private double gelignite;
 
     @Column(columnDefinition = "int default 0")

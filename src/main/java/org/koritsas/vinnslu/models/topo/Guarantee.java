@@ -27,6 +27,9 @@ public class Guarantee implements Serializable {
     @GeneratedValue(generator = "guar_generator")
     private Long id;
 
+    @Enumerated(EnumType.STRING)
+    private GenerationType guaranteeType;
+
 
     @ManyToOne
     @JoinColumn(name = "organization_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "GUARANTY_AUTH_ID"))

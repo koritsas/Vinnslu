@@ -4,7 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Parameter;
 
 import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Opinions;
+import org.koritsas.vinnslu.models.common.Opinion;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
@@ -35,13 +35,24 @@ public class StandardEnvironmentalCommitments implements Serializable{
     private String ada;
 
     @ManyToOne
-    @JoinColumn(name = "opinions_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "PTD_OPINIONS_ID_FK"))
-    private Opinions opinions;
+    @JoinColumn(name = "city_planning_opinion_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "CP_PPD_OPINION_ID_FK"))
+    private Opinion cityPlanningOpinion;
+
+    @ManyToOne
+    @JoinColumn(name = "forestry_opinion_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FORESTRY_PPD_OPINION_ID_FK"))
+    private Opinion forestryOpinion;
+
+    @ManyToOne
+    @JoinColumn(name = "archeology_opinion_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "ARCHEOLOGY_PPD_OPINION_ID_FK"))
+    private Opinion archeologyOpinion;
+
+    @ManyToOne
+    @JoinColumn(name = "speleology_opinion_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "SPELEOLOGY_PPD_OPINION_ID_FK"))
+    private Opinion speleologyOpinion;
 
     @ManyToOne
     @JoinColumn(name = "topo_id",referencedColumnName = "id",foreignKey = @ForeignKey(name = "PPD_TOPO_ID_FK"))
     private Topo topo;
-
 
     @Lazy
     @ManyToOne
@@ -53,6 +64,38 @@ public class StandardEnvironmentalCommitments implements Serializable{
 
     public Long getId() {
         return id;
+    }
+
+    public Opinion getCityPlanningOpinion() {
+        return cityPlanningOpinion;
+    }
+
+    public void setCityPlanningOpinion(Opinion cityPlanningOpinion) {
+        this.cityPlanningOpinion = cityPlanningOpinion;
+    }
+
+    public Opinion getForestryOpinion() {
+        return forestryOpinion;
+    }
+
+    public void setForestryOpinion(Opinion forestryOpinion) {
+        this.forestryOpinion = forestryOpinion;
+    }
+
+    public Opinion getArcheologyOpinion() {
+        return archeologyOpinion;
+    }
+
+    public void setArcheologyOpinion(Opinion archeologyOpinion) {
+        this.archeologyOpinion = archeologyOpinion;
+    }
+
+    public Opinion getSpeleologyOpinion() {
+        return speleologyOpinion;
+    }
+
+    public void setSpeleologyOpinion(Opinion speleologyOpinion) {
+        this.speleologyOpinion = speleologyOpinion;
     }
 
     public boolean isActive() {
@@ -95,14 +138,6 @@ public class StandardEnvironmentalCommitments implements Serializable{
         this.document = document;
     }
 
-    public Opinions getOpinions() {
-        return opinions;
-    }
-
-    public void setOpinions(Opinions opinions) {
-        this.opinions = opinions;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -111,24 +146,29 @@ public class StandardEnvironmentalCommitments implements Serializable{
         return active == that.active &&
                 Objects.equals(protocol, that.protocol) &&
                 Objects.equals(ada, that.ada) &&
-                Objects.equals(opinions, that.opinions) &&
+                Objects.equals(cityPlanningOpinion, that.cityPlanningOpinion) &&
+                Objects.equals(forestryOpinion, that.forestryOpinion) &&
+                Objects.equals(archeologyOpinion, that.archeologyOpinion) &&
+                Objects.equals(speleologyOpinion, that.speleologyOpinion) &&
                 Objects.equals(topo, that.topo) &&
                 Objects.equals(document, that.document);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(active, protocol, ada, opinions, topo, document);
+        return Objects.hash(active, protocol, ada, cityPlanningOpinion, forestryOpinion, archeologyOpinion, speleologyOpinion, topo, document);
     }
 
     @Override
     public String toString() {
         return "StandardEnvironmentalCommitments{" +
-                "id=" + id +
-                ", active=" + active +
+                "active=" + active +
                 ", protocol='" + protocol + '\'' +
                 ", ada='" + ada + '\'' +
-                ", opinions=" + opinions +
+                ", cityPlanningOpinion=" + cityPlanningOpinion +
+                ", forestryOpinion=" + forestryOpinion +
+                ", archeologyOpinion=" + archeologyOpinion +
+                ", speleologyOpinion=" + speleologyOpinion +
                 ", topo=" + topo +
                 ", document=" + document +
                 '}';

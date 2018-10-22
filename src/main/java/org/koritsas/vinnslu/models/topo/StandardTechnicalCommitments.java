@@ -1,11 +1,10 @@
 package org.koritsas.vinnslu.models.topo;
 
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.ManyToAny;
 import org.hibernate.annotations.Parameter;
 
 import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Opinions;
+import org.koritsas.vinnslu.models.common.Opinion;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -41,7 +40,7 @@ public class StandardTechnicalCommitments implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "opinions_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "PTD_OPINIONS_ID_FK"))
-    private Opinions opinions;
+    private Opinion miningInspectionOpinion;
 
 
     @ManyToOne
@@ -51,12 +50,12 @@ public class StandardTechnicalCommitments implements Serializable {
     public StandardTechnicalCommitments() {
     }
 
-    public StandardTechnicalCommitments(boolean active, String protocol, String ada, Topo topo, Opinions opinions, Document document) {
+    public StandardTechnicalCommitments(boolean active, String protocol, String ada, Topo topo, Opinion miningInspectionOpinion, Document document) {
         this.active = active;
         this.protocol = protocol;
         this.ada = ada;
         this.topo = topo;
-        this.opinions = opinions;
+        this.miningInspectionOpinion = miningInspectionOpinion;
         this.document = document;
     }
 
@@ -69,13 +68,13 @@ public class StandardTechnicalCommitments implements Serializable {
                 Objects.equals(protocol, that.protocol) &&
                 Objects.equals(ada, that.ada) &&
                 Objects.equals(topo, that.topo) &&
-                Objects.equals(opinions, that.opinions) &&
+                Objects.equals(miningInspectionOpinion, that.miningInspectionOpinion) &&
                 Objects.equals(document, that.document);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(active, protocol, ada, topo, opinions, document);
+        return Objects.hash(active, protocol, ada, topo, miningInspectionOpinion, document);
     }
 
     @Override
@@ -85,7 +84,7 @@ public class StandardTechnicalCommitments implements Serializable {
                 ", protocol='" + protocol + '\'' +
                 ", ada='" + ada + '\'' +
                 ", topo=" + topo +
-                ", opinions=" + opinions +
+                ", miningInspectionOpinion=" + miningInspectionOpinion +
                 ", document=" + document +
                 '}';
     }
