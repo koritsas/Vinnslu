@@ -7,7 +7,7 @@ import com.vividsolutions.jts.geom.Coordinate;
 import org.koritsas.vinnslu.models.topo.Topo;
 
 import java.io.IOException;
-/** This class is used for serialization of topo object to GeoJSON**/
+/** This class is used for serialization of topo object to GeoJSON ggggg**/
 public class GeoJsonSerializer extends StdSerializer<Topo> {
 
     public GeoJsonSerializer() {
