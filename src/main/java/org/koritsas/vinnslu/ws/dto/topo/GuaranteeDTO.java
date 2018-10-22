@@ -4,8 +4,7 @@ import org.koritsas.vinnslu.models.common.Authority;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.topo.Guarantee;
-import org.koritsas.vinnslu.utils.AbstractDto;
-import org.springframework.context.annotation.Lazy;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 import javax.persistence.*;
 

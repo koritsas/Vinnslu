@@ -4,7 +4,7 @@ import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.models.types.VehicleType;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 import java.util.Date;
 

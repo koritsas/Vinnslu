@@ -4,11 +4,7 @@ import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.common.Opinion;
 import org.koritsas.vinnslu.models.topo.StandardTechnicalCommitments;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
-
-import javax.persistence.ForeignKey;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 public class StandardTechnicalCommitmentsDTO implements AbstractDto<Long> {
 

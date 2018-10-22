@@ -5,10 +5,8 @@ import org.koritsas.vinnslu.models.topo.ResearchLicense;
 import org.koritsas.vinnslu.models.topo.StandardEnvironmentalCommitments;
 import org.koritsas.vinnslu.models.topo.StandardTechnicalCommitments;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
-import org.springframework.context.annotation.Lazy;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
-import javax.persistence.*;
 import java.util.Date;
 
 public class ResearchLicenseDTO implements AbstractDto<Long> {

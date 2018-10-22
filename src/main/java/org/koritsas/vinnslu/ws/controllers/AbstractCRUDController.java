@@ -1,7 +1,6 @@
 package org.koritsas.vinnslu.ws.controllers;
 
-import org.koritsas.vinnslu.utils.AbstractDto;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 import org.koritsas.vinnslu.ws.services.AbstractCRUDService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -4,7 +4,7 @@ import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.common.Opinion;
 import org.koritsas.vinnslu.models.topo.EnvironmentalImpactStudy;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 import java.util.Date;
 

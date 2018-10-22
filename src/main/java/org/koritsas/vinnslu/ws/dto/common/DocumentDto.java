@@ -1,7 +1,7 @@
 package org.koritsas.vinnslu.ws.dto.common;
 
 import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 import java.io.File;
 import java.util.Date;

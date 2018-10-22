@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.utils;
+package org.koritsas.vinnslu.ws.dto;
 
 public interface AbstractDto<PK> {
 

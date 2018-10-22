@@ -2,7 +2,7 @@ package org.koritsas.vinnslu.ws.dto.topo;
 
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 public class TopoDTO implements AbstractDto<Long> {
 

@@ -1,13 +1,11 @@
 package org.koritsas.vinnslu.ws.dto.topo;
 
-import org.hibernate.annotations.NaturalId;
 import org.koritsas.vinnslu.models.topo.Guarantee;
 import org.koritsas.vinnslu.models.topo.MiningLicense;
 import org.koritsas.vinnslu.models.topo.TechnicalStudy;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
-import javax.persistence.*;
 import java.util.Date;
 
 public class MiningLicenseDTO implements AbstractDto<Long> {

@@ -5,9 +5,8 @@ import org.koritsas.vinnslu.models.common.Document;
 import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.models.topo.ExplosivesLicense;
 import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.utils.AbstractDto;
+import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
-import javax.persistence.*;
 import java.util.Date;
 
 public class EXplosivesLicenseDTO implements AbstractDto<Long> {
