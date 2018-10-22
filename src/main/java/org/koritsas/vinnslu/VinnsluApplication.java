@@ -2,6 +2,7 @@ package org.koritsas.vinnslu;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 
 import javax.persistence.EntityManager;
