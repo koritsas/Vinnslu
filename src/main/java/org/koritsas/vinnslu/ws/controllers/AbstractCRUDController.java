@@ -29,18 +29,18 @@ public class AbstractCRUDController<S extends AbstractCRUDService, E extends Ser
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<E> findCompanyById(@PathVariable PK id) {
+    public ResponseEntity<E> find(@PathVariable PK id) {
 	return ResponseEntity.ok((E) service.find(id));
     }
 
     @PostMapping()
-    public ResponseEntity<E> createCompany(@RequestBody DTO dto) {
+    public ResponseEntity<E> create(@RequestBody DTO dto) {
 	return ResponseEntity.status(201).body((E) service.create(mapper.map(dto, (Class<E>) dto.getClaZZ())));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> delete(@PathVariable long companyId) {
-	return ResponseEntity.ok("Deleted: " + service.delete(companyId));
+    public ResponseEntity<String> delete(@PathVariable Long id) {
+	return ResponseEntity.ok("Deleted: " + service.delete(id));
     }
 
     @PutMapping()

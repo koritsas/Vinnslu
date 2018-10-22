@@ -19,7 +19,13 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
 
     @Transactional
     public E find(PK id) {
-	return (E) repo.getOne(id);
+
+        if (repo.findById(id).isPresent()){
+            return (E) repo.findById(id).get();
+        }else{
+            throw new EntityNotFoundException("Entity with id: " + id + " not found");
+        }
+
     }
 
     @Transactional(readOnly = true)
@@ -42,9 +48,10 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
 	    throw new EntityNotFoundException("Entity with id: " + id + " not found");
 	}
 
-	E entity = (E) repo.getOne(id);
+	E entity = (E) repo.findById(id).get();
 
-	repo.delete(id);
+
+	repo.delete(entity);
 
 	return entity;
 

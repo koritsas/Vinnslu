@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/common/companies")
-@CrossOrigin(origins = "http://localhost:4200")
 public class CompanyController  extends AbstractCRUDController<CompanyService,Company,Long,CompanyDto> {
     public CompanyController(CompanyService service) {
         super(service);
