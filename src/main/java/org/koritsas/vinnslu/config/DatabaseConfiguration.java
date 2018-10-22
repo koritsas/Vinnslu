@@ -1,29 +1,15 @@
 package org.koritsas.vinnslu.config;
 
-import org.hibernate.ejb.HibernateEntityManagerFactory;
-import org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.orm.hibernate5.HibernateTransactionManager;
-import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
-import org.springframework.orm.jpa.EntityManagerFactoryUtils;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.sql.DataSource;
-
-import java.util.Properties;
 
 @Configuration
 @EnableTransactionManagement
@@ -45,8 +31,8 @@ public class DatabaseConfiguration {
 
 
     @Bean
-	public GeometryModelMapper geometryModelMapper(){
-    	return new GeometryModelMapper();
+	public ModelMapper geometryModelMapper(){
+    	return new ModelMapper();
 	}
 /*
     @Autowired

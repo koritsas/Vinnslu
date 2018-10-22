@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.repos.common.CompanyRepository;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.controllers.common.CompanyController;
 import org.koritsas.vinnslu.ws.services.common.CompanyService;
 import org.mockito.MockitoAnnotations;

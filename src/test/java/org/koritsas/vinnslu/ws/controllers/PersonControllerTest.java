@@ -6,7 +6,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.repos.common.PersonRepository;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.controllers.common.PersonController;
 import org.koritsas.vinnslu.ws.services.common.PersonService;
 import org.mockito.MockitoAnnotations;

@@ -11,7 +11,6 @@ import org.junit.runner.RunWith;
 import org.koritsas.vinnslu.models.common.Person;
 import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.repos.topo.TopoRepository;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.controllers.topo.TopoController;
 import org.koritsas.vinnslu.ws.services.topo.TopoService;
 import org.mockito.Mock;
