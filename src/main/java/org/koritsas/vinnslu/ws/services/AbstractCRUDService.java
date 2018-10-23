@@ -1,8 +1,10 @@
 package org.koritsas.vinnslu.ws.services;
 
+import org.koritsas.vinnslu.exceptions.EntityAlreadyExistsException;
 import org.koritsas.vinnslu.exceptions.EntityNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

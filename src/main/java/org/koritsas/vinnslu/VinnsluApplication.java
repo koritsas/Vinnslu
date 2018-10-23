@@ -1,5 +1,6 @@
 package org.koritsas.vinnslu;
 
+import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;

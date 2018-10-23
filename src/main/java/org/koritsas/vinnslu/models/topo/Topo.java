@@ -9,16 +9,19 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Company;
+import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
 import org.koritsas.vinnslu.utils.GeoJsonSerializer;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 @Entity
 @Table(name="topos")
 @JsonSerialize(using = GeoJsonSerializer.class)
+@JsonDeserialize(using = GeoJsonDesirializer.class)
 public class Topo implements Serializable{
 
     @Id
@@ -145,5 +148,42 @@ public class Topo implements Serializable{
 
     public void setAreaOwner(Company areaOwner) {
         this.areaOwner = areaOwner;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Topo)) return false;
+        Topo topo = (Topo) o;
+        return Double.compare(topo.area, area) == 0 &&
+                forest == topo.forest &&
+                Objects.equals(abl, topo.abl) &&
+                Objects.equals(polygon, topo.polygon) &&
+                Objects.equals(community, topo.community) &&
+                Objects.equals(location, topo.location) &&
+                Objects.equals(prefecture, topo.prefecture) &&
+                Objects.equals(topoOwner, topo.topoOwner) &&
+                Objects.equals(areaOwner, topo.areaOwner);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(abl, area, polygon, community, location, prefecture, forest, topoOwner, areaOwner);
+    }
+
+    @Override
+    public String toString() {
+        return "Topo{" +
+                "id=" + id +
+                ", abl=" + abl +
+                ", area=" + area +
+                ", polygon=" + polygon +
+                ", community='" + community + '\'' +
+                ", location='" + location + '\'' +
+                ", prefecture='" + prefecture + '\'' +
+                ", forest=" + forest +
+                ", topoOwner=" + topoOwner +
+                ", areaOwner=" + areaOwner +
+                '}';
     }
 }

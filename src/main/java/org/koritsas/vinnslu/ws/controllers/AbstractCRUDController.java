@@ -1,5 +1,6 @@
 package org.koritsas.vinnslu.ws.controllers;
 
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.dto.AbstractDto;
 import org.koritsas.vinnslu.ws.services.AbstractCRUDService;
 import org.modelmapper.ModelMapper;
@@ -15,7 +16,7 @@ public class AbstractCRUDController<S extends AbstractCRUDService, E extends Ser
     private S service;
 
     @Autowired
-    private ModelMapper mapper;
+    private GeometryModelMapper mapper;
 
     public AbstractCRUDController(S service) {
 	this.service = service;

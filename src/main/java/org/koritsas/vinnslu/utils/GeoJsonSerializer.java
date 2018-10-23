@@ -18,6 +18,7 @@ public class GeoJsonSerializer extends StdSerializer<Topo> {
         super(t);
     }
 
+
     @Override
     public void serialize(Topo value, JsonGenerator gen, SerializerProvider provider) throws IOException {
 
