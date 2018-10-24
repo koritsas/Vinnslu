@@ -5,11 +5,11 @@ import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Authority;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.common.Document;
+import org.koritsas.vinnslu.models.types.GuaranteeType;
 import org.springframework.context.annotation.Lazy;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Currency;
 
 @Entity
 public class Guarantee implements Serializable {
@@ -28,8 +28,9 @@ public class Guarantee implements Serializable {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private GenerationType guaranteeType;
+    private GuaranteeType guaranteeType;
 
+    private String protocol;
 
     @ManyToOne
     @JoinColumn(name = "organization_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "GUARANTY_AUTH_ID"))

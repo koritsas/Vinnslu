@@ -16,7 +16,7 @@ public class MiningLicenseDTO implements AbstractDto<Long> {
 
     private boolean active;
 
-    private String ada;
+    private String protocol;
 
     private MiningLicense.Contract contract;
 
@@ -59,12 +59,12 @@ public class MiningLicenseDTO implements AbstractDto<Long> {
         this.active = active;
     }
 
-    public String getAda() {
-        return ada;
+    public String getProtocol() {
+        return protocol;
     }
 
-    public void setAda(String ada) {
-        this.ada = ada;
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public MiningLicense.Contract getContract() {

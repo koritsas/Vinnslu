@@ -21,7 +21,7 @@ import java.util.Objects;
 @Entity
 @Table(name="topos")
 @JsonSerialize(using = GeoJsonSerializer.class)
-@JsonDeserialize(using = GeoJsonDesirializer.class)
+
 public class Topo implements Serializable{
 
     @Id
@@ -47,6 +47,8 @@ public class Topo implements Serializable{
 
     @Column(nullable = false)
     private Polygon polygon;
+
+    private String municipality;
 
     @Column(name="community",nullable = false)
     private String community;
@@ -100,6 +102,14 @@ public class Topo implements Serializable{
 
     public void setPolygon(Polygon polygon) {
         this.polygon = polygon;
+    }
+
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
     }
 
     public String getCommunity() {
@@ -159,6 +169,7 @@ public class Topo implements Serializable{
                 forest == topo.forest &&
                 Objects.equals(abl, topo.abl) &&
                 Objects.equals(polygon, topo.polygon) &&
+                Objects.equals(municipality, topo.municipality) &&
                 Objects.equals(community, topo.community) &&
                 Objects.equals(location, topo.location) &&
                 Objects.equals(prefecture, topo.prefecture) &&
@@ -168,16 +179,16 @@ public class Topo implements Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(abl, area, polygon, community, location, prefecture, forest, topoOwner, areaOwner);
+        return Objects.hash(abl, area, polygon, municipality, community, location, prefecture, forest, topoOwner, areaOwner);
     }
 
     @Override
     public String toString() {
         return "Topo{" +
-                "id=" + id +
-                ", abl=" + abl +
+                "abl=" + abl +
                 ", area=" + area +
                 ", polygon=" + polygon +
+                ", municipality='" + municipality + '\'' +
                 ", community='" + community + '\'' +
                 ", location='" + location + '\'' +
                 ", prefecture='" + prefecture + '\'' +
