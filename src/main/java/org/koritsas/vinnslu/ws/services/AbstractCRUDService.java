@@ -1,5 +1,6 @@
 package org.koritsas.vinnslu.ws.services;
 
+import com.fasterxml.jackson.core.ObjectCodec;
 import org.koritsas.vinnslu.exceptions.EntityAlreadyExistsException;
 import org.koritsas.vinnslu.exceptions.EntityNotFoundException;
 import org.slf4j.Logger;
@@ -8,6 +9,7 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.validation.ConstraintViolationException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -35,12 +37,10 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
 	return repo.findAll();
     }
 
-    @Transactional(rollbackFor = EntityNotFoundException.class)
+    @Transactional(rollbackFor ={EntityNotFoundException.class, ConstraintViolationException.class})
     public E create(E entity) {
 
-	LOGGER.info("Creating entity: " + entity.toString());
-
-	return (E) repo.save(entity);
+        return (E) repo.save(entity);
     }
 
     @Transactional(rollbackFor = EntityNotFoundException.class)
@@ -59,7 +59,7 @@ public abstract class AbstractCRUDService<R extends JpaRepository, E extends Ser
 
     }
 
-    @Transactional(rollbackFor = EntityNotFoundException.class)
+    @Transactional(rollbackFor = {EntityNotFoundException.class, ConstraintViolationException.class})
     public E update(PK id, E entity) {
 
 	if (!repo.existsById(id)) {

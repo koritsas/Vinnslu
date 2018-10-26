@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Company implements Serializable{
 
     @Id
@@ -102,9 +102,8 @@ public class Company implements Serializable{
         if (this == o) return true;
         if (!(o instanceof Company)) return false;
         Company company = (Company) o;
-        return phone == company.phone &&
-                Objects.equals(id, company.id) &&
-                Objects.equals(afm, company.afm) &&
+        return afm == company.afm &&
+                phone == company.phone &&
                 Objects.equals(name, company.name) &&
                 Objects.equals(address, company.address) &&
                 Objects.equals(department, company.department);
@@ -112,7 +111,7 @@ public class Company implements Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, afm, name, address, department, phone);
+        return Objects.hash(afm, name, address, department, phone);
     }
 
     @Override

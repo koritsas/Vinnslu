@@ -5,14 +5,17 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
 import javafx.util.Builder;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.NaturalId;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
 import org.koritsas.vinnslu.utils.GeoJsonSerializer;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.Table;
 import javax.validation.constraints.Max;
 
 import java.io.Serializable;
@@ -63,16 +66,16 @@ public class Topo implements Serializable{
     private boolean forest=true;
 
     @ManyToOne
-    @JoinColumn(name="topo_owner_id",foreignKey = @ForeignKey(name="OWNER_FK"))
+    @JoinColumn(name="topo_owner_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="OWNER_FK"))
     private Company topoOwner;
 
     @ManyToOne
-    @JoinColumn(name="owner_id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
+    @JoinColumn(name="owner_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="TOPO_OWNER_FK"))
     private Company areaOwner;
 
     public Topo(){}
 
-    private Topo(Polygon polygon) {
+    public Topo(Polygon polygon) {
         this.polygon = polygon;
     }
 
