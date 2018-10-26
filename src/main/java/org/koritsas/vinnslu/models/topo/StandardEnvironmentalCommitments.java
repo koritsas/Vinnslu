@@ -12,7 +12,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Table(name = "standard_environmental_commitments")
 public class StandardEnvironmentalCommitments implements Serializable{
 
     @Id

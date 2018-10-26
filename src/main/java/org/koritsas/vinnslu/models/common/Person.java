@@ -16,7 +16,6 @@ public class Person extends Company{
 
     private String mothername;
 
-    @Column(name = "id_card_number")
     private String idCardNumber;
 
     private String job;
@@ -25,7 +24,6 @@ public class Person extends Company{
 
 
     @Temporal(TemporalType.DATE)
-    @Column(name="birth_date")
     private Date birthDate;
 
     public Person(){}

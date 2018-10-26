@@ -41,7 +41,6 @@ public class Topo implements Serializable{
     private Long id;
 
     @NaturalId
-    @Column(name="abl")
     private Long abl;
 
     @Max(value = 300000)
@@ -53,16 +52,15 @@ public class Topo implements Serializable{
 
     private String municipality;
 
-    @Column(name="community",nullable = false)
+    @Column(nullable = false)
     private String community;
 
-    @Column(name="location",nullable = false)
+    @Column(nullable = false)
     private String location;
 
-    @Column(name="prefecture",nullable = false)
+    @Column(nullable = false)
     private String prefecture;
 
-    @Column(name="forest")
     private boolean forest=true;
 
     @ManyToOne
