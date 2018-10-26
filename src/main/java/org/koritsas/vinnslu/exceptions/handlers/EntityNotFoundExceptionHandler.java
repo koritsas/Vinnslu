@@ -1,7 +1,5 @@
 package org.koritsas.vinnslu.exceptions.handlers;
 
-import org.hibernate.exception.ConstraintViolationException;
-import org.koritsas.vinnslu.exceptions.EntityAlreadyExistsException;
 import org.koritsas.vinnslu.exceptions.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -16,15 +14,6 @@ public class EntityNotFoundExceptionHandler extends ResponseEntityExceptionHandl
 
     @ExceptionHandler(value = {EntityNotFoundException.class})
     protected ResponseEntity<Object> handleEntityNotFound(
-            RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = ex.getMessage();
-
-        return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
-    }
-
-    @ExceptionHandler(value = {EntityAlreadyExistsException.class})
-    protected ResponseEntity<Object> handleE(
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();
 

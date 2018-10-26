@@ -50,6 +50,7 @@ public class Topo implements Serializable{
     @Column(nullable = false)
     private Polygon polygon;
 
+    @Column(nullable = false)
     private String municipality;
 
     @Column(nullable = false)
