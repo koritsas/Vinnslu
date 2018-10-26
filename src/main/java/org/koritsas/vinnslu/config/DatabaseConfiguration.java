@@ -1,5 +1,6 @@
 package org.koritsas.vinnslu.config;
 
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -31,8 +32,8 @@ public class DatabaseConfiguration {
 
 
     @Bean
-	public ModelMapper geometryModelMapper(){
-    	return new ModelMapper();
+	public GeometryModelMapper geometryModelMapper(){
+    	return new GeometryModelMapper();
 	}
 /*
     @Autowired

@@ -10,9 +10,9 @@ import java.util.List;
 
 public interface MiningLicenseRepository extends JpaRepository<MiningLicense, Long> {
 
-    MiningLicense findByAda(final String ada);
+    MiningLicense findByProtocol(final String protocol);
 
-    MiningLicense findByTopoId(final String id);
+    MiningLicense findByTopoId(final Long id);
 
     MiningLicense findByContract(final Contract contract);
 

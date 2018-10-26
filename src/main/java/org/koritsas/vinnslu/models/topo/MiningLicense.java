@@ -4,15 +4,14 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Person;
+import org.koritsas.vinnslu.models.types.Contract;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Mining_License")
 public class MiningLicense implements Serializable {
 
     @Id
@@ -34,12 +33,14 @@ public class MiningLicense implements Serializable {
 
     private boolean active;
 
-    private String ada;
-
+    private String protocol;
 
     @Embedded
     @Column(unique = true)
     private Contract contract;
+
+    @Temporal(TemporalType.DATE)
+    private Date startDate;
 
     @Temporal(TemporalType.DATE)
     private Date endDate;
@@ -64,11 +65,12 @@ public class MiningLicense implements Serializable {
     public MiningLicense() {
     }
 
-    public MiningLicense(Topo topo_abl, boolean active, String ada, Contract contract, Date endDate, TechnicalStudy technicalStudy, Topo topo, Guarantee environmentalGuarantee, Guarantee leaseGuarantee) {
+    public MiningLicense(Topo topo_abl, boolean active, String protocol, Contract contract, Date startDate, Date endDate, TechnicalStudy technicalStudy, Topo topo, Guarantee environmentalGuarantee, Guarantee leaseGuarantee) {
         this.topo_abl = topo_abl;
         this.active = active;
-        this.ada = ada;
+        this.protocol = protocol;
         this.contract = contract;
+        this.startDate = startDate;
         this.endDate = endDate;
         this.technicalStudy = technicalStudy;
         this.topo = topo;
@@ -96,12 +98,12 @@ public class MiningLicense implements Serializable {
         this.active = active;
     }
 
-    public String getAda() {
-        return ada;
+    public String getProtocol() {
+        return protocol;
     }
 
-    public void setAda(String ada) {
-        this.ada = ada;
+    public void setProtocol(String protocol) {
+        this.protocol = protocol;
     }
 
     public Contract getContract() {
@@ -110,6 +112,14 @@ public class MiningLicense implements Serializable {
 
     public void setContract(Contract contract) {
         this.contract = contract;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
     public Date getEndDate() {
@@ -159,8 +169,9 @@ public class MiningLicense implements Serializable {
         MiningLicense that = (MiningLicense) o;
         return active == that.active &&
                 Objects.equals(topo_abl, that.topo_abl) &&
-                Objects.equals(ada, that.ada) &&
+                Objects.equals(protocol, that.protocol) &&
                 Objects.equals(contract, that.contract) &&
+                Objects.equals(startDate, that.startDate) &&
                 Objects.equals(endDate, that.endDate) &&
                 Objects.equals(technicalStudy, that.technicalStudy) &&
                 Objects.equals(topo, that.topo) &&
@@ -169,12 +180,18 @@ public class MiningLicense implements Serializable {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hash(topo_abl, active, protocol, contract, startDate, endDate, technicalStudy, topo, environmentalGuarantee, leaseGuarantee);
+    }
+
+    @Override
     public String toString() {
         return "MiningLicense{" +
                 "topo_abl=" + topo_abl +
                 ", active=" + active +
-                ", ada='" + ada + '\'' +
+                ", protocol='" + protocol + '\'' +
                 ", contract=" + contract +
+                ", startDate=" + startDate +
                 ", endDate=" + endDate +
                 ", technicalStudy=" + technicalStudy +
                 ", topo=" + topo +
@@ -182,33 +199,5 @@ public class MiningLicense implements Serializable {
                 ", leaseGuarantee=" + leaseGuarantee +
                 '}';
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(topo_abl, active, ada, contract, endDate, technicalStudy, topo, environmentalGuarantee, leaseGuarantee);
-    }
-
-    // Embeddable class for Contract
-    @Embeddable
-    public class Contract{
-
-        private Date date;
-
-        private Person notary;
-
-        private int contractNumber;
-
-        public Contract() {
-        }
-
-        public Contract(Date date, Person notary, int contractNumber) {
-            this.date = date;
-            this.notary = notary;
-            this.contractNumber = contractNumber;
-        }
-
-
-    }
-
 
 }

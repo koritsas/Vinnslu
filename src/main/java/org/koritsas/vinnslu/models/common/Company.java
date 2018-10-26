@@ -10,7 +10,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Company implements Serializable{
 
     @Id
@@ -28,7 +28,7 @@ public class Company implements Serializable{
 
     @NaturalId
     @Column(unique = true)
-    private int afm;
+    private Long afm;
 
     @Column(nullable = false)
     private String name;
@@ -37,11 +37,11 @@ public class Company implements Serializable{
 
     private String department;
 
-    private int phone;
+    private Long phone;
 
     public Company() {}
 
-    public Company(int afm, String name, String address, String department, int phone) {
+    public Company(Long afm, String name, String address, String department, Long phone) {
         this.afm = afm;
         this.name = name;
         this.address = address;
@@ -57,11 +57,11 @@ public class Company implements Serializable{
         this.id = id;
     }
 
-    public int getAfm() {
+    public Long getAfm() {
         return afm;
     }
 
-    public void setAfm(int afm) {
+    public void setAfm(Long afm) {
         this.afm = afm;
     }
 
@@ -89,11 +89,11 @@ public class Company implements Serializable{
         this.department = department;
     }
 
-    public int getPhone() {
+    public Long getPhone() {
         return phone;
     }
 
-    public void setPhone(int phone) {
+    public void setPhone(Long phone) {
         this.phone = phone;
     }
 
@@ -102,9 +102,8 @@ public class Company implements Serializable{
         if (this == o) return true;
         if (!(o instanceof Company)) return false;
         Company company = (Company) o;
-        return phone == company.phone &&
-                Objects.equals(id, company.id) &&
-                Objects.equals(afm, company.afm) &&
+        return afm == company.afm &&
+                phone == company.phone &&
                 Objects.equals(name, company.name) &&
                 Objects.equals(address, company.address) &&
                 Objects.equals(department, company.department);
@@ -112,7 +111,7 @@ public class Company implements Serializable{
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, afm, name, address, department, phone);
+        return Objects.hash(afm, name, address, department, phone);
     }
 
     @Override
