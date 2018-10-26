@@ -9,10 +9,8 @@ import com.vividsolutions.jts.geom.Polygon;
 import com.vividsolutions.jts.geom.PrecisionModel;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.koritsas.vinnslu.models.common.Authority;
-import org.koritsas.vinnslu.models.common.Company;
-import org.koritsas.vinnslu.models.common.Document;
-import org.koritsas.vinnslu.models.common.Person;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.koritsas.vinnslu.models.common.*;
 import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
@@ -52,14 +50,33 @@ public class VinnsluApplication {
 
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
-       EntityManager entityManager= factory.createEntityManager();
+    EntityManager entityManager= factory.createEntityManager();
+
+
+
+        Session session = entityManager.unwrap( Session.class );
+        SessionImplementor sessionImplementor = entityManager.unwrap( SessionImplementor.class );
+
+        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap( SessionFactory.class );
+
+        session.save(new Opinion(true,null));
+
+        sessionFactory.openSession();
+        session.beginTransaction();
+
+        session.save(new Opinion(true,null));
+
+
+        session.getTransaction().commit();
+
 
 
 /*
-        JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, entityManager)
-                .generate();
-*/
 
+        JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, session)
+                .generate();
+
+*/
 
 /*
 

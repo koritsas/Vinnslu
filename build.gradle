@@ -45,10 +45,11 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-envers'
 	
     compile 'com.github.kuros:random-jpa:+'
-    
-    
-    
-    runtime('org.postgresql:postgresql')
+
+
+	runtimeOnly('com.h2database:h2')
+
+	runtime('org.postgresql:postgresql')
 	
 	
 	
