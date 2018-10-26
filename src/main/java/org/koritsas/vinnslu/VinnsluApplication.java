@@ -17,6 +17,7 @@ import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.models.types.Fuel;
 import org.koritsas.vinnslu.models.types.VehicleType;
 import org.koritsas.vinnslu.models.vehicles.Vehicle;
+import org.koritsas.vinnslu.utils.FakeData;
 import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -45,8 +46,10 @@ public class VinnsluApplication {
 
         System.out.println("----------------------------------BEANS----------------------------------------");
     for(String name:names){
-        System.out.println(name);
+      //  System.out.println(name);
     }
+
+
 
 /*
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");

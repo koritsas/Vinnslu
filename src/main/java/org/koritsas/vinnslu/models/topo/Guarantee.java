@@ -40,6 +40,10 @@ public class Guarantee implements Serializable {
     @JoinColumn(name = "company_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "GUARANTY_COMPANY_ID"))
     private Company company;
 
+    @ManyToOne
+    @JoinColumn(name = "topo_abl", referencedColumnName = "abl",foreignKey = @ForeignKey(foreignKeyDefinition = "TOPO_ABL_GUAR_FK"))
+    private Topo topo;
+
     @Column(precision = 2)
     private double amount;
 

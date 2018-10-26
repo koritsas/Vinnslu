@@ -4,6 +4,7 @@ import org.koritsas.vinnslu.models.topo.Guarantee;
 import org.koritsas.vinnslu.models.topo.MiningLicense;
 import org.koritsas.vinnslu.models.topo.TechnicalStudy;
 import org.koritsas.vinnslu.models.topo.Topo;
+import org.koritsas.vinnslu.models.types.Contract;
 import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
 import java.util.Date;
@@ -18,7 +19,7 @@ public class MiningLicenseDTO implements AbstractDto<Long> {
 
     private String protocol;
 
-    private MiningLicense.Contract contract;
+    private Contract contract;
 
     private Date endDate;
 
@@ -67,11 +68,11 @@ public class MiningLicenseDTO implements AbstractDto<Long> {
         this.protocol = protocol;
     }
 
-    public MiningLicense.Contract getContract() {
+    public Contract getContract() {
         return contract;
     }
 
-    public void setContract(MiningLicense.Contract contract) {
+    public void setContract(Contract contract) {
         this.contract = contract;
     }
 

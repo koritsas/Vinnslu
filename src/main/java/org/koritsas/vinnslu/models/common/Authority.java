@@ -8,7 +8,7 @@ public class Authority extends Company{
     public Authority() {
     }
 
-    public Authority(int afm, String name, String address, String department, int phone) {
+    public Authority(Long afm, String name, String address, String department, Long phone) {
         super(afm, name, address, department, phone);
     }
 }

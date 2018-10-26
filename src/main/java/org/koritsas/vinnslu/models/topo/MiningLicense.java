@@ -4,6 +4,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Person;
+import org.koritsas.vinnslu.models.types.Contract;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -11,7 +12,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "Mining_License")
 public class MiningLicense implements Serializable {
 
     @Id
@@ -199,28 +199,5 @@ public class MiningLicense implements Serializable {
                 ", leaseGuarantee=" + leaseGuarantee +
                 '}';
     }
-
-    // Embeddable class for Contract
-    @Embeddable
-    public class Contract{
-
-        private Date date;
-
-        private Person notary;
-
-        private int contractNumber;
-
-        public Contract() {
-        }
-
-        public Contract(Date date, Person notary, int contractNumber) {
-            this.date = date;
-            this.notary = notary;
-            this.contractNumber = contractNumber;
-        }
-
-
-    }
-
 
 }

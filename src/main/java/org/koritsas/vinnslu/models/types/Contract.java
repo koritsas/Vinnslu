@@ -10,10 +10,11 @@ import java.util.Date;
 @Embeddable
 public class Contract implements Serializable {
 
-    @Column(name = "contract_id")
+
     private Long contractId;
 
-    @Column(name = "start_date")
+    private String contractProtocol;
+
     @Temporal(TemporalType.DATE)
     private Date contractDate;
 
@@ -29,27 +30,10 @@ public class Contract implements Serializable {
 
     private Contract() {}
 
-    public Long getContractId() {
-	return contractId;
-    }
-
-    public void setContractId(Long contractId) {
-	this.contractId = contractId;
-    }
-
-    public Date getContractDate() {
-	return contractDate;
-    }
-
-    public void setContractDate(Date contractDate) {
-	this.contractDate = contractDate;
-    }
-
-    public Person getNotary() {
-	return notary;
-    }
-
-    public void setNotary(Person notary) {
-	this.notary = notary;
+    public Contract(Long contractId, String contractProtocol, Date contractDate, Person notary) {
+        this.contractId = contractId;
+        this.contractProtocol = contractProtocol;
+        this.contractDate = contractDate;
+        this.notary = notary;
     }
 }
