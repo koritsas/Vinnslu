@@ -1,6 +1,6 @@
 package org.koritsas.vinnslu.exceptions.handlers;
 
-import org.koritsas.vinnslu.exceptions.EntityNotFoundException;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -9,16 +9,21 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-@ControllerAdvice
-public class EntityNotFoundExceptionHandler extends ResponseEntityExceptionHandler {
+import java.util.ArrayList;
+import java.util.List;
 
-    @ExceptionHandler(value = {EntityNotFoundException.class})
-    protected ResponseEntity<Object> handleEntityNotFound(
-            RuntimeException ex, WebRequest request) {
-        String bodyOfResponse = ex.getMessage();
+@ControllerAdvice
+public class ConstraintViolationExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler({ ConstraintViolationException.class })
+    public ResponseEntity<Object> handleConstraintViolation(
+            ConstraintViolationException ex, WebRequest request) {
+
+        String bodyOfResponse = "Unable to commit transaction due to constraint violation "+ex.getConstraintName()+""+ex.getCause();
+
+
 
         return handleExceptionInternal(ex, bodyOfResponse,
                 new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
-
 }

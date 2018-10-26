@@ -11,8 +11,6 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
-
-
 public class StandardTechnicalCommitments implements Serializable {
 
     @Id

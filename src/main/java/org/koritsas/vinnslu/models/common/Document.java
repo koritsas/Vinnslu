@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name="documents",uniqueConstraints = {@UniqueConstraint(name = "DOCUMENT_SINGULARITY",columnNames = {"sender_id","protocol","date","file"})})
+@Table(uniqueConstraints = {@UniqueConstraint(name = "DOCUMENT_SINGULARITY",columnNames = {"sender_id","protocol","date","file","name"})})
 public class Document implements Serializable {
 
     @Id
@@ -27,6 +27,7 @@ public class Document implements Serializable {
     @GeneratedValue(generator = "document_generator")
     private Long id;
 
+    @Column(unique = true)
     private String name;
 
     @ManyToOne
@@ -45,6 +46,7 @@ public class Document implements Serializable {
     private String mimetype;
 
     @Lob
+    @Column(unique = true)
     private File file;
 
     public Document() {

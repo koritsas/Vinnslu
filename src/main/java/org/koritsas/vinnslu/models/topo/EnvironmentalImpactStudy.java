@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "environmental_impact_study")
 public class EnvironmentalImpactStudy implements Serializable {
     @Id
     @GenericGenerator(

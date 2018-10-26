@@ -13,7 +13,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "research_license")
 public class ResearchLicense implements Serializable {
 
     @Id

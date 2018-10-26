@@ -29,7 +29,7 @@ public class Vehicle implements Serializable {
     @GeneratedValue(generator = "vehicle_generator")
     private Long id;
 
-    @Column(precision = 17,name="frame_number")
+    @Column(precision = 17)
     @NaturalId
     private String frameNumber;
 
@@ -46,7 +46,6 @@ public class Vehicle implements Serializable {
     private Fuel fuel;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "exhaust_card_end")
     private Date exhaustCardEnd;
 
     @Temporal(TemporalType.DATE)

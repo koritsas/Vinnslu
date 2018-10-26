@@ -24,6 +24,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
 import org.springframework.data.jpa.provider.HibernateUtils;
+import org.springframework.orm.hibernate5.SessionFactoryUtils;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -34,9 +35,6 @@ import java.util.Date;
 
 @SpringBootApplication
 public class VinnsluApplication {
-
-
-    private EntityManager entityManager;
 
     public static void main(String[] args) {
 
@@ -51,11 +49,13 @@ public class VinnsluApplication {
 
 
 
-/*
+
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
        EntityManager entityManager= factory.createEntityManager();
 
+
+/*
         JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, entityManager)
                 .generate();
 */

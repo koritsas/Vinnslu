@@ -14,7 +14,6 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "technical_study")
 public class TechnicalStudy implements Serializable {
 
     @Id
