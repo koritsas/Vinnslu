@@ -1,44 +1,15 @@
 package org.koritsas.vinnslu;
 
-import com.fasterxml.jackson.core.Version;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.github.kuros.random.jpa.Database;
-import com.github.kuros.random.jpa.JPAContext;
-import com.github.kuros.random.jpa.JPAContextFactory;
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.Polygon;
-import com.vividsolutions.jts.geom.PrecisionModel;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.engine.spi.SessionImplementor;
-import org.koritsas.vinnslu.models.common.*;
-import org.koritsas.vinnslu.models.topo.Topo;
-import org.koritsas.vinnslu.models.types.Fuel;
-import org.koritsas.vinnslu.models.types.VehicleType;
-import org.koritsas.vinnslu.models.vehicles.Vehicle;
-import org.koritsas.vinnslu.utils.FakeData;
-import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
+import org.koritsas.vinnslu.utils.GeoJsonDeserializer;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
-import org.modelmapper.PropertyMap;
+import org.koritsas.vinnslu.ws.dto.topo.TopoDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.ApplicationContext;
-import org.springframework.data.jpa.provider.HibernateUtils;
-import org.springframework.orm.hibernate5.SessionFactoryUtils;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.PersistenceContext;
-import javax.validation.ConstraintViolationException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
 
 
 @SpringBootApplication
@@ -116,29 +87,29 @@ public class VinnsluApplication {
        // Topo t= mapper.map(topoGeoJson,Topo.class);
 
 
-/*
-        ObjectMapper objectMapper = new ObjectMapper();
-        SimpleModule simpleModule = new SimpleModule("GeoJsonDesirializer");
 
-        simpleModule.addDeserializer(Topo.class,new GeoJsonDesirializer());
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule simpleModule = new SimpleModule("GeoJsonDeserializer");
+
+        simpleModule.addDeserializer(TopoDTO.class,new GeoJsonDeserializer());
 
         objectMapper.registerModule(simpleModule);
 
         try {
-            Topo topo = objectMapper.readValue(topoGeoJson,Topo.class);
+            TopoDTO topo = objectMapper.readValue(topoGeoJson, TopoDTO.class);
 
             System.out.println(topo.toString());
         } catch (IOException e) {
             e.printStackTrace();
         }
-*/
+
 
 /*
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
     EntityManager entityManager= factory.createEntityManager();
 
-        GeoJsonDesirializer f = new GeoJsonDesirializer();
+        GeoJsonDeserializer f = new GeoJsonDeserializer();
 
 
 

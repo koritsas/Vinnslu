@@ -1,36 +1,35 @@
 package org.koritsas.vinnslu.utils;
 
 import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
 import org.koritsas.vinnslu.models.topo.Topo;
+import org.koritsas.vinnslu.ws.dto.topo.TopoDTO;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-public class GeoJsonDesirializer extends StdDeserializer<Topo> {
-    public GeoJsonDesirializer() {
+public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
+    public GeoJsonDeserializer() {
         this(null);
     }
 
-    public GeoJsonDesirializer(Class<Topo> t) {
+    public GeoJsonDeserializer(Class<Topo> t) {
         super(t);
     }
 
 
     @Override
-    public Topo deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
+    public TopoDTO deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
 
-        Topo topo = new Topo();
+        TopoDTO topo = new TopoDTO();
 
         ObjectCodec codec = parser.getCodec();
         JsonNode node = codec.readTree(parser);

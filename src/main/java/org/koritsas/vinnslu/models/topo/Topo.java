@@ -4,12 +4,10 @@ package org.koritsas.vinnslu.models.topo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
-import javafx.util.Builder;
 import org.hibernate.annotations.*;
-import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.models.common.Company;
-import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
+import org.koritsas.vinnslu.utils.GeoJsonDeserializer;
 import org.koritsas.vinnslu.utils.GeoJsonSerializer;
 
 import javax.persistence.*;
@@ -24,7 +22,7 @@ import java.util.Objects;
 @Entity
 @Table(name="topos")
 @JsonSerialize(using = GeoJsonSerializer.class)
-@JsonDeserialize(using = GeoJsonDesirializer.class)
+@JsonDeserialize(using = GeoJsonDeserializer.class)
 public class Topo implements Serializable{
 
     @Id
