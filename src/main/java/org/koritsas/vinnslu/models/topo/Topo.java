@@ -24,7 +24,7 @@ import java.util.Objects;
 @Entity
 @Table(name="topos")
 @JsonSerialize(using = GeoJsonSerializer.class)
-
+@JsonDeserialize(using = GeoJsonDesirializer.class)
 public class Topo implements Serializable{
 
     @Id

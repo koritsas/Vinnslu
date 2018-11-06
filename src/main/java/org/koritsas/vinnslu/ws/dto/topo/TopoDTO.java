@@ -1,18 +1,24 @@
 package org.koritsas.vinnslu.ws.dto.topo;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.vividsolutions.jts.geom.Polygon;
 import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.topo.Topo;
+import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
 import org.koritsas.vinnslu.ws.dto.AbstractDto;
 
+=
 public class TopoDTO implements AbstractDto<Long> {
 
     private Long id;
 
-    private int abl;
+    private Long abl;
 
-    private String polygon;
+    private Polygon polygon;
 
     private String community;
+
+    private String municipality;
 
     private String location;
 
@@ -41,13 +47,13 @@ public class TopoDTO implements AbstractDto<Long> {
         return forest;
     }
 
-    public int getAbl() { return abl; }
+    public Long getAbl() { return abl; }
 
-    public void setAbl(int abl) { this.abl = abl; }
+    public void setAbl(Long abl) { this.abl = abl; }
 
-    public String getPolygon() { return polygon; }
+    public Polygon getPolygon() { return polygon; }
 
-    public void setPolygon(String polygon) { this.polygon = polygon; }
+    public void setPolygon(Polygon polygon) { this.polygon = polygon; }
 
     public String getCommunity() { return community; }
 
@@ -69,6 +75,14 @@ public class TopoDTO implements AbstractDto<Long> {
 
     public void setTopoOwner(Company topoOwner) { this.topoOwner = topoOwner; }
 
+    public String getMunicipality() {
+        return municipality;
+    }
+
+    public void setMunicipality(String municipality) {
+        this.municipality = municipality;
+    }
+
     public Company getAreaOwner() { return areaOwner; }
 
     public void setAreaOwner(Company areaOwner) { this.areaOwner = areaOwner; }
@@ -76,14 +90,15 @@ public class TopoDTO implements AbstractDto<Long> {
     @Override
     public String toString() {
         return "TopoDTO{" +
-            "abl=" + abl +
-            ", polygon=" + polygon +
-            ", community='" + community + '\'' +
-            ", location='" + location + '\'' +
-            ", prefecture='" + prefecture + '\'' +
-            ", forest=" + forest +
-            ", topoOwner=" + topoOwner +
-            ", areaOwner=" + areaOwner +
-            '}';
+                "abl=" + abl +
+                ", polygon=" + polygon +
+                ", community='" + community + '\'' +
+                ", municipality='" + municipality + '\'' +
+                ", location='" + location + '\'' +
+                ", prefecture='" + prefecture + '\'' +
+                ", forest=" + forest +
+                ", topoOwner=" + topoOwner +
+                ", areaOwner=" + areaOwner +
+                '}';
     }
 }

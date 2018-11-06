@@ -1,5 +1,9 @@
 package org.koritsas.vinnslu;
 
+import com.fasterxml.jackson.core.Version;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.github.kuros.random.jpa.Database;
 import com.github.kuros.random.jpa.JPAContext;
 import com.github.kuros.random.jpa.JPAContextFactory;
@@ -17,6 +21,8 @@ import org.koritsas.vinnslu.models.types.VehicleType;
 import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.utils.FakeData;
 import org.koritsas.vinnslu.utils.GeoJsonDesirializer;
+import org.koritsas.vinnslu.utils.GeometryModelMapper;
+import org.modelmapper.PropertyMap;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
@@ -28,7 +34,11 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.PersistenceContext;
 import javax.validation.ConstraintViolationException;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -46,11 +56,89 @@ public class VinnsluApplication {
     }
 
 
+    String topoGeoJson = "{\n" +
+            "    \"type\": \"Feature\",\n" +
+            "    \"geometry\": {\n" +
+            "        \"type\": \"Polygon\",\n" +
+            "        \"coordinates\": [\n" +
+            "            [\n" +
+            "                [\n" +
+            "                    0,\n" +
+            "                    0\n" +
+            "                ],\n" +
+            "                [\n" +
+            "                    0,\n" +
+            "                    1\n" +
+            "                ],\n" +
+            "                [\n" +
+            "                    1,\n" +
+            "                    1\n" +
+            "                ],\n" +
+            "                [\n" +
+            "                    5,\n" +
+            "                    5\n" +
+            "                ],\n" +
+            "                [\n" +
+            "                    6,\n" +
+            "                    7\n" +
+            "                ],\n" +
+            "                [\n" +
+            "                    0,\n" +
+            "                    0\n" +
+            "                ]\n" +
+            "            ]\n" +
+            "        ]\n" +
+            "    },\n" +
+            "    \"properties\": {\n" +
+            "        \"id\": 1,\n" +
+            "        \"abl\": 10520520,\n" +
+            "        \"community\": \"SomeCommunity\",\n" +
+            "        \"location\": \"SomeLocation\",\n" +
+            "        \"prefecture\": \"SomePrefecture\",\n" +
+            "        \"municipality\": \"SomeMunicipality\",\n" +
+            "        \"forest\": false,\n" +
+            "        \"topoOwner\": null,\n" +
+            "        \"owner\": null\n" +
+            "    }\n" +
+            "}";
 
 
+
+
+
+
+        GeometryModelMapper mapper = new GeometryModelMapper();
+
+
+
+
+
+       // Topo t= mapper.map(topoGeoJson,Topo.class);
+
+
+/*
+        ObjectMapper objectMapper = new ObjectMapper();
+        SimpleModule simpleModule = new SimpleModule("GeoJsonDesirializer");
+
+        simpleModule.addDeserializer(Topo.class,new GeoJsonDesirializer());
+
+        objectMapper.registerModule(simpleModule);
+
+        try {
+            Topo topo = objectMapper.readValue(topoGeoJson,Topo.class);
+
+            System.out.println(topo.toString());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+
+/*
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
     EntityManager entityManager= factory.createEntityManager();
+
+        GeoJsonDesirializer f = new GeoJsonDesirializer();
 
 
 
@@ -71,7 +159,7 @@ public class VinnsluApplication {
 
         session.close();
 
-
+*/
 
 /*
 
