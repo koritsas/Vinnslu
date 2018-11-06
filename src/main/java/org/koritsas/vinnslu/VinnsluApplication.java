@@ -69,6 +69,8 @@ public class VinnsluApplication {
 
         session.getTransaction().commit();
 
+        session.close();
+
 
 
 /*
