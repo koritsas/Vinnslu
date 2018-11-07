@@ -9,9 +9,7 @@ import org.koritsas.vinnslu.models.vehicles.Vehicle;
 import org.koritsas.vinnslu.utils.GeometryModelMapper;
 import org.koritsas.vinnslu.ws.services.vehicles.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,30 +20,27 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-import static org.assertj.core.internal.bytebuddy.matcher.ElementMatchers.is;
+import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
-
 import static org.mockito.BDDMockito.given;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @RunWith(SpringRunner.class)
 @WebMvcTest(VehicleController.class)
 public class VehicleControllerTest {
 
     @Autowired
-    private MockMvc mvc;
+    MockMvc mvc;
 
     @MockBean
-    private GeometryModelMapper mapper;
+    VehicleService service;
 
     @MockBean
-    private VehicleService service;
-
-
-
+    GeometryModelMapper mapper;
 
 
     Vehicle vehicle1;
@@ -55,18 +50,26 @@ public class VehicleControllerTest {
     @Before
     public void setUp() {
 
-        vehicle1 = new Vehicle.Builder("XXX-111","fds45as21f153sd", VehicleType.CAR).build();
+        vehicle1 = new Vehicle.Builder("XXX-111","fdsa545g6fds", VehicleType.JEEP).build();
 
-        vehicle2 = new Vehicle.Builder("XXX-222","dfasdf545654asfd",VehicleType.JEEP).build();
+        vehicle2 = new Vehicle.Builder("XXX-222","hgfd6546dfgh",VehicleType.CAR).build();
+
+        vehicle1.setId(1L);
+
+        vehicle2.setId(2L);
 
         List<Vehicle> vehicles = new ArrayList<>();
 
         vehicles.add(vehicle1);
+
         vehicles.add(vehicle2);
+
 
         given(service.findAll()).willReturn(vehicles);
 
         given(service.find(1L)).willReturn(vehicle1);
+
+        given(service.find(2L)).willReturn(vehicle2);
 
 
 
@@ -74,13 +77,41 @@ public class VehicleControllerTest {
 
 
     @Test
-    public void givenVehicles_whenGetAllVehicles_returnJsonArray(){
-
+    public void givenVEhicles_whenGetAllVehicles_ReturnJsonArray(){
 
         try {
-            mvc.perform(get("/assets/vehicles").contentType(MediaType.APPLICATION_JSON_UTF8))
-                    .andExpect(status().isOk())
-                    .andExpect((ResultMatcher) jsonPath(("$[0].licensePlate"),is("Asfdf")));
+            mvc.perform(get("/assets/vehicles").contentType(MediaType.APPLICATION_JSON))
+                    //.andExpect((ResultMatcher) jsonPath("$[0].licensePlate",is(vehicle1.getLicensePlate())));
+                      .andExpect(status().isOk())
+                      .andExpect(jsonPath("$",hasSize(2)))
+                      .andExpect(jsonPath("$[0].licensePlate",is(vehicle1.getLicensePlate())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Test
+    public void givenVehicles_whenGetOne_returnJsonObject(){
+        try {
+            mvc.perform(get("/assets/vehicles/1").contentType(MediaType.APPLICATION_JSON))
+                      .andExpect(status().isOk())
+                      .andExpect(jsonPath("$",hasSize(1)))
+                      .andExpect(jsonPath("$[0].licensePlate",is(vehicle2.getLicensePlate())));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @Test
+    public void whenDoesNotExist_return404(){
+        try {
+            mvc.perform(get("/assets/vehicles/4").contentType(MediaType.APPLICATION_JSON))
+                    .andExpect(status().isNotFound());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
