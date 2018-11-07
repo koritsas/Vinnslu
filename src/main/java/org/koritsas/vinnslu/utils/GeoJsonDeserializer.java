@@ -8,8 +8,10 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.GeometryFactory;
 import com.vividsolutions.jts.geom.Polygon;
+import org.koritsas.vinnslu.models.common.Company;
 import org.koritsas.vinnslu.models.topo.Topo;
 import org.koritsas.vinnslu.ws.dto.topo.TopoDTO;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,6 +27,8 @@ public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
         super(t);
     }
 
+    @Autowired
+    private GeometryModelMapper mapper;
 
     @Override
     public TopoDTO deserialize(JsonParser parser, DeserializationContext deserializer) throws IOException {
@@ -43,14 +47,9 @@ public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
         boolean forest = node.get("properties").get("forest").asBoolean();
         Long abl = node.get("properties").get("abl").asLong();
 
-        boolean isArray =node.get("geometry").get("coordinates").isArray();
+        //Get the polygon coordinates from geojson and create the JTSPolygon
 
         JsonNode array =node.get("geometry").get("coordinates");
-
-        JsonNode a = array.get(0).get(0).get(0);
-
-        JsonNode b = array.get(0).get(1).get(1);
-
 
         Iterator jsonNodeIterator = array.get(0).iterator();
 
@@ -78,6 +77,14 @@ public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
         Polygon polygon = factory.createPolygon(coordinates);
 
 
+
+        //   Company topoOwner =  mapper.map(node.get("properties").get("topoOwner"),Company.class);
+        System.out.println("This is topoOwner");
+        System.out.println(node.get("properties").get("topoOwner").asText());
+
+//        Company areaOwner =  mapper.map(node.get("properties").get("areaOwner"),Company.class);
+
+
         topo.setPolygon(polygon);
         topo.setForest(forest);
         topo.setCommunity(community);
@@ -85,6 +92,8 @@ public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
         topo.setPrefecture(prefecture);
         topo.setMunicipality(municipality);
         topo.setAbl(abl);
+    //    topo.setTopoOwner(topoOwner);
+     //   topo.setAreaOwner(areaOwner);
 
         System.out.println("LELELE");
         System.out.println(topo.toString());
