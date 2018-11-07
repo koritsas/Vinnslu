@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.env.Environment;
 import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -16,6 +17,7 @@ import javax.persistence.EntityManager;
 @Configuration
 @EnableTransactionManagement
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
+@Profile("production")
 public class DatabaseConfiguration {
 
     private static final String[] ENTITIES_PACKAGE = { "org.koritsas.vinnslu.models" };

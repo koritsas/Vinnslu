@@ -42,13 +42,15 @@ dependencies {
 
 
 	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '2.3.0'
+	compile group: 'org.modelmapper.extensions', name: 'modelmapper-jackson', version: '2.3.0'
 	compile group: 'org.hibernate', name: 'hibernate-envers'
 	
     compile 'com.github.kuros:random-jpa:+'
-    
-    
-    
-    runtime('org.postgresql:postgresql')
+
+
+	runtimeOnly('com.h2database:h2')
+
+	runtime('org.postgresql:postgresql')
 	
 	
 	
