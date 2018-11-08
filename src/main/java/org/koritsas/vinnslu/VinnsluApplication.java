@@ -2,9 +2,9 @@ package org.koritsas.vinnslu;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.koritsas.vinnslu.utils.GeoJsonDeserializer;
-import org.koritsas.vinnslu.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.ws.dto.topo.TopoDTO;
+import org.koritsas.vinnslu.main.utils.GeoJsonDeserializer;
+import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
+import org.koritsas.vinnslu.main.ws.dto.topo.TopoDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
