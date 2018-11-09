@@ -1,7 +1,6 @@
-package org.koritsas.vinnslu.security.exceptions.handlers;
+package org.koritsas.vinnslu.main.exceptions.handlers;
 
-import org.koritsas.vinnslu.main.exceptions.EntityNotFoundException;
-import org.koritsas.vinnslu.security.exceptions.EmailExistsException;
+import org.koritsas.vinnslu.main.exceptions.EmailExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

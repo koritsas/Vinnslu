@@ -1,15 +1,12 @@
 package org.koritsas.vinnslu;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.module.SimpleModule;
-import org.koritsas.vinnslu.main.utils.GeoJsonDeserializer;
+import org.koritsas.vinnslu.main.models.security.VinnsluUser;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.main.ws.dto.topo.TopoDTO;
+import org.koritsas.vinnslu.main.utils.validators.UserRole;
+import org.koritsas.vinnslu.main.ws.dto.security.UserDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
-
-import java.io.IOException;
 
 
 @SpringBootApplication
@@ -81,13 +78,26 @@ public class VinnsluApplication {
         GeometryModelMapper mapper = new GeometryModelMapper();
 
 
+        UserDTO userDTO = new UserDTO();
+
+        userDTO.setEmail("test@test.gr");
+        userDTO.setName("ilas");
+        userDTO.setSurname("koritsas");
+        userDTO.setPassword("ilkor@4664");
+        userDTO.setUsername("skedaddler");
+        userDTO.setUserRole(UserRole.ADMIN);
+
+
+        VinnsluUser user = mapper.map(userDTO, VinnsluUser.class);
+
+        System.out.println(user.toString());
 
 
 
        // Topo t= mapper.map(topoGeoJson,Topo.class);
 
 
-
+/*
         ObjectMapper objectMapper = new ObjectMapper();
         SimpleModule simpleModule = new SimpleModule("GeoJsonDeserializer");
 
@@ -102,7 +112,7 @@ public class VinnsluApplication {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+*/
 
 /*
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");

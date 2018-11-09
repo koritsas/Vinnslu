@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.security.exceptions;
+package org.koritsas.vinnslu.main.exceptions;
 
 public class UserDoesNotExistException extends RuntimeException {
 

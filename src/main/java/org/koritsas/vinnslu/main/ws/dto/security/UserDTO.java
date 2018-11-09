@@ -1,13 +1,11 @@
-package org.koritsas.vinnslu.security.ws.dto;
+package org.koritsas.vinnslu.main.ws.dto.security;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
-import org.hibernate.annotations.Parameter;
-import org.koritsas.vinnslu.security.models.User;
+import org.koritsas.vinnslu.main.models.security.VinnsluUser;
 import org.koritsas.vinnslu.main.ws.dto.AbstractDto;
-import org.koritsas.vinnslu.security.utils.PasswordMatches;
-import org.koritsas.vinnslu.security.utils.UserRole;
-import org.koritsas.vinnslu.security.utils.ValidEmail;
+import org.koritsas.vinnslu.main.utils.validators.PasswordMatches;
+import org.koritsas.vinnslu.main.utils.validators.UserRole;
+import org.koritsas.vinnslu.main.utils.validators.ValidEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -60,7 +58,7 @@ public class UserDTO implements AbstractDto<Long> {
 
     @Override
     public Class getClaZZ() {
-        return User.class;
+        return VinnsluUser.class;
     }
 
 

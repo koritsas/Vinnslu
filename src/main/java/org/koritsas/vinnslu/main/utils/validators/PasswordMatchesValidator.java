@@ -1,6 +1,6 @@
-package org.koritsas.vinnslu.security.utils;
+package org.koritsas.vinnslu.main.utils.validators;
 
-import org.koritsas.vinnslu.security.ws.dto.UserDTO;
+import org.koritsas.vinnslu.main.ws.dto.security.UserDTO;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
