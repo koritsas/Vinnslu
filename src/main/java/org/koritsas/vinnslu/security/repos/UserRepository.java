@@ -1,6 +1,6 @@
-package org.koritsas.vinnslu.main.repos.security;
+package org.koritsas.vinnslu.security.repos;
 
-import org.koritsas.vinnslu.main.models.security.VinnsluUser;
+import org.koritsas.vinnslu.security.models.VinnsluUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

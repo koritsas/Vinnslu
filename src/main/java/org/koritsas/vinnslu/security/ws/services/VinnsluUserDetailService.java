@@ -1,8 +1,7 @@
-package org.koritsas.vinnslu.main.ws.services.security;
+package org.koritsas.vinnslu.security.ws.services;
 
-import org.koritsas.vinnslu.main.repos.security.UserRepository;
+import org.koritsas.vinnslu.security.repos.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -16,7 +15,7 @@ public class VinnsluUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
 
-       
+
 
         return null;
     }

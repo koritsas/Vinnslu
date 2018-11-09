@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.main.config;
+package org.koritsas.vinnslu.security.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,7 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-
+/*
     @Override
     protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
         auth.inMemoryAuthentication()
@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/topos").hasAnyRole("ADMIN");
     }
 
-
+*/
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder(31);

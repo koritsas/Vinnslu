@@ -1,12 +1,11 @@
-package org.koritsas.vinnslu.main.ws.services.security;
+package org.koritsas.vinnslu.security.ws.services;
 
-import org.koritsas.vinnslu.main.models.security.VinnsluUser;
+import org.koritsas.vinnslu.security.models.VinnsluUser;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.main.exceptions.EmailExistsException;
-import org.koritsas.vinnslu.main.exceptions.UserDoesNotExistException;
-import org.koritsas.vinnslu.main.exceptions.UsernameExistsException;
-import org.koritsas.vinnslu.main.repos.security.UserRepository;
-import org.koritsas.vinnslu.main.ws.dto.security.UserDTO;
+import org.koritsas.vinnslu.security.exceptions.EmailExistsException;
+import org.koritsas.vinnslu.security.exceptions.UsernameExistsException;
+import org.koritsas.vinnslu.security.repos.UserRepository;
+import org.koritsas.vinnslu.security.ws.dto.UserDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;

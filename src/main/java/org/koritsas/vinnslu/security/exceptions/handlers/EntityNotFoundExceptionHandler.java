@@ -1,6 +1,6 @@
-package org.koritsas.vinnslu.main.exceptions.handlers;
+package org.koritsas.vinnslu.security.exceptions.handlers;
 
-import org.koritsas.vinnslu.main.exceptions.EmailExistsException;
+import org.koritsas.vinnslu.main.exceptions.EntityNotFoundException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,14 +10,15 @@ import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class EmailExistsExceptionHandler extends ResponseEntityExceptionHandler {
+public class EntityNotFoundExceptionHandler extends ResponseEntityExceptionHandler {
 
-    @ExceptionHandler(value = {EmailExistsException.class})
-    protected ResponseEntity<Object> handleEmailExists(
+    @ExceptionHandler(value = {EntityNotFoundException.class})
+    protected ResponseEntity<Object> handleEntityNotFound(
             RuntimeException ex, WebRequest request) {
         String bodyOfResponse = ex.getMessage();
 
         return handleExceptionInternal(ex, bodyOfResponse,
-                new HttpHeaders(), HttpStatus.CONFLICT, request);
+                new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
+
 }

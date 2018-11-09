@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.main.exceptions;
+package org.koritsas.vinnslu.security.exceptions;
 
 public class UsernameExistsException extends RuntimeException {
 

@@ -1,11 +1,11 @@
-package org.koritsas.vinnslu.main.ws.dto.security;
+package org.koritsas.vinnslu.security.ws.dto;
 
 import org.hibernate.annotations.NaturalId;
-import org.koritsas.vinnslu.main.models.security.VinnsluUser;
+import org.koritsas.vinnslu.security.models.VinnsluUser;
 import org.koritsas.vinnslu.main.ws.dto.AbstractDto;
-import org.koritsas.vinnslu.main.utils.validators.PasswordMatches;
-import org.koritsas.vinnslu.main.utils.validators.UserRole;
-import org.koritsas.vinnslu.main.utils.validators.ValidEmail;
+import org.koritsas.vinnslu.security.utils.validators.PasswordMatches;
+import org.koritsas.vinnslu.security.utils.validators.UserRole;
+import org.koritsas.vinnslu.security.utils.validators.ValidEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

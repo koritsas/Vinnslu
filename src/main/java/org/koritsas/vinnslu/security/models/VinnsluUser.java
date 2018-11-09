@@ -1,10 +1,10 @@
-package org.koritsas.vinnslu.main.models.security;
+package org.koritsas.vinnslu.security.models;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
-import org.koritsas.vinnslu.main.utils.validators.UserRole;
-import org.koritsas.vinnslu.main.utils.validators.ValidEmail;
+import org.koritsas.vinnslu.security.utils.validators.UserRole;
+import org.koritsas.vinnslu.security.utils.validators.ValidEmail;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;

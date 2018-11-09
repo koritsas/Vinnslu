@@ -1,6 +1,6 @@
-package org.koritsas.vinnslu.main.exceptions.handlers;
+package org.koritsas.vinnslu.security.exceptions.handlers;
 
-import org.koritsas.vinnslu.main.exceptions.UsernameExistsException;
+import org.koritsas.vinnslu.security.exceptions.UsernameExistsException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

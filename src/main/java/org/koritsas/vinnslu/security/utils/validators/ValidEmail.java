@@ -1,4 +1,4 @@
-package org.koritsas.vinnslu.main.utils.validators;
+package org.koritsas.vinnslu.security.utils.validators;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;

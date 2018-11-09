@@ -1,9 +1,9 @@
 package org.koritsas.vinnslu;
 
-import org.koritsas.vinnslu.main.models.security.VinnsluUser;
+import org.koritsas.vinnslu.security.models.VinnsluUser;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.main.utils.validators.UserRole;
-import org.koritsas.vinnslu.main.ws.dto.security.UserDTO;
+import org.koritsas.vinnslu.security.utils.validators.UserRole;
+import org.koritsas.vinnslu.security.ws.dto.UserDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

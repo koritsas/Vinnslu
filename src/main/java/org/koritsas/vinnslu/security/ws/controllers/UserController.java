@@ -1,7 +1,7 @@
-package org.koritsas.vinnslu.main.ws.controllers.security;
+package org.koritsas.vinnslu.security.ws.controllers;
 
-import org.koritsas.vinnslu.main.ws.dto.security.UserDTO;
-import org.koritsas.vinnslu.main.ws.services.security.UserService;
+import org.koritsas.vinnslu.security.ws.dto.UserDTO;
+import org.koritsas.vinnslu.security.ws.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
