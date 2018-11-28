@@ -1,9 +1,6 @@
 package org.koritsas.vinnslu;
 
-import org.koritsas.vinnslu.security.models.VinnsluUser;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
-import org.koritsas.vinnslu.security.utils.validators.UserRole;
-import org.koritsas.vinnslu.security.ws.dto.UserDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -78,19 +75,6 @@ public class VinnsluApplication {
         GeometryModelMapper mapper = new GeometryModelMapper();
 
 
-        UserDTO userDTO = new UserDTO();
-
-        userDTO.setEmail("test@test.gr");
-        userDTO.setName("ilas");
-        userDTO.setSurname("koritsas");
-        userDTO.setPassword("ilkor@4664");
-        userDTO.setUsername("skedaddler");
-        userDTO.setUserRole(UserRole.ADMIN);
-
-
-        VinnsluUser user = mapper.map(userDTO, VinnsluUser.class);
-
-        System.out.println(user.toString());
 
 
 
