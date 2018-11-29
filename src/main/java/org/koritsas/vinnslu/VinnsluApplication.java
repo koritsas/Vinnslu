@@ -1,9 +1,20 @@
 package org.koritsas.vinnslu;
 
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.Polygon;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.koritsas.vinnslu.main.models.common.Opinion;
+import org.koritsas.vinnslu.main.models.topo.Topo;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 
 @SpringBootApplication
@@ -98,12 +109,12 @@ public class VinnsluApplication {
         }
 */
 
-/*
-   EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
+
+        EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
     EntityManager entityManager= factory.createEntityManager();
 
-        GeoJsonDeserializer f = new GeoJsonDeserializer();
+
 
 
 
@@ -112,6 +123,22 @@ public class VinnsluApplication {
 
         SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap( SessionFactory.class );
 
+
+        GeometryFactory geometryFactory = new GeometryFactory();
+
+        Polygon polygon = geometryFactory.createPolygon(new Coordinate[]{new Coordinate(0, 0), new Coordinate(0, 1), new Coordinate(1, 1), new Coordinate(1, 0), new Coordinate(0, 0)});
+
+        Topo topo = new Topo(polygon);
+
+        topo.setAbl(6666L);
+        topo.setArea(50000);
+        topo.setForest(true);
+        topo.setLocation("fsdfa");
+        topo.setCommunity("sdfasd");
+        topo.setMunicipality("dfasdfasd");
+        topo.setPrefecture("Drama");
+
+        session.save(topo);
         session.save(new Opinion(true,null));
 
         sessionFactory.openSession();
@@ -124,7 +151,7 @@ public class VinnsluApplication {
 
         session.close();
 
-*/
+
 
 /*
 
