@@ -1,7 +1,9 @@
 package org.koritsas.vinnslu.main.ws.dto.topo;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Polygon;
 import org.koritsas.vinnslu.main.models.common.Company;
 import org.koritsas.vinnslu.main.models.topo.Topo;
@@ -13,11 +15,24 @@ import org.koritsas.vinnslu.main.ws.dto.AbstractDto;
 @JsonSerialize(using = GeoJsonSerializer.class)
 public class TopoDTO implements AbstractDto<Long> {
 
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.NAME,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "type"
+
+    )
     private Long id;
 
     private Long abl;
 
+    @JsonTypeInfo(
+            use = JsonTypeInfo.Id.NAME,
+            include = JsonTypeInfo.As.PROPERTY,
+            property = "type"
+
+    )
     private Polygon polygon;
+
 
     private String community;
 
@@ -32,6 +47,11 @@ public class TopoDTO implements AbstractDto<Long> {
     private Company topoOwner;
 
     private Company areaOwner;
+
+
+    public Coordinate[] getCoordinates() {
+        return this.polygon.getCoordinates();
+    }
 
     public Long getId() {
         return id;

@@ -57,7 +57,7 @@ public class Topo implements Serializable{
 
     private boolean forest=true;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="topo_owner_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="OWNER_FK"))
     private Company topoOwner;
 

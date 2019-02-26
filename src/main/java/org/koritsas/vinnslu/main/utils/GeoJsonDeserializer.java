@@ -66,6 +66,7 @@ public class GeoJsonDeserializer extends StdDeserializer<TopoDTO> {
         }
 
         if (node.get("properties").get("topoOnwer") != null) {
+            Company too = objectMapper.readValue(node.get("properties").get("topoOnwer").asText(), Company.class);
             topo.setTopoOwner(objectMapper.readValue(node.get("properties").get("topoOnwer").asText(), Company.class));
         }
 
