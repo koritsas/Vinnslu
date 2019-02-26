@@ -34,7 +34,7 @@ repositories {
 sourceSets {
 	main{
 		java{
-			srcDir 'out/production/classes/generated/org/koritsas/vinnslu/main/models'
+			srcDir 'src/main/metamodels'
 		}
 	}
 	
