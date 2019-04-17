@@ -23,13 +23,13 @@ public class TopoController extends AbstractCRUDController<TopoService, Topo, Lo
     private TopoController(TopoService topoService) { this.topoService = topoService; }
 
     @GetMapping(value = "/find/all")
-    public ResponseEntity<List<Topo>> getAllTopos(){
+    public ResponseEntity<List<Topo_>> getAllTopos(){
         return ResponseEntity.ok(topoService.findAll());
     }
 
     @PostMapping("/create")
-    public ResponseEntity<Topo> createTopo(@RequestBody TopoDTO dto){
-        return ResponseEntity.status(201).body((topoService.create(mapper.map(dto, Topo.class))));
+    public ResponseEntity<Topo_> createTopo(@RequestBody TopoDTO dto){
+        return ResponseEntity.status(201).body((topoService.create(mapper.map(dto, Topo_.class))));
     }
 
 
@@ -39,13 +39,13 @@ public class TopoController extends AbstractCRUDController<TopoService, Topo, Lo
     }
 
     @GetMapping("/find/{topoId}")
-    public ResponseEntity<Topo> findTopo(@PathVariable long topoId){
+    public ResponseEntity<Topo_> findTopo(@PathVariable long topoId){
         return ResponseEntity.ok(topoService.find(topoId));
     }
 
     @PutMapping("/update")
-    public ResponseEntity<Topo> updateTopo(@RequestBody TopoDTO dto){
-        return ResponseEntity.status(204).body(topoService.update(dto.getId(), mapper.map(dto, Topo.class)));
+    public ResponseEntity<Topo_> updateTopo(@RequestBody TopoDTO dto){
+        return ResponseEntity.status(204).body(topoService.update(dto.getId(), mapper.map(dto, Topo_.class)));
     }
 */
 }

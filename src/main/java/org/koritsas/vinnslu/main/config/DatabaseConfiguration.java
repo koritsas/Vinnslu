@@ -17,7 +17,7 @@ import javax.persistence.EntityManager;
 @EnableAutoConfiguration(exclude={DataSourceAutoConfiguration.class})
 @Profile("production")
 public class DatabaseConfiguration {
-
+/*
     private static final String[] ENTITIES_PACKAGE = { "org.koritsas.vinnslu.main.models" };
 
     private Environment environment;
@@ -35,6 +35,8 @@ public class DatabaseConfiguration {
 	public GeometryModelMapper geometryModelMapper(){
     	return new GeometryModelMapper();
 	}
+	*/
+
 /*
     @Autowired
     public void setEnvironment(Environment environment) { this.environment = environment; }

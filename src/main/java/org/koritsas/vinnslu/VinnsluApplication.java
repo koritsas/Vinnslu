@@ -1,9 +1,30 @@
 package org.koritsas.vinnslu;
 
+import com.github.kuros.random.jpa.Database;
+import com.github.kuros.random.jpa.JPAContext;
+import com.github.kuros.random.jpa.JPAContextFactory;
+import com.github.kuros.random.jpa.link.Dependencies;
+import com.github.kuros.random.jpa.link.Link;
+import com.github.kuros.random.jpa.types.CreationPlan;
+import com.github.kuros.random.jpa.types.Entity;
+import com.github.kuros.random.jpa.types.Plan;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.koritsas.vinnslu.main.models.common.Company;
+import org.koritsas.vinnslu.main.models.common.Opinion;
+import org.koritsas.vinnslu.main.models.common.Person;
+import org.koritsas.vinnslu.main.models.metamodels.Company_;
+import org.koritsas.vinnslu.main.models.metamodels.Person_;
+import org.koritsas.vinnslu.main.models.metamodels.Topo_;
+import org.koritsas.vinnslu.main.models.topo.Topo;
 import org.koritsas.vinnslu.main.utils.GeometryModelMapper;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
 
 
 @SpringBootApplication
@@ -21,64 +42,10 @@ public class VinnsluApplication {
     }
 
 
-    String topoGeoJson = "{\n" +
-            "    \"type\": \"Feature\",\n" +
-            "    \"geometry\": {\n" +
-            "        \"type\": \"Polygon\",\n" +
-            "        \"coordinates\": [\n" +
-            "            [\n" +
-            "                [\n" +
-            "                    0,\n" +
-            "                    0\n" +
-            "                ],\n" +
-            "                [\n" +
-            "                    0,\n" +
-            "                    1\n" +
-            "                ],\n" +
-            "                [\n" +
-            "                    1,\n" +
-            "                    1\n" +
-            "                ],\n" +
-            "                [\n" +
-            "                    5,\n" +
-            "                    5\n" +
-            "                ],\n" +
-            "                [\n" +
-            "                    6,\n" +
-            "                    7\n" +
-            "                ],\n" +
-            "                [\n" +
-            "                    0,\n" +
-            "                    0\n" +
-            "                ]\n" +
-            "            ]\n" +
-            "        ]\n" +
-            "    },\n" +
-            "    \"properties\": {\n" +
-            "        \"id\": 1,\n" +
-            "        \"abl\": 10520520,\n" +
-            "        \"community\": \"SomeCommunity\",\n" +
-            "        \"location\": \"SomeLocation\",\n" +
-            "        \"prefecture\": \"SomePrefecture\",\n" +
-            "        \"municipality\": \"SomeMunicipality\",\n" +
-            "        \"forest\": false,\n" +
-            "        \"topoOwner\": null,\n" +
-            "        \"owner\": null\n" +
-            "    }\n" +
-            "}";
 
 
 
-
-
-
-        GeometryModelMapper mapper = new GeometryModelMapper();
-
-
-
-
-
-       // Topo t= mapper.map(topoGeoJson,Topo.class);
+       // Topo_ t= mapper.map(topoGeoJson,Topo_.class);
 
 
 /*
@@ -98,12 +65,12 @@ public class VinnsluApplication {
         }
 */
 
-/*
+
    EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
 
     EntityManager entityManager= factory.createEntityManager();
 
-        GeoJsonDeserializer f = new GeoJsonDeserializer();
+
 
 
 
@@ -112,26 +79,46 @@ public class VinnsluApplication {
 
         SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap( SessionFactory.class );
 
-        session.save(new Opinion(true,null));
+
 
         sessionFactory.openSession();
         session.beginTransaction();
 
-        session.save(new Opinion(true,null));
+
+
+
+        Plan plan = Plan.create();
+
+        Dependencies dependencies = Dependencies.newInstance();
+       // dependencies.withLink(Link.newLink(Company_.id,Topo_.id));
+      //  dependencies.withLink(Link.newLink(Company_.id,Topo_.id));
+
+        JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, session).with(dependencies)
+                .generate();
+
+
+        CreationPlan creationPlan = jpaContext.create(
+               Entity.of(Company.class,10),
+             Entity.of(Person_.class,10)
+             //  Entity.of(Topo.class,10)
+        );
+
+
+        jpaContext.persist(creationPlan);
+
 
 
         session.getTransaction().commit();
 
         session.close();
 
-*/
 
-/*
 
-        JPAContext jpaContext = JPAContextFactory.newInstance(Database.POSTGRES, session)
-                .generate();
 
-*/
+
+
+
+
 
 /*
 
@@ -167,7 +154,7 @@ public class VinnsluApplication {
 
         Company company1 = new Company(4532,"sdfasdf","54543","Asdfsad",565685);
 
-	Topo topo = new Topo(polygon);
+	Topo_ topo = new Topo_(polygon);
 	topo.setCommunity("sdfa");
 	topo.setMunicipality("sadfasd");
 	topo.setLocation("sdfasdfsa");
@@ -176,7 +163,7 @@ public class VinnsluApplication {
 	topo.setAreaOwner(auth2);
 
 
-        Topo topo2 = new Topo(polygon2);
+        Topo_ topo2 = new Topo_(polygon2);
         topo.setCommunity("sdfa");
         topo.setMunicipality("sadfasd");
         topo.setLocation("sdfasdfsa");
