@@ -1,28 +1,23 @@
 package org.koritsas.vinnslu.main.models.topo;
 
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.vividsolutions.jts.geom.Polygon;
-import org.hibernate.annotations.*;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.NaturalId;
 import org.hibernate.annotations.Parameter;
 import org.koritsas.vinnslu.main.models.common.Company;
-import org.koritsas.vinnslu.main.utils.GeoJsonDeserializer;
 import org.koritsas.vinnslu.main.utils.GeoJsonSerializer;
 
 import javax.persistence.*;
-import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
-import javax.persistence.Table;
 import javax.validation.constraints.Max;
-
 import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name="topos")
 @JsonSerialize(using = GeoJsonSerializer.class)
-@JsonDeserialize(using = GeoJsonDeserializer.class)
+//@JsonDeserialize(using = GeoJsonDeserializer.class)
 public class Topo implements Serializable{
 
     @Id
@@ -62,7 +57,7 @@ public class Topo implements Serializable{
 
     private boolean forest=true;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="topo_owner_id",referencedColumnName = "id",foreignKey = @ForeignKey(name="OWNER_FK"))
     private Company topoOwner;
 

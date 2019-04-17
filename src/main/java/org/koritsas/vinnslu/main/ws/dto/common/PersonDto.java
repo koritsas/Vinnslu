@@ -15,6 +15,7 @@ public class PersonDto implements AbstractDto<Long> {
 
     private String afm;
 
+
     private String fathername;
 
     private String mothername;

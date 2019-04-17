@@ -9,7 +9,7 @@ buildscript {
     allprojects{
         repositories {
             jcenter()
-            maven { url "https://jitpack.io" }
+           // maven { url "https://jitpack.io" }
         }
     }
     
@@ -29,8 +29,16 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
-}
 
+}
+sourceSets {
+	main{
+		java{
+			srcDir 'src/main/metamodels'
+		}
+	}
+	
+}
 
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
@@ -39,6 +47,10 @@ dependencies {
 	compile('org.springframework.session:spring-session-core')
 	//compile('org.springframework.boot:spring-boot-starter-log4j2')
 	compile("org.hibernate:hibernate-spatial:5.2.3.Final")
+    
+    compile("org.hibernate:hibernate-jpamodelgen")
+
+	
 
 
 	compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '2.3.0'
@@ -46,6 +58,7 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-envers'
 	
     compile 'com.github.kuros:random-jpa:+'
+
 
 
 	runtimeOnly('com.h2database:h2')
