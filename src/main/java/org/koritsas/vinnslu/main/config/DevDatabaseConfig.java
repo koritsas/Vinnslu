@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration()
 @Profile("dev")
 public class DevDatabaseConfig {
+
     @Bean
     public GeometryModelMapper geometryModelMapper(){
         return new GeometryModelMapper();

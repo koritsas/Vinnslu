@@ -4,12 +4,9 @@ import com.github.kuros.random.jpa.Database;
 import com.github.kuros.random.jpa.JPAContext;
 import com.github.kuros.random.jpa.JPAContextFactory;
 import com.github.kuros.random.jpa.types.CreationPlan;
-import com.github.kuros.random.jpa.types.Entity;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.engine.spi.SessionImplementor;
-import org.koritsas.vinnslu.main.models.topo.Test;
-import org.koritsas.vinnslu.main.models.topo.Test_;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -23,20 +20,20 @@ public class VinnsluApplication {
 
     public static void main(String[] args) {
 
-	ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
+        ApplicationContext context = SpringApplication.run(VinnsluApplication.class, args);
 
-        EntityManagerFactory factory= (EntityManagerFactory) context.getBean("entityManagerFactory");
+        EntityManagerFactory factory = (EntityManagerFactory) context.getBean("entityManagerFactory");
 
         EntityManager entityManager = factory.createEntityManager();
-
+/*
 
         System.out.println("----------------------Starting kuros-----------------------------------");
 
 
-        Session session = entityManager.unwrap( Session.class );
-        SessionImplementor sessionImplementor = entityManager.unwrap( SessionImplementor.class );
+        Session session = entityManager.unwrap(Session.class);
+        SessionImplementor sessionImplementor = entityManager.unwrap(SessionImplementor.class);
 
-        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap( SessionFactory.class );
+        SessionFactory sessionFactory = entityManager.getEntityManagerFactory().unwrap(SessionFactory.class);
 
         sessionFactory.openSession();
 
@@ -49,14 +46,7 @@ public class VinnsluApplication {
 
 
         CreationPlan creationPlan = jpaContext.create(
-                Entity.of(Test.class, 2),
 
-                Entity.of(Test.class, 2).with(Test_.field2, "AAAAAAAAAAAAAAAA"),
-                Entity.of(Test.class, 2).with(Test_.field3, "AAAAAAAAAAAAAAAA"),
-                Entity.of(Test.class, 2).with(Test_.field4, "AAAAAAAAAAAAAAAA"),
-                Entity.of(Test.class, 2).with(Test_.field5, "AAAAAAAAAAAAAAAA"),
-                Entity.of(Test.class, 2).with(Test_.field6, "AAAAAAAAAAAAAAAA"),
-                Entity.of(Test.class, 2).with(Test_.field7, "AAAAAAAAAAAAAAAA")
 
         );
 
@@ -67,6 +57,8 @@ public class VinnsluApplication {
 
 
         session.getTransaction().commit();
+        */
+
     }
 
 }
